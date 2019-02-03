@@ -1,14 +1,11 @@
-const initialState = {
-  bars:[]
-}
+import {combineReducers} from 'redux'
 
- function reducer(state=initialState, action) {
-  switch(action.type){
-    case "SET_BARS":
-      return {...state, bars:action.payload}
-    default:
-      return state
-  }
-}
+import bars from './bars'
+import user from './user'
 
-export default reducer
+const rootReducer = combineReducers({
+  user,
+  bars:bars
+})
+
+export default rootReducer

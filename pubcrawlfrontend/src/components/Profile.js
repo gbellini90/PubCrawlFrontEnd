@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
-import Bars from './Bars'
+import BarContainer from './BarContainer'
 import {Card} from 'react-materialize'
 
 
@@ -28,7 +28,7 @@ class Profile extends React.Component {
         <nav>
         <Link to='/bars'>  Bars  </Link>
         </nav>
-        <Route path='/bars' component={Bars} />
+        <Route path='/bars' component={BarContainer} />
         </>
       </Router>
       </div>

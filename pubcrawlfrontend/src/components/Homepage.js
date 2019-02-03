@@ -1,7 +1,7 @@
 import React from 'react'
 import {Input, Row, Icon} from 'react-materialize'
 import Signup from './Signup'
-import Bars from './Bars'
+import BarContainer from './BarContainer'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
 class Homepage extends React.Component {

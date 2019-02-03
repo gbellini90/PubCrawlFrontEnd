@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import Homepage from './Homepage'
 import Signup from './Signup'
-import Bars from './Bars'
+import BarContainer from './BarContainer'
 import Profile from './Profile'
 
 
@@ -32,7 +32,7 @@ class App extends React.Component {
         <Route path='/signup' render={() => <Signup setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} />}
    />
           <Route path='/homepage' component={Homepage} />
-          <Route path='/bars' component={Bars} />
+          <Route path='/bars' component={BarContainer} />
           <Route path='/profile' render={() => <Profile setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} />}
      />
 
