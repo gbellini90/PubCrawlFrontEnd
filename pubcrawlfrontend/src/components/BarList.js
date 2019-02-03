@@ -1,11 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
+
 class BarList extends React.Component {
 
   render() {
     console.log(this.props.bars)
     return (
-      <div></div>
+      <div>BarLisssst</div>
     );
   }
 

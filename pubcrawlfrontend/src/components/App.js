@@ -4,11 +4,18 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import Homepage from './Homepage'
 import Signup from './Signup'
 import Bars from './Bars'
+import Profile from './Profile'
 
 
 
 
 class App extends React.Component {
+
+  state={
+    currentUser:null
+  }
+
+  setCurrentUser = userObj => this.setState({currentUser:userObj},()=>{})
 
   render() {
 
@@ -19,13 +26,15 @@ class App extends React.Component {
         <nav>
           <Link to='/signup'>  Sign Up  </Link>
           <Link to='/homepage'>  Log In  </Link>
-          <Link to='/bars'> Bars </Link>
 
 
         </nav>
-          <Route path='/signup' component={Signup} />
+        <Route path='/signup' render={() => <Signup setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} />}
+   />
           <Route path='/homepage' component={Homepage} />
           <Route path='/bars' component={Bars} />
+          <Route path='/profile' render={() => <Profile setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} />}
+     />
 
 
         </>
