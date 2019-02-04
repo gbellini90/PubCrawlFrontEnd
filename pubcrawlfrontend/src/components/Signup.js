@@ -2,6 +2,8 @@ import React from 'react'
 import { Redirect, Link, Route, Switch } from "react-router-dom";
 import {Input, Row, Icon} from 'react-materialize'
 import Profile from './Profile'
+import {connect} from 'react-redux'
+import {setCurrentUser} from '../actions/user'
 
 const apiUsersAddress = 'http://localhost:3000/api/v1/users'
 
@@ -13,12 +15,14 @@ class Signup extends React.Component {
    age:'',
    pic:'',
    bio: '',
+   loggedIn:false
    //will be password attribute in the future for login feature
  }
 
  handleSubmit = (event) => {
      event.preventDefault()
-     const postConfig = {
+     this.setState({ loggedIn: true })
+      const postConfig = {
      	method:"POST",
      	headers: {
          "Content-type": "application/json"
@@ -48,25 +52,24 @@ class Signup extends React.Component {
 
   render() {
     const signUpForm =
-      <div>
-      <form onSubmit={this.handleSubmit}>
-        <Row>
-            <Input s={6}  onChange={this.handleChange} name="name" value={this.state.name} placeholder="Name"/>
-            <Input s={2}  onChange={this.handleChange} name="age" value={this.state.age} placeholder="Age"/>
-            <Input s={6}  onChange={this.handleChange} name="username" value={this.state.username} placeholder="Username"/>
-            <Input s={6}  onChange={this.handleChange} name="pic" value={this.state.pic} placeholder="Pic"/>
-            <Input s={12} onChange={this.handleChange} name="bio" value={this.state.bio} placeholder="Bio"/>
-            <Input type="submit"/>
-        </Row>
-        </form>
-      </div>
-
-      return this.props.currentUser ? <Switch>
-  <Redirect from='/signup' to='/profile'/>
-  <Route path='/profile' render={() => <Profile setCurrentUser={this.props.setCurrentUser} currentUser={this.props.currentUser} />}
-  />
-</Switch> : signUpForm
-
+        <div>
+        <form onSubmit={this.handleSubmit}>
+          <Row>
+              <Input s={6}  onChange={this.handleChange} name="name" value={this.state.name} placeholder="Name"/>
+              <Input s={2}  onChange={this.handleChange} name="age" value={this.state.age} placeholder="Age"/>
+              <Input s={6}  onChange={this.handleChange} name="username" value={this.state.username} placeholder="Username"/>
+              <Input s={6}  onChange={this.handleChange} name="pic" value={this.state.pic} placeholder="Pic"/>
+              <Input s={12} onChange={this.handleChange} name="bio" value={this.state.bio} placeholder="Bio"/>
+              <Input type="submit"/>
+          </Row>
+          </form>
+        </div>
+      return this.state.loggedIn ?
+      <Switch>
+             <Redirect from='/signup' to='/profile'/>
+             <Route path='/profile' render={() => <Profile />}
+             />
+      </Switch> : signUpForm
   }
 
 }
@@ -75,5 +78,18 @@ class Signup extends React.Component {
 
 
 
+const mapStateToProps = (state) => {
+  return {
+    user:state.user.user
+  }
+}
 
-export default Signup;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setCurrentUser: (user) => dispatch(setCurrentUser(user))
+  }
+}
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Signup);

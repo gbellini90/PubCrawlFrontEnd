@@ -13,7 +13,7 @@ class BarCard extends React.Component {
         <li>Price:{this.props.price}</li>
         <li>Rating:{this.props.rating}/5</li>
         <li>Address:{this.props.location.display_address}</li>
-        <li></li>
+        <button>Add to Crawl</button>
         </ul>
 
       </div>
@@ -24,7 +24,8 @@ class BarCard extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-      bars:state.bars.bars
+      bars:state.bars.bars,
+      user:state.user.user
   }
 }
 

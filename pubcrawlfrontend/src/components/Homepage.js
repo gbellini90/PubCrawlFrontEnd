@@ -6,9 +6,6 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
 class Homepage extends React.Component {
 
-          //
-
-
 
   render() {
     return (
@@ -18,6 +15,7 @@ class Homepage extends React.Component {
         <Row>
             <Input s={6} placeholder="Username"><Icon>account_circle</Icon></Input>
             <Input s={6} placeholder="Password"><Icon>lock</Icon></Input>
+            <Input type="submit" />
         </Row>
       </div>
     );

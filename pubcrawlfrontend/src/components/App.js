@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import {connect} from 'react-redux'
+import {setCurrentUser} from '../actions/user'
 import Homepage from './Homepage'
 import Signup from './Signup'
 import BarContainer from './BarContainer'
@@ -10,12 +12,6 @@ import Profile from './Profile'
 
 
 class App extends React.Component {
-
-  state={
-    currentUser:null
-  }
-
-  setCurrentUser = userObj => this.setState({currentUser:userObj},()=>{})
 
   render() {
 
@@ -29,11 +25,11 @@ class App extends React.Component {
 
 
         </nav>
-        <Route path='/signup' render={() => <Signup setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} />}
+        <Route path='/signup' render={() => <Signup  />}
    />
           <Route path='/homepage' component={Homepage} />
           <Route path='/bars' component={BarContainer} />
-          <Route path='/profile' render={() => <Profile setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} />}
+          <Route path='/profile' render={() => <Profile />}
      />
 
 
@@ -44,6 +40,10 @@ class App extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    user:state.user.user
+  }
+}
 
-
-export default App;
+export default connect(mapStateToProps)(App);

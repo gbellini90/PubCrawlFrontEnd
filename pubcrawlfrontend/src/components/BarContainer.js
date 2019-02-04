@@ -38,7 +38,8 @@ class Bars extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    bars:state.bars.bars
+    bars:state.bars.bars,
+    user:state.user.user
   }
 }
 
