@@ -25,12 +25,10 @@ class App extends React.Component {
 
 
         </nav>
-        <Route path='/signup' render={() => <Signup  />}
-   />
+          <Route path='/signup' component={Signup}/>
           <Route path='/login' component={Login} />
           <Route path='/bars' component={BarContainer} />
-          <Route path='/profile' render={() => <Profile />}
-     />
+          <Route path='/profile' component={Profile}/>
 
 
         </>
