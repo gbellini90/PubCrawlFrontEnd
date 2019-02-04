@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import {connect} from 'react-redux'
 import {setCurrentUser} from '../actions/user'
-import Homepage from './Homepage'
+import Login from './Login'
 import Signup from './Signup'
 import BarContainer from './BarContainer'
 import Profile from './Profile'
@@ -21,13 +21,13 @@ class App extends React.Component {
         <>
         <nav>
           <Link to='/signup'>  Sign Up  </Link>
-          <Link to='/homepage'>  Log In  </Link>
+          <Link to='/login'>  Log In  </Link>
 
 
         </nav>
         <Route path='/signup' render={() => <Signup  />}
    />
-          <Route path='/homepage' component={Homepage} />
+          <Route path='/login' component={Login} />
           <Route path='/bars' component={BarContainer} />
           <Route path='/profile' render={() => <Profile />}
      />
