@@ -8,11 +8,12 @@ class Homepage extends React.Component {
   render() {
     return (
       <div className="Homepage">
-      Hi from the Homepage
         <nav>
           <Link to='/signup'>  Sign Up  </Link>
           <Link to='/login'>  Log In  </Link>
         </nav>
+        <img src='../cheers.jpg' alt="beer" />
+
       </div>
     );
   }

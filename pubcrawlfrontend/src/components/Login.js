@@ -33,7 +33,6 @@ class Login extends React.Component {
   render() {
     const logInForm =
       <div>
-      <h1>PubCrawl Creator App</h1>
         <div>Hi, this is the login form page</div>
         <form onSubmit={this.handleSubmit}>
         <Row>
