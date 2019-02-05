@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {setBars} from '../actions/bars'
 import BarCard from './BarCard'
-import {Input, Row, Icon, Button} from 'react-materialize'
+import {Input} from 'react-materialize'
 
 
 class Bars extends React.Component {
@@ -25,7 +25,7 @@ class Bars extends React.Component {
 
   render() {
     return (
-      <div><h1>Bar Pageeee</h1>
+      <div><h1>Hi from Bar Pageeee</h1>
       {this.props.bars ? this.props.bars.map(bar=> <BarCard key= {bar.id} {...bar} />) : null}
       <form>
         <Input onChange={(event)=>this.componentDidMount(event.target.value)} placeholder="search by NYC neighborhood" type="text"/>

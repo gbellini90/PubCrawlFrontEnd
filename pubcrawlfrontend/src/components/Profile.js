@@ -1,8 +1,7 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
-import BarContainer from './BarContainer'
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {Card} from 'react-materialize'
+
 
 
 
@@ -12,11 +11,14 @@ class Profile extends React.Component {
     console.log(this.props.user);
     return (
       <div>
-
+      <nav>
+      <Link to='/bars'>  Bars  </Link>
+      </nav>
+      Hi from Profile Page
       <div className="card horizontal">
 
               <div className="card-image waves-effect waves-block waves-light">
-                <img className="card-image" src={this.props.user.pic}/>
+                <img className="card-image" src={this.props.user.pic} alt={this.props.user.name}/>
               </div>
 
               <div className="card-content">
@@ -25,16 +27,6 @@ class Profile extends React.Component {
               </div>
 
           </div>
-          <Router>
-            <>
-            <nav>
-            <Link to='/bars'>  Bars  </Link>
-            </nav>
-            <Route path='/bars' component={BarContainer} />
-            </>
-          </Router>
-
-
 
       </div>
 

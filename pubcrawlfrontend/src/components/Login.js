@@ -1,15 +1,13 @@
 import React from 'react'
 import {Input, Row, Icon} from 'react-materialize'
-import Signup from './Signup'
-import BarContainer from './BarContainer'
-import {BrowserRouter as Router, Redirect, Switch, Route, Link} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {setCurrentUser} from '../actions/user'
-import Profile from './Profile'
+
 
 const apiUsersAddress = 'http://localhost:3000/api/v1/users'
 
-class Homepage extends React.Component {
+class Login extends React.Component {
 
   state = {
     name:'',
@@ -36,7 +34,7 @@ class Homepage extends React.Component {
     const logInForm =
       <div>
       <h1>PubCrawl Creator App</h1>
-        <div>Hi, this is the homepage/login form page</div>
+        <div>Hi, this is the login form page</div>
         <form onSubmit={this.handleSubmit}>
         <Row>
             <Input s={6} onChange={this.handleChange} placeholder="Username" name="username" value={this.state.username}><Icon>account_circle</Icon></Input>
@@ -45,13 +43,8 @@ class Homepage extends React.Component {
         </Row>
         </form>
       </div>
-return this.state.loggedIn?
-<Switch>
-       <Redirect from='/login' to='/profile'/>
-       <Route path='/profile' render={() => <Profile />}
-       />
-</Switch> : logInForm
-
+      console.log(this.props)
+      return this.state.loggedIn ? <Redirect to='/profile'/> : logInForm
   }
 
 }
@@ -71,4 +64,4 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(Homepage);
+export default connect(mapStateToProps,mapDispatchToProps)(Login);

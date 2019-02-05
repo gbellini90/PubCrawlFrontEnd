@@ -1,7 +1,6 @@
 import React from 'react'
-import { Redirect, Link, Route, Switch } from "react-router-dom";
-import {Input, Row, Icon} from 'react-materialize'
-import Profile from './Profile'
+import {Redirect} from "react-router-dom";
+import {Input, Row} from 'react-materialize'
 import {connect} from 'react-redux'
 import {setCurrentUser} from '../actions/user'
 
@@ -64,12 +63,7 @@ class Signup extends React.Component {
           </Row>
           </form>
         </div>
-      return this.state.loggedIn ?
-      <Switch>
-             <Redirect from='/signup' to='/profile'/>
-             <Route path='/profile' render={() => <Profile />}
-             />
-      </Switch> : signUpForm
+      return this.state.loggedIn ? <Redirect to='/profile'/> : signUpForm
   }
 
 }
