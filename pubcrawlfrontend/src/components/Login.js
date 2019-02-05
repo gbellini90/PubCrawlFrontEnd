@@ -42,7 +42,6 @@ class Login extends React.Component {
         </Row>
         </form>
       </div>
-      console.log(this.props)
       return this.state.loggedIn ? <Redirect to='/profile'/> : logInForm
   }
 
