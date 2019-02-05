@@ -22,7 +22,7 @@ class Profile extends React.Component {
               </div>
 
       <div className="card-content">
-        <span className="card-title grey-text text-darken-4">{this.props.user.name}<i className="material-icons right">{this.props.user.age}</i></span>
+        <span className="card-title grey-text text-darken-4">{this.props.user.name} {this.props.user.id}<i className="material-icons right">{this.props.user.age}</i></span>
         <p>{this.props.user.bio}</p>
       </div>
         <UserList />

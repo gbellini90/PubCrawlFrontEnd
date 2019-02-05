@@ -1,6 +1,6 @@
 import React from 'react';
 import './css/App.css';
-import { Route, withRouter } from 'react-router-dom'
+import { Route} from 'react-router-dom'
 import Homepage from './Homepage'
 import Signup from './Signup'
 import Login from './Login'
@@ -31,4 +31,4 @@ class App extends React.Component {
 
 
 
-export default withRouter(App)
+export default App

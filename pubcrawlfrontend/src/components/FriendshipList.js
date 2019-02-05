@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {setFriendships} from '../actions/friendships'
-import FriendCard from './FriendCard'
+import PendingFriendCard from './PendingFriendCard'
+import AcceptedFriendCard from './AcceptedFriendCard'
 
 const apiFriendshipAddress = 'http://localhost:3000/api/v1/friendships'
 
@@ -14,34 +15,15 @@ class FriendshipList extends React.Component {
     .then(friendships => this.props.setFriendships(friendships))
   }
 
-  // {this.props.friendships ? let friends = this.props.friendships.filter(friendship => friendship.friender_id === this.props.user.id) ? friends.map(friend => <FriendCard key=friend.id {...friend}/>) : null}
-
-  // filterFunction = () => {
-  //   this.props.friendships ? this.props.friendship.filter(friendship => friendship.friender_id === this.props.user.id || friendship.friendee_id ===this.props.user.id) : null
-  // }
-
-  //
-  // filterAndMapFunction = () => {
-  //   console.log(this.props.friendships)
-  //   if (this.props.friendships) {
-  //     let filteredFriendships = this.props.friendships.filter(friendship => friendship.friender_id === this.props.user.id || friendship.friendee_id === this.props.user.id)
-  //       console.log(filteredFriendships)
-  //       filteredFriendships.map(friend => {
-  //         return <FriendCard key={friend.id} {...friend} />
-  //       })
-  //   }
-  //   else {
-  //     return "Why doesn't this workkkk"
-  //   }
-  // }
-
 
   render() {
     return (
       <div>
-        <h3>Pending Friendships</h3>
-        {this.props.friendships ? this.props.friendships.filter(friendship => friendship.friender_id === this.props.user.id || friendship.friendee_id ===this.props.user.id).map(friend => <FriendCard key={friend.id} {...friend}/>) : null}
+        <h3>Friendships</h3>
+        {this.props.friendships ? this.props.friendships.filter(friendship => (friendship.accepted === false && friendship.friender_id === this.props.user.id) || ( friendship.accepted === false && friendship.friendee_id === this.props.user.id)).map(friend => <PendingFriendCard key={friend.id} {...friend}/>) : null}
+        {this.props.friendships ? this.props.friendships.filter(friendship => (friendship.accepted === true && friendship.friender_id === this.props.user.id) || ( friendship.accepted === true && friendship.friendee_id === this.props.user.id)).map(friend => <AcceptedFriendCard key={friend.id} {...friend}/>) : null}
       </div>
+
 
 
     );
