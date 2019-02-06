@@ -3,6 +3,7 @@ import {Redirect} from "react-router-dom";
 import {Input, Row} from 'react-materialize'
 import {connect} from 'react-redux'
 import {setCurrentUser} from '../actions/user'
+import {setCurrentUserList} from '../actions/users'
 
 const apiUsersAddress = 'http://localhost:3000/api/v1/users'
 
@@ -16,6 +17,12 @@ class Signup extends React.Component {
    bio: '',
    loggedIn:false
    //will be password attribute in the future for login feature
+ }
+
+ componentDidMount = () => {
+   fetch ('http://localhost:3000/api/v1/users')
+   .then(r => r.json())
+   .then(allUsers => this.props.setCurrentUserList(allUsers))
  }
 
  handleSubmit = (event) => {
@@ -75,13 +82,16 @@ class Signup extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    user:state.user.user
+    user:state.user.user,
+    users:state.users.users
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setCurrentUser: (user) => dispatch(setCurrentUser(user))
+    setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+    setCurrentUserList: (users) => dispatch(setCurrentUserList(users))
+
   }
 }
 

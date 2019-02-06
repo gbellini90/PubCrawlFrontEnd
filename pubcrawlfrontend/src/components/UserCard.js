@@ -39,8 +39,8 @@ const mapStateToProps = (state) => {
   return {
       bars:state.bars.bars,
       user:state.user.user,
-      users:state.users.users,
-      friendship:state.friendship.friendship
+      friendship:state.friendship.friendship,
+      budless:state.budless.budless
   }
 }
 

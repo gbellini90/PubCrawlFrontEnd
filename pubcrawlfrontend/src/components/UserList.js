@@ -1,18 +1,20 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {setCurrentUserList} from '../actions/users'
+import {setCurrentListofBudlessUsers} from '../actions/budless'
 import UserCard from './UserCard'
 
 
-const apiUsersAddress = 'http://localhost:3000/api/v1/users'
-
 class UserList extends React.Component {
 
-componentDidMount = () => {
-  fetch(apiUsersAddress)
-  .then(r => r.json())
-  .then(allUsers => this.props.setCurrentUserList(allUsers.filter(user => user.username !== this.props.user.username && user.name !== this.props.user.name)))
-}
+
+  handleClick = (id) => {
+  fetch(`http://localhost:3000/api/v1/users/${id}/budless`)
+    .then(r => r.json())
+    .then(budlessUsers => {
+      this.props.setCurrentListofBudlessUsers(budlessUsers)
+    })
+
+  }
 
 
 
@@ -20,25 +22,27 @@ componentDidMount = () => {
     return (
       <div>
       <h3>All Users</h3>
-      {this.props.users? this.props.users.map(user => <UserCard key= {user.id} {...user} />) : null}
+      <button onClick={()=>this.handleClick(this.props.user.id)}>View Users</button>
+      {this.props.budless ? this.props.budless.map(budlessuser => <UserCard key= {budlessuser.id} {...budlessuser} />) : null}
       </div>
     );
   }
-
 }
 
 
 const mapStateToProps = (state) => {
   return {
     user:state.user.user,
-    users:state.users.users,
-    bars:state.bars.bars
+    bars:state.bars.bars,
+    friendships:state.friendships.friendships,
+    buds:state.buds.buds,
+    budless:state.budless.budless
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setCurrentUserList: (users) => dispatch(setCurrentUserList(users))
+    setCurrentListofBudlessUsers: (budlessUsers) => dispatch(setCurrentListofBudlessUsers(budlessUsers))
   }
 }
 

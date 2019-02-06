@@ -21,6 +21,7 @@ class GroupCard extends React.Component {
       <ul>
       <li>{this.props.name} <button onClick={()=>this.deleteGroup(this.props.id)}>x</button><br />
       <button onClick={()=>this.addFriendsToGroup(this.props.user.id)}> Add Friends to This Group!</button>
+      <button> Create A Pub Crawl With This Group </button>
       </li>
     </ul>
       </div>

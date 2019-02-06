@@ -33,12 +33,6 @@ class Profile extends React.Component {
 
       </div>
 
-
-
-
-
-
-
     );
   }
 
@@ -48,9 +42,9 @@ class Profile extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user:state.user.user,
-    users:state.users.users,
     friendship:state.friendships.friendship,
-    friendships:state.friendships.friendships
+    friendships:state.friendships.friendships,
+    budless:state.budless.budless
   }
 }
 

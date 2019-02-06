@@ -3,11 +3,20 @@ import {Input, Row, Icon} from 'react-materialize'
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {setCurrentUser} from '../actions/user'
+import {setCurrentUserList} from '../actions/users'
 
 
 const apiUsersAddress = 'http://localhost:3000/api/v1/users'
 
 class Login extends React.Component {
+
+  componentDidMount = () => {
+    fetch ('http://localhost:3000/api/v1/users')
+    .then(r => r.json())
+    .then(allUsers => this.props.setCurrentUserList(allUsers))
+  }
+
+
 
   state = {
     name:'',
@@ -55,7 +64,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setCurrentUser: (user) => dispatch(setCurrentUser(user))
+    setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+    setCurrentUserList: (users) => dispatch(setCurrentUserList(users))
   }
 }
 
