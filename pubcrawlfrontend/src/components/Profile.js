@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import UserList from './UserList'
 import FriendshipList from './FriendshipList'
+import AcceptedFriendCard from './AcceptedFriendCard'
 
 
 
@@ -14,6 +15,7 @@ class Profile extends React.Component {
       <div>
         <nav>
         <Link to='/bars'>  Search Bars  </Link>
+        <Link to='/groups'>  Create a Group  </Link>
         </nav>
       Hi from Profile Page
       <div className="card horizontal">

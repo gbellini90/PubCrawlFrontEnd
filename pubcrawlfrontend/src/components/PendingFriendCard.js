@@ -35,7 +35,7 @@ acceptFriendRequest = (friend_id) => {
   render() {
     return (
       <div>
-      Pending Friendships:
+      <h3>Pending Friendships:</h3>
         <li>Friendship id: {this.props.id} <br/>
             Friender_id: {this.props.friender_id} <br/>
             Friendee_id {this.props.friendee_id} <br/>
