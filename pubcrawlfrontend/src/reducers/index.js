@@ -7,8 +7,10 @@ import friendship from './friendship'
 import friendships from './friendships'
 import group from './group'
 import groups from './groups'
-import buds from './buds'
+import friends from './friends'
 import budless from './budless'
+import addfriend from './addfriend'
+import pendingFriends from './pendingfriends'
 
 
 const rootReducer = combineReducers({
@@ -19,8 +21,10 @@ const rootReducer = combineReducers({
   friendships:friendships,
   group:group,
   groups:groups,
-  buds:buds,
-  budless:budless
+  friends:friends,
+  budless:budless,
+  addfriend:addfriend,
+  pendingFriends:pendingFriends
 
 })
 

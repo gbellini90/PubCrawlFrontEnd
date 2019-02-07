@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import AcceptedFriendCard from './AcceptedFriendCard'
+import AcceptedFriendList from './AcceptedFriendList'
 
 
 class GroupCard extends React.Component {

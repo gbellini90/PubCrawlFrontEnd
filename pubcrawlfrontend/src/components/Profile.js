@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import UserList from './UserList'
 import FriendshipList from './FriendshipList'
-import AcceptedFriendCard from './AcceptedFriendCard'
+import AcceptedFriendList from './AcceptedFriendList'
 
 
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from "react-router-dom";
-import AcceptedFriendCard from './AcceptedFriendCard'
+import AcceptedFriendList from './AcceptedFriendList'
 import {setGroup} from '../actions/group'
 import {setGroups} from '../actions/groups'
 import GroupCard from './GroupCard'
@@ -41,10 +41,6 @@ class Group extends React.Component {
 
 
 
-
-
-
-
   handleChange = (event) => {
     this.setState({
    [event.target.name]: event.target.value
@@ -62,7 +58,8 @@ class Group extends React.Component {
       <input onChange={this.handleChange} name="groupName" value={this.state.groupName} type="text" placeholder="Enter Group Name here!"/>
       <input type="submit" />
       </form>
-      <h3> Your Group(s) </h3>
+      <AcceptedFriendList />
+      <h3> Your Created Group(s) </h3>
       {this.props.groups ? this.props.groups.filter(group => (group.creator_id === this.props.user.id)).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} />) : "WUUTT" }
       <nav>
       <Link to='/bars'>  Search Bars  </Link>

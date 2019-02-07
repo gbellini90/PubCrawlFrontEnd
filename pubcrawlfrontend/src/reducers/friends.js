@@ -1,11 +1,11 @@
 const initialState = {
-  buds: []
+  friends: []
 }
 
  function reducer(state=initialState, action) {
   switch(action.type){
-    case "SET_BUDS":
-      return {...state, buds:action.payload}
+    case "SET_FRIENDS":
+      return {...state, friends:action.payload}
     default:
       return state
   }

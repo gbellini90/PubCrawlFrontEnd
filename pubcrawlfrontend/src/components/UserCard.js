@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {setFriendship} from '../actions/friendship'
+import {addPendingFriend} from '../actions/addPendingFriend'
 
 class UserCard extends React.Component {
 
@@ -18,7 +18,7 @@ class UserCard extends React.Component {
       }
   ).then(r =>r.json())
   .then(friendship => {
-    this.props.setFriendship(friendship)
+    this.props.addPendingFriend(friendship)
   })}
 
 
@@ -46,7 +46,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setFriendship: (friendship) => dispatch(setFriendship(friendship))
+    addPendingFriend: (pendingFriend) => dispatch(addPendingFriend(pendingFriend)),
+
   }
 }
 
