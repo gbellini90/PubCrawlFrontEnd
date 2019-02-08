@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {addPendingFriend} from '../actions/addPendingFriend'
+import {addToFriendships} from '../actions/addToFriendships'
 
 class UserCard extends React.Component {
 
@@ -18,7 +19,9 @@ class UserCard extends React.Component {
       }
   ).then(r =>r.json())
   .then(friendship => {
-    this.props.addPendingFriend(friendship)
+    let friendeeObj = this.props.users.find(user => user.id === id)
+    this.props.addToFriendships(friendship)
+    this.props.addPendingFriend(friendeeObj)
   })}
 
 
@@ -37,17 +40,21 @@ class UserCard extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+      friendships:state.friendships.friendships,
+      friends:state.friends.friends,
+      budless:state.budless.budless,
       bars:state.bars.bars,
       user:state.user.user,
-      friendship:state.friendship.friendship,
-      budless:state.budless.budless
+      users:state.users.users,
+      pendingFriendees:state.pendingFriendees.pendingFriendees,
+      pendingFrienders:state.pendingFrienders.pendingFrienders,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addPendingFriend: (pendingFriend) => dispatch(addPendingFriend(pendingFriend)),
-
+    addToFriendships: (friendship) => dispatch(addToFriendships(friendship)),
+    addPendingFriend: (pendingFriend) => dispatch(addPendingFriend(pendingFriend))
   }
 }
 

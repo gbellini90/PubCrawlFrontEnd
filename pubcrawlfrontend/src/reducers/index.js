@@ -1,30 +1,37 @@
 import {combineReducers} from 'redux'
 
 import bars from './bars'
-import user from './user'
-import users from './users'
-import friendship from './friendship'
-import friendships from './friendships'
-import group from './group'
-import groups from './groups'
-import friends from './friends'
-import budless from './budless'
-import addfriend from './addfriend'
-import pendingFriends from './pendingfriends'
+import user from './users&friends'
+import users from './users&friends'
+import groups from './group'
+import usergroups from './group'
+import removeGroup from './group'
+import budless from './users&friends'
+import friendships from './users&friends'
+import friends from './users&friends'
+import addFriend from './users&friends'
+import addPendingFriend from './users&friends'
+import addToFriendships from './users&friends'
+import pendingFrienders from './users&friends'
+import pendingFriendees from './users&friends'
+
 
 
 const rootReducer = combineReducers({
   user:user,
-  bars:bars,
   users:users,
-  friendship:friendship,
-  friendships:friendships,
-  group:group,
+  bars:bars,
   groups:groups,
+  usergroups:usergroups,
+  removeGroup:removeGroup,
+  friendships:friendships,
   friends:friends,
   budless:budless,
-  addfriend:addfriend,
-  pendingFriends:pendingFriends
+  addFriend:addFriend,
+  addPendingFriend:addPendingFriend,
+  addToFriendships:addToFriendships,
+  pendingFriendees: pendingFriendees,
+  pendingFrienders: pendingFrienders
 
 })
 

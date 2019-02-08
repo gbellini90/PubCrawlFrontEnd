@@ -1,24 +1,21 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {setFriendships} from '../actions/friendships'
+import {setFriends} from '../actions/friends'
 import PendingFriendList from './PendingFriendList'
 import AcceptedFriendList from './AcceptedFriendList'
-
-const apiFriendshipAddress = 'http://localhost:3000/api/v1/friendships'
 
 
 class FriendshipList extends React.Component {
 
   componentDidMount = () => {
-    fetch(apiFriendshipAddress)
-    .then(r => r.json())
-    .then(friendships => {
-      this.props.setFriendships(friendships)
-  })
-  }
+      fetch (`http://localhost:3000/api/v1/users/${this.props.user.id}/friends`)
+      .then (r => r.json())
+      .then(friends => {
+        this.props.setFriends(friends)
+      })
+    }
 
 
-  // {this.props.friendships ? this.props.friendships.filter(friendship => (friendship.accepted === false && friendship.friender_id === this.props.user.id) || ( friendship.accepted === false && friendship.friendee_id === this.props.user.id)).map(friend => <PendingFriendCard key={friend.id} {...friend}/>) : "No friend requests at this time"}
 
   render() {
     return (
@@ -26,9 +23,6 @@ class FriendshipList extends React.Component {
         <AcceptedFriendList />
         <PendingFriendList />
       </div>
-
-
-
     );
   }
 
@@ -38,21 +32,21 @@ const mapStateToProps = (state) => {
   return {
       bars:state.bars.bars,
       user:state.user.user,
-      friendship:state.friendship.friendship,
       friendships:state.friendships.friendships,
       friends:state.friends.friends,
-      pendingFriends:state.pendingFriends.pendingFriends
+      pendingFriendees:state.pendingFriendees.pendingFriendees,
+      pendingFrienders:state.pendingFrienders.pendingFrienders,
+      budless:state.budless.budless,
+      users:state.users.users
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setFriendships: (friendships) => dispatch(setFriendships(friendships)),
-
+    setFriends: (friends) => dispatch(setFriends(friends))
   }
 }
 
 
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(FriendshipList);
+export default connect(mapStateToProps,mapDispatchToProps)(FriendshipList);

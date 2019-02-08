@@ -8,7 +8,12 @@ import {Input} from 'react-materialize'
 
 class Bars extends React.Component {
 
-  componentDidMount = (location) => {
+  state = {
+    search:''
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault()
     fetch('http://localhost:3000/api/v1/search', {
       method:"POST",
       headers: {
@@ -16,12 +21,19 @@ class Bars extends React.Component {
               "Accept":"application/json"},
       body:
         JSON.stringify({
-          location: location
+          location: this.state.search
         })
       }
   ).then(r =>r.json())
   .then(data => this.props.setBars(data.businesses))
   }
+
+  handleChange = (event) => {
+    this.setState({
+      search: event.target.value
+ })
+}
+
 
 
   render() {
@@ -33,8 +45,9 @@ class Bars extends React.Component {
       </nav>
       <h1>Hi from Bar Pageeee</h1>
       {this.props.bars ? this.props.bars.map(bar=> <BarCard key= {bar.id} {...bar} />) : null}
-      <form>
-        <Input onChange={(event)=>this.componentDidMount(event.target.value)} placeholder="search by NYC neighborhood" type="text"/>
+      <form onSubmit={this.handleSubmit}>
+        <Input onChange={this.handleChange} name="search" value={this.state.search} placeholder="search by NYC neighborhood" type="text"/>
+        <Input type="submit" />
       </form>
       </div>
     );

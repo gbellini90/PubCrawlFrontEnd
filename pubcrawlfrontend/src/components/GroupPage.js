@@ -1,8 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from "react-router-dom";
-import AcceptedFriendList from './AcceptedFriendList'
-import {setGroup} from '../actions/group'
+import {addGroup} from '../actions/addgroup'
 import {setGroups} from '../actions/groups'
 import GroupCard from './GroupCard'
 
@@ -36,7 +35,7 @@ class Group extends React.Component {
 
       fetch(apiGroupsAddress,postConfig)
         .then(r=>r.json())
-        .then(groupObj => this.props.setGroup(groupObj))
+        .then(groupObj => this.props.addGroup(groupObj))
     }
 
 
@@ -58,7 +57,6 @@ class Group extends React.Component {
       <input onChange={this.handleChange} name="groupName" value={this.state.groupName} type="text" placeholder="Enter Group Name here!"/>
       <input type="submit" />
       </form>
-      <AcceptedFriendList />
       <h3> Your Created Group(s) </h3>
       {this.props.groups ? this.props.groups.filter(group => (group.creator_id === this.props.user.id)).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} />) : "WUUTT" }
       <nav>
@@ -76,19 +74,20 @@ class Group extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-      bars:state.bars.bars,
-      user:state.user.user,
-      users:state.users.users,
-      friendship:state.friendship.friendship,
-      friendships:state.friendships.friendships,
-      group:state.group.group,
-      groups:state.groups.groups
+    bars:state.bars.bars,
+    user:state.user.user,
+    users:state.users.users,
+    friendships:state.friendships.friendships,
+    groups:state.groups.groups,
+    friends:state.friends.friends,
+    pendingFriendees:state.pendingFriendees.pendingFriendees,
+    pendingFrienders:state.pendingFrienders.pendingFrienders,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setGroup: (group) => dispatch(setGroup(group)),
+    addGroup: (group) => dispatch(addGroup(group)),
     setGroups: (groups) => dispatch(setGroups(groups))
   }
 }

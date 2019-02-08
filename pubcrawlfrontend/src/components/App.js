@@ -7,6 +7,7 @@ import Login from './Login'
 import Profile from './Profile'
 import BarContainer from './BarContainer'
 import GroupPage from './GroupPage'
+import FriendPage from './FriendPage'
 
 
 
@@ -25,6 +26,7 @@ class App extends React.Component {
           <Route path='/profile' component={Profile} />
           <Route path='/bars' component={BarContainer} />
           <Route path='/groups' component={GroupPage} />
+          <Route path='/friends' component={FriendPage} />
         </>
       </div>
     );
