@@ -1,9 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {setCurrentListofBudlessUsers} from '../actions/budless'
 import UserList from './UserList'
 import FriendshipList from './FriendshipList'
+import {setFriends} from '../actions/friends'
+import {setCurrentListofBudlessUsers} from '../actions/budless'
 
 class FriendPage extends React.Component {
 
@@ -12,6 +13,12 @@ class FriendPage extends React.Component {
     .then(r => r.json())
     .then(budlessUsers => {
       this.props.setCurrentListofBudlessUsers(budlessUsers)
+    })
+
+    fetch (`http://localhost:3000/api/v1/users/${this.props.user.id}/friends`)
+    .then (r => r.json())
+    .then(friends => {
+      this.props.setFriends(friends)
     })
 
   }
@@ -35,22 +42,22 @@ class FriendPage extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    friendships:state.friendships.friendships,
-    friends:state.friends.friends,
-    budless:state.budless.budless,
     bars:state.bars.bars,
     user:state.user.user,
-    users:state.users.users,
-    pendingFriendees:state.pendingFriendees.pendingFriendees,
-    pendingFrienders:state.pendingFrienders.pendingFrienders,
+    users:state.user.users,
+    friendships:state.user.friendships,
+    pendingFriendees:state.user.pendingFriendees,
+    pendingFrienders:state.user.pendingFrienders,
+    budless:state.user.budless,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setCurrentListofBudlessUsers: (budlessUsers) => dispatch(setCurrentListofBudlessUsers(budlessUsers))
+    setCurrentListofBudlessUsers: (budlessUsers) => dispatch(setCurrentListofBudlessUsers(budlessUsers)),
+    setFriends: (friends) => dispatch(setFriends(friends))
   }
 }
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(FriendPage);
+export default connect(mapStateToProps, mapDispatchToProps)(FriendPage);

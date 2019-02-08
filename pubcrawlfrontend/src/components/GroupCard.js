@@ -9,6 +9,10 @@ import {setUserGroups} from '../actions/usergroups'
 
 class GroupCard extends React.Component {
 
+  state= {
+    clicked:false
+  }
+
   componentDidMount = () => {
     fetch('http://localhost:3000/api/v1/user_groups')
     .then(r => r.json())
@@ -24,6 +28,7 @@ class GroupCard extends React.Component {
   }
 
   addFriendToGroup = (id) => {
+    this.setState({clicked:true})
     fetch('http://localhost:3000/api/v1/user_groups', {
       method:"POST",
       headers: {
@@ -38,8 +43,8 @@ class GroupCard extends React.Component {
       .then(r =>r.json())
       .then(userGroup => this.props.addToUserGroup(userGroup))
   }
-
-
+//
+// {this.props.usergroups ? this.props.usergroups.filter(usergroup => usergroup.group_id === this.props.id).map(usergroup => <li>{usergroup.id} {usergroup.group_id} {usergroup.user_id} </li>) : null}
 
 
   render() {
@@ -47,8 +52,7 @@ class GroupCard extends React.Component {
       <div>
       <ul>
       <li>{this.props.name} <button onClick={()=>this.deleteGroup(this.props.id)}>x</button><br />
-      {this.props.friends.map(friend => <li> {friend.name} <button onClick={()=>this.addFriendToGroup(friend.id)}> Add to Group? </button> </li>)}
-      {this.props.usergroups ? this.props.usergroups.filter(usergroup => usergroup.group_id === this.props.id).map(usergroup => <li>{usergroup.id} {usergroup.group_id} {usergroup.user_id} </li>) : null}
+      {this.props.friends.map(friend => <li> {friend.name} <button onClick={()=>this.addFriendToGroup(friend.id)}> {this.state.clicked ? `Added! to ${this.props.name}` : "Add to Group?"} </button> </li>)}
       <button> Create A Pub Crawl With This Group </button>
       </li>
     </ul>
@@ -64,11 +68,11 @@ const mapStateToProps = (state) => {
   return {
       bars:state.bars.bars,
       user:state.user.user,
-      users:state.users.users,
-      friendships:state.friendships.friendships,
+      users:state.user.users,
+      friendships:state.user.friendships,
       groups:state.groups.groups,
-      friends:state.friends.friends,
-      usergroups:state.usergroups.usergroups
+      friends:state.user.friends,
+      usergroups:state.groups.usergroups
   }
 }
 

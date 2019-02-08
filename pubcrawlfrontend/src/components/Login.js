@@ -16,8 +16,6 @@ class Login extends React.Component {
     .then(allUsers => this.props.setCurrentUserList(allUsers))
   }
 
-
-
   state = {
     name:'',
     username: '',
@@ -27,8 +25,8 @@ class Login extends React.Component {
   handleChange = (event) => {
     this.setState({
    [event.target.name]: event.target.value
- })
-}
+   })
+  }
 
   handleSubmit = (event) => {
     event.preventDefault()
@@ -65,9 +63,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-    setCurrentUserList: (users) => dispatch(setCurrentUserList(users))
-  }
-}
+    setCurrentUserList: (users) => dispatch(setCurrentUserList(users)),
+}}
 
 
 

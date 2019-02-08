@@ -27,18 +27,19 @@ const initialState = {
     case "ADD_FRIEND":
       return {
         ...state,
-        budless: state.budless.filter(friend => friend !== action.payload),
-        pendingFrienders: state.pendingFrienders.filter(friend => friend !== action.payload),
+        budless: state.budless.filter(friend => friend.id !== action.payload.id),
+        pendingFrienders: state.pendingFrienders.filter(friend => friend.id !== action.payload.id),
         friends: [...state.friends, action.payload]
       }
     case "ADD_PENDING_FRIEND":
       return {
         ...state,
-        budless: state.budless.filter(friend => friend !== action.payload),
+        budless: state.budless.filter(friend => friend.id !== action.payload.id),
         pendingFriendees: [...state.pendingFriendees, action.payload]
       }
     case "ADD_TO_FRIENDSHIPS":
       return {
+        ...state,
         friendships: [...state.friendships, action.payload]
       }
     default:

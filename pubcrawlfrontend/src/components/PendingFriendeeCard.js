@@ -21,14 +21,13 @@ class PendingFriendeeCard extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-      bars:state.bars.bars,
-      user:state.user.user,
-      users:state.users.users,
-      friendships:state.friendships.friendships,
-      groups:state.groups.groups,
-      friends:state.friends.friends,
-      pendingFriendees:state.pendingFriendees.pendingFriendees,
-      pendingFrienders:state.pendingFrienders.pendingFrienders,
+    bars:state.bars.bars,
+    user:state.user.user,
+    users:state.user.users,
+    friendships:state.user.friendships,
+    pendingFriendees:state.user.pendingFriendees,
+    pendingFrienders:state.user.pendingFrienders,
+    budless:state.user.budless,
   }
 }
 

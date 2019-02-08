@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import {setCurrentUser} from '../actions/user'
 import {setCurrentUserList} from '../actions/users'
 
+
 const apiUsersAddress = 'http://localhost:3000/api/v1/users'
 
 class Signup extends React.Component {
@@ -83,15 +84,14 @@ class Signup extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user:state.user.user,
-    users:state.users.users
+    users:state.user.users
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-    setCurrentUserList: (users) => dispatch(setCurrentUserList(users))
-
+    setCurrentUserList: (users) => dispatch(setCurrentUserList(users)),
   }
 }
 

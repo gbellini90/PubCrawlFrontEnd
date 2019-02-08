@@ -48,17 +48,16 @@ class Group extends React.Component {
 
 
   render() {
-    console.log(this.props)
     return (
       <div>
       <h1> Group Page </h1>
         <h3> Create a New Group!</h3>
       <form onSubmit={this.createGroup}>
-      <input onChange={this.handleChange} name="groupName" value={this.state.groupName} type="text" placeholder="Enter Group Name here!"/>
-      <input type="submit" />
+        <input onChange={this.handleChange} name="groupName" value={this.state.groupName} type="text" placeholder="Enter Group Name here!"/>
+        <input type="submit" />
       </form>
       <h3> Your Created Group(s) </h3>
-      {this.props.groups ? this.props.groups.filter(group => (group.creator_id === this.props.user.id)).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} />) : "WUUTT" }
+      {this.props.groups ? this.props.groups.filter(group => (group.creator_id === this.props.user.id)).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} />) : null}
       <nav>
       <Link to='/bars'>  Search Bars  </Link>
       <Link to='/profile'>  Back to Profile  </Link>
@@ -76,19 +75,19 @@ const mapStateToProps = (state) => {
   return {
     bars:state.bars.bars,
     user:state.user.user,
-    users:state.users.users,
-    friendships:state.friendships.friendships,
+    users:state.user.users,
+    friendships:state.user.friendships,
     groups:state.groups.groups,
-    friends:state.friends.friends,
-    pendingFriendees:state.pendingFriendees.pendingFriendees,
-    pendingFrienders:state.pendingFrienders.pendingFrienders,
+    friends:state.user.friends,
+    pendingFriendees:state.user.pendingFriendees,
+    pendingFrienders:state.user.pendingFrienders,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addGroup: (group) => dispatch(addGroup(group)),
-    setGroups: (groups) => dispatch(setGroups(groups))
+    setGroups: (groups) => dispatch(setGroups(groups)),
+    addGroup: (group) => dispatch(addGroup(group))
   }
 }
 

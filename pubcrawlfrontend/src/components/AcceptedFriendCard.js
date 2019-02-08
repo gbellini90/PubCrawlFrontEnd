@@ -16,14 +16,13 @@ class AcceptedFriendCard extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    friendships:state.friendships.friendships,
-    friends:state.friends.friends,
-    budless:state.budless.budless,
     bars:state.bars.bars,
     user:state.user.user,
-    users:state.users.users,
-    pendingFriendees:state.pendingFriendees.pendingFriendees,
-    pendingFrienders:state.pendingFrienders.pendingFrienders,
+    users:state.user.users,
+    friendships:state.user.friendships,
+    pendingFriendees:state.user.pendingFriendees,
+    pendingFrienders:state.user.pendingFrienders,
+    budless:state.user.budless,
   }
 }
 
