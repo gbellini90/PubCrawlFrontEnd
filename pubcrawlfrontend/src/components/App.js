@@ -8,6 +8,7 @@ import Profile from './Profile'
 import BarContainer from './BarContainer'
 import GroupPage from './GroupPage'
 import FriendPage from './FriendPage'
+import PubCrawlPage from './pubcrawlpage'
 
 
 
@@ -27,6 +28,7 @@ class App extends React.Component {
           <Route path='/bars' component={BarContainer} />
           <Route path='/groups' component={GroupPage} />
           <Route path='/friends' component={FriendPage} />
+          <Route path='/pubcrawl' component={PubCrawlPage} />
         </>
       </div>
     );

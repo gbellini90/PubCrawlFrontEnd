@@ -1,6 +1,6 @@
 const initialState = {
   groups: [],
-  usergroups: []
+  group:{}
 }
 
  function reducer(state=initialState, action) {
@@ -19,11 +19,37 @@ const initialState = {
       }
     case "SET_USER_GROUPS":
       return {...state, usergroups:action.payload}
-    case "ADD_TO_USER_GROUP":
+    case "ADD_USER_TO_GROUP":
+      // make a copy of state
+      let copyOfGroups =  [...state.groups]
+
+      // find the index of the group (we'll need to replace it later)
+      let index = copyOfGroups.findIndex(group => group.id === action.payload.group_id)
+
+      // find the actual group
+      let foundGroup = copyOfGroups.find(group => group.id === action.payload.group_id)
+
+      // copy the group so we don't manipulate state
+      let copyFoundGroup = {...foundGroup}
+
+      // copy the users so we don't manipulate state
+      let copyUsers = [...copyFoundGroup.users]
+
+      // push new user into group
+      copyUsers.push(action.payload.user)
+
+      // reset users to our new array of users (with new user added)
+      copyFoundGroup.users = copyUsers
+
+      // replace the original group object with our new group object
+      copyOfGroups[index] = copyFoundGroup
+
       return {
         ...state,
-        usergroups:[...state.usergroups, action.payload]
+        groups: copyOfGroups
       }
+    case "SET_CURRENT_GROUP":
+      return {...state, group:action.payload}
     default:
       return state
   }

@@ -8,8 +8,6 @@ class PendingFriendList extends React.Component {
 
 
 componentDidMount() {
-  console.log('component did mount', this.props.user.id)
-
   fetch(`http://localhost:3000/api/v1/users/${this.props.user.id}/pendingFriendees`)
   .then(r => r.json())
   .then(pendingFrienders => {

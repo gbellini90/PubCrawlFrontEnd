@@ -28,6 +28,7 @@ class Bars extends React.Component {
   .then(data => this.props.setBars(data.businesses))
   }
 
+
   handleChange = (event) => {
     this.setState({
       search: event.target.value
@@ -41,12 +42,11 @@ class Bars extends React.Component {
       <div>
       <nav>
       <Link to='/profile'>  Back to Profile </Link>
-      <Link to='/groups'>  Group Page </Link>
       </nav>
       <h1>Hi from Bar Pageeee</h1>
       {this.props.bars ? this.props.bars.map(bar=> <BarCard key= {bar.id} {...bar} />) : null}
       <form onSubmit={this.handleSubmit}>
-        <Input onChange={this.handleChange} name="search" value={this.state.search} placeholder="search by NYC neighborhood" type="text"/>
+        <Input onChange={this.handleChange} name="search" value={this.state.search} placeholder="Search for bars by NYC neighborhood name or zip code" type="text"/>
         <Input type="submit" />
       </form>
       </div>
@@ -58,7 +58,11 @@ class Bars extends React.Component {
 const mapStateToProps = (state) => {
   return {
     bars:state.bars.bars,
-    user:state.user.user
+    user:state.user.user,
+    group:state.groups.group,
+    groups:state.groups.groups,
+    pubcrawls:state.bars.pubcrawls,
+    pubcrawl:state.bars.pubcrawl
   }
 }
 

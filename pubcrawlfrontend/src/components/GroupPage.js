@@ -5,6 +5,7 @@ import {addGroup} from '../actions/addgroup'
 import {setGroups} from '../actions/groups'
 import GroupCard from './GroupCard'
 
+
 const apiGroupsAddress = 'http://localhost:3000/api/v1/groups'
 
 class Group extends React.Component {
@@ -35,10 +36,10 @@ class Group extends React.Component {
 
       fetch(apiGroupsAddress,postConfig)
         .then(r=>r.json())
-        .then(groupObj => this.props.addGroup(groupObj))
-    }
-
-
+        .then(groupObj => {
+          this.props.addGroup(groupObj)
+        })
+      }
 
   handleChange = (event) => {
     this.setState({
@@ -51,18 +52,18 @@ class Group extends React.Component {
     return (
       <div>
       <h1> Group Page </h1>
-        <h3> Create a New Group!</h3>
+        <h4> Create a New Group Below !</h4>
       <form onSubmit={this.createGroup}>
         <input onChange={this.handleChange} name="groupName" value={this.state.groupName} type="text" placeholder="Enter Group Name here!"/>
         <input type="submit" />
       </form>
-      <h3> Your Created Group(s) </h3>
-      {this.props.groups ? this.props.groups.filter(group => (group.creator_id === this.props.user.id)).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} />) : null}
+      <h3> Your Group(s) </h3>
+      {this.props.groups ? this.props.groups.filter(group => (group.creator_id === this.props.user.id)).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} usersfromgroup={mygroup.users} />) : null}
       <nav>
       <Link to='/bars'>  Search Bars  </Link>
       <Link to='/profile'>  Back to Profile  </Link>
+      <Link to='/friends'> Back to Friend Page </Link>
       </nav>
-
       </div>
     );
   }

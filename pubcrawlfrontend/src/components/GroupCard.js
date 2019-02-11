@@ -1,23 +1,26 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {removeGroup} from '../actions/removegroup'
-import {addToUserGroup} from '../actions/addtousergroup'
-import {setUserGroups} from '../actions/usergroups'
+import {addUserToGroup} from '../actions/addusertogroup'
+import {setCurrentGroup} from '../actions/currentgroup'
+import {setPubCrawls} from '../actions/pubcrawls'
+import {Redirect} from "react-router-dom";
+
 
 
 
 
 class GroupCard extends React.Component {
 
-  state= {
-    clicked:false
-  }
+componentDidMount = () => {
+  fetch('http://localhost:3000/api/v1/pubcrawls')
+  .then(r=>r.json())
+  .then(pubcrawls => this.props.setPubCrawls(pubcrawls))
+}
 
-  componentDidMount = () => {
-    fetch('http://localhost:3000/api/v1/user_groups')
-    .then(r => r.json())
-    .then(usergroups => this.props.setUserGroups(usergroups))
-  }
+state ={
+  pubcrawlClicked:false
+}
 
   deleteGroup = (group_id) => {
     fetch(`http://localhost:3000/api/v1/groups/${group_id}`, {
@@ -27,8 +30,9 @@ class GroupCard extends React.Component {
     this.props.removeGroup(deleteGroup)
   }
 
-  addFriendToGroup = (id) => {
-    this.setState({clicked:true})
+
+
+  addFriendToGroup = (friend, group_id) => {
     fetch('http://localhost:3000/api/v1/user_groups', {
       method:"POST",
       headers: {
@@ -36,29 +40,46 @@ class GroupCard extends React.Component {
               "Accept":"application/json"},
       body:
         JSON.stringify({
-          user_id:id ,
-          group_id:this.props.id
+          user_id:friend.id ,
+          group_id:group_id
         })
       })
-      .then(r =>r.json())
-      .then(userGroup => this.props.addToUserGroup(userGroup))
+
+      this.props.addUserToGroup(friend,group_id)
   }
-//
-// {this.props.usergroups ? this.props.usergroups.filter(usergroup => usergroup.group_id === this.props.id).map(usergroup => <li>{usergroup.id} {usergroup.group_id} {usergroup.user_id} </li>) : null}
+
+  handlePub = (id) => {
+    console.log("hey")
+    console.log(id)
+    this.setState({pubcrawlClicked:!this.state.pubcrawlClicked})
+    let groupObj = this.props.groups.find(group => group.id === this.props.id)
+    this.props.setCurrentGroup(groupObj)
+  }
+
 
 
   render() {
-    return (
+    console.log("Group Card", this.props)
+    const groupCard =
       <div>
-      <ul>
-      <li>{this.props.name} <button onClick={()=>this.deleteGroup(this.props.id)}>x</button><br />
-      {this.props.friends.map(friend => <li> {friend.name} <button onClick={()=>this.addFriendToGroup(friend.id)}> {this.state.clicked ? `Added! to ${this.props.name}` : "Add to Group?"} </button> </li>)}
-      <button> Create A Pub Crawl With This Group </button>
-      </li>
-    </ul>
+        <ul>
+          <li><h3>Name of Group: {this.props.name}</h3>
+          Current users in group {this.props.name} {this.props.usersfromgroup.map(user => <li> {user.name} </li>)}
+          <button onClick={()=>this.deleteGroup(this.props.id)}>x</button><br />
+          Group Id: {this.props.id}
+          Creator Id: {this.props.creator_id}
+          {this.props.pubcrawls.map(pubcrawl => (
+            <div key={pubcrawl.id}>  Group Id of this existing pub crawl{pubcrawl.group_id},Pubcrawl id of this existing pubcrawl {pubcrawl.id}
+              <button onClick={()=> this.setCurrentPubCrawl(pubcrawl.id)}>  Add bars to Existing pubcrawl</button>
+            </div>
+          ))}
+          {this.props.friends.map(friend => <li>{friend.name} <button onClick={()=>this.addFriendToGroup(friend, this.props.id)}> {this.props.usersfromgroup.find(user => user.id === friend.id)  ? `Added to ${this.props.name}!` : "Add to Group?"} </button> </li>)} <br />
+          <button onClick={()=>this.handlePub(this.props.id)}> Create New Pub Crawl With {this.props.name} </button>
+          </li>
+        </ul>
       </div>
+      return this.state.pubcrawlClicked? <Redirect to='/pubcrawl'/> : groupCard
 
-    );
   }
 
 }
@@ -66,21 +87,19 @@ class GroupCard extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-      bars:state.bars.bars,
       user:state.user.user,
-      users:state.user.users,
-      friendships:state.user.friendships,
-      groups:state.groups.groups,
       friends:state.user.friends,
-      usergroups:state.groups.usergroups
+      group:state.groups.group,
+      groups:state.groups.groups
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     removeGroup: (group) => dispatch(removeGroup(group)),
-    setUserGroups: (groups) => dispatch(setUserGroups(groups)),
-    addToUserGroup : (usergroup)=> dispatch(addToUserGroup(usergroup))
+    addUserToGroup : (user, group_id)=> dispatch(addUserToGroup(user,group_id)),
+    setCurrentGroup : (group) => dispatch(setCurrentGroup(group)),
+    setPubCrawls:(pubcrawls) => dispatch(setPubCrawls(pubcrawls)),
   }
 }
 

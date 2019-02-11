@@ -21,8 +21,6 @@ class Profile extends React.Component {
   const profile =
       <div>
         <nav>
-        <Link to='/bars'>  Search Bars  </Link>
-        <Link to='/groups'>  Create a Group  </Link>
         <Link to='/friends'> View Friends </Link>
         </nav>
       Hi from Profile Page
