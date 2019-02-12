@@ -20,7 +20,8 @@ componentDidMount = () => {
 }
 
 state ={
-  pubcrawlClicked:false
+  newPubcrawlClicked:false,
+  existingCrawlClicked:false
 }
 
   deleteGroup = (group_id) => {
@@ -50,20 +51,21 @@ state ={
   }
 
   createNewPubCrawl = (id) => {
-    this.setState({pubcrawlClicked:!this.state.pubcrawlClicked})
+    this.setState({newPubcrawlClicked:!this.state.newPubcrawlClicked})
     let groupObj = this.props.groups.find(group => group.id === this.props.id)
     this.props.setCurrentGroup(groupObj)
   }
 
-  addBarsToExistingPubCrawl = (pubcrawl) => {
-    // this.setState({pubcrawlClicked:!this.state.pubcrawlClicked})
+  viewPubCrawl = (pubcrawl) => {
+    console.log(pubcrawl)
+    this.setState({existingCrawlClicked:!this.state.existingCrawlClicked})
     fetch('http://localhost:3000/api/v1/pubcrawls')
     .then(r=>r.json())
-    .then(data => {console.log(data)
+    .then(data => {
       let foundPubcrawl = data.find(data => data.id === pubcrawl.id)
-      let foundGroup = data.find( data => data.group_id === pubcrawl.group_id)
+      // let foundGroup = data.find( data => data.group_id === pubcrawl.group_id)
       this.props.setCurrentPubCrawl(foundPubcrawl)
-      this.props.setCurrentGroup(foundGroup)
+      // this.props.setCurrentGroup(foundGroup)
       //Need to possibly redirect to this pubcrawl's show page with edit features?
     })
   }
@@ -81,7 +83,7 @@ state ={
             Creator Id: {this.props.creator_id} <br/>
             {this.props.pubcrawls.map(pubcrawl => (
               <div key={pubcrawl.id}>  Group Id of this existing pub crawl{pubcrawl.group_id},Pubcrawl id of this existing pubcrawl {pubcrawl.id}
-                <button onClick={()=> this.addBarsToExistingPubCrawl(pubcrawl)}>  Add bars to this existing pubcrawl</button>
+                <button onClick={()=> this.viewPubCrawl(pubcrawl)}>  View This Pubcrawl! </button>
               </div>
             ))}
             {this.props.friends.map(friend => <span key={friend.id}>{friend.name} <button onClick={()=>this.addFriendToGroup(friend, this.props.id)}> {this.props.usersfromgroup.find(user => user.id === friend.id)  ? `Added to ${this.props.name}!` : "Add to Group?"} </button> </span>)} <br />
@@ -89,7 +91,7 @@ state ={
           </li>
         </ul>
       </div>
-      return this.state.pubcrawlClicked? <Redirect to='/pubcrawl'/> : groupCard
+      return this.state.newPubcrawlClicked? <Redirect to='/pubcrawl'/> : this.state.existingCrawlClicked ?  <Redirect to='mypubcrawl'/> : groupCard
 
   }
 

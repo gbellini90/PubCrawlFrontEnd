@@ -24,7 +24,8 @@ const mapStateToProps = (state) => {
     pubcrawls:state.bars.pubcrawls,
     pubcrawl:state.bars.pubcrawl,
     mybars:state.bars.mybars,
-    pubcrawlbars:state.bars.pubcrawlbars
+    pubcrawlbars:state.bars.pubcrawlbars,
+    pubcrawlbar:state.bars.pubcrawlbar
   }
 }
 

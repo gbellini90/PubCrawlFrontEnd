@@ -10,6 +10,8 @@ const apiGroupsAddress = 'http://localhost:3000/api/v1/groups'
 
 class Group extends React.Component {
 
+    // {this.props.groups ? this.props.groups.filter(group =>(group.creator_id !== this.props.user.id))}
+
   state = {
     groupName : ''
   }
@@ -49,6 +51,7 @@ class Group extends React.Component {
 
 
   render() {
+    console.log("From the GroupPage", this.props)
     return (
       <div>
       <h1> Group Page </h1>
@@ -59,6 +62,7 @@ class Group extends React.Component {
       </form>
       <h3> Your Created Group(s) </h3>
       {this.props.groups ? this.props.groups.filter(group => (group.creator_id === this.props.user.id)).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} usersfromgroup={mygroup.users} />) : null}
+
       <nav>
       <Link to='/bars'>  Search Bars  </Link>
       <Link to='/profile'>  Back to Profile  </Link>

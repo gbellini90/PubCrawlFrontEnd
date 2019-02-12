@@ -4,15 +4,17 @@ const initialState = {
   bar:{},
   pubcrawls:[],
   pubcrawl:{},
-  pubcrawlbar:{}
+  pubcrawlbar:{},
+  showBars:[]
 }
-
 
 
  function reducer(state=initialState, action) {
   switch(action.type){
     case "SET_BARS":
       return {...state, bars:action.payload}
+    case "SET_PUBCRAWL_BARS":
+      return {...state, showBars:action.payload}
     case "CURRENT_PUBCRAWL_BAR":
       return {...state, pubcrawlbar:action.payload}
     case "ADD_TO_MY_BARS":
@@ -24,8 +26,8 @@ const initialState = {
     case "REMOVE_FROM_MY_BARS":
       return {
         ...state,
-        mybars: state.mybars.filter(bar => bar.id!== action.payload.id),
-        bars: [...state.bars, action.payload]
+        mybars: state.mybars.filter(bar => bar.id!== action.payload.bar.id),
+        bars: [...state.bars, action.payload.bar]
       }
     case "SET_PUBCRAWLS":
       return {...state, pubcrawls:action.payload}
@@ -67,10 +69,11 @@ const initialState = {
       }
 
     case "REMOVE_BAR_FROM_PUBCRAWL":
-      // make a copy of state
+
+      // make a copy of state: works, gives back every pubcrawl object which consists of group_id, group obj, pubcrawl_bars, bars
       let copyOfPubcrawlss =  [...state.pubcrawls]
 
-      // find the index of the pubcrawl (we'll need to replace it later)
+      // find the index of the pubcrawl (we'll need to replace it later): gives back index of the pubcrawl within the list of pubcrawls
       let indexx = copyOfPubcrawlss.findIndex(pubcrawl => pubcrawl.id === action.payload.pubcrawl_id)
 
       // find the actual pubcrawl
@@ -79,17 +82,20 @@ const initialState = {
       // copy the pubcrawl so we don't manipulate state
       let copyFoundPubcrawll = {...foundPubcrawll}
 
-      // copy the bars so we don't manipulate state
-      let copyBarss = [...copyFoundPubcrawll.bars]
+      // // copy the bars so we don't manipulate state
+      let copyBarss = [...foundPubcrawll.bars]
 
-      // remove bar from pubcrawl
-      copyBarss.splice(indexx, 1)
+      //find the bar to remove and remove from list
+      let updatedBarArray = copyBarss.filter(bar => bar.id !== action.payload.bar.id)
+
+      // copyBarss.splice(indexx, 1)
 
       // reset bars to our new array of bars (with bar removed)
-      copyFoundPubcrawll.bars = copyBarss
+      copyFoundPubcrawll.bars = updatedBarArray
 
       // replace the original pubcrawl object with our new pubcrawl object
-      copyOfPubcrawlss = copyFoundPubcrawll
+      copyOfPubcrawlss[indexx] = copyFoundPubcrawll
+
 
       return {
         ...state,

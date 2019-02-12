@@ -9,6 +9,7 @@ import BarContainer from './BarContainer'
 import GroupPage from './GroupPage'
 import FriendPage from './FriendPage'
 import PubCrawlPage from './pubcrawlpage'
+import PubCrawlShow from './pubcrawlshow'
 
 
 
@@ -29,6 +30,7 @@ class App extends React.Component {
           <Route path='/groups' component={GroupPage} />
           <Route path='/friends' component={FriendPage} />
           <Route path='/pubcrawl' component={PubCrawlPage} />
+          <Route path ='/mypubcrawl' component={PubCrawlShow}/>
         </>
       </div>
     );

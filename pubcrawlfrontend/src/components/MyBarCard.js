@@ -7,11 +7,13 @@ import {removeFromMyBars} from '../actions/removefrommybars'
 class MyBarCard extends React.Component {
 
 
-  removeFromCrawl = (bar, pubcrawlbar) => {
+  removeFromCrawl = (bar, pubcrawl, pubcrawlbar) => {
+    console.log(bar)
+    console.log(pubcrawl)
     fetch(`http://localhost:3000/api/v1/pubcrawl_bars/${pubcrawlbar.id}`, {
       method:"DELETE"
     })
-    this.props.removeBarFromPubcrawl(bar, this.props.pubcrawl.id)
+    this.props.removeBarFromPubcrawl(bar, pubcrawl.id)
     this.props.removeFromMyBars(bar)
   }
 
@@ -19,11 +21,7 @@ class MyBarCard extends React.Component {
 
 
   render() {
-    console.log("From my bar card, pubcrawl id", this.props.pubcrawl.id);
-    console.log("From my bar card, props id", this.props.id);
-    console.log("From my bar card, bar id", this.props.bar.id);
-    console.log("From my bar card, current pubcrawlbar info?", this.props.pubcrawlbar)
-    console.log("From my bar card, current pubcrawlbar id?", this.props.pubcrawlbar.id)
+
     return (
       <div>
         <ul>
@@ -32,7 +30,7 @@ class MyBarCard extends React.Component {
         <li>Price:{this.props.price}</li>
         <li>Rating:{this.props.rating}/5</li>
         <li>Address:{this.props.location.display_address.join(" ")}</li>
-        <button onClick={()=>this.removeFromCrawl(this.props, this.props.pubcrawlbar)}>Remove from Crawl</button>
+        <button onClick={()=>this.removeFromCrawl(this.props, this.props.pubcrawl, this.props.pubcrawlbar)}>Remove from Crawl</button>
         </ul>
 
       </div>
@@ -51,7 +49,8 @@ const mapStateToProps = (state) => {
     pubcrawls:state.bars.pubcrawls,
     pubcrawl:state.bars.pubcrawl,
     mybars:state.bars.mybars,
-    pubcrawlbar:state.bars.pubcrawlbar
+    pubcrawlbar:state.bars.pubcrawlbar,
+    pubcrawlbars:state.bars.pubcrawlbars,
   }
 }
 
