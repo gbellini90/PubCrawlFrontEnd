@@ -57,7 +57,7 @@ class Group extends React.Component {
         <input onChange={this.handleChange} name="groupName" value={this.state.groupName} type="text" placeholder="Enter Group Name here!"/>
         <input type="submit" />
       </form>
-      <h3> Your Group(s) </h3>
+      <h3> Your Created Group(s) </h3>
       {this.props.groups ? this.props.groups.filter(group => (group.creator_id === this.props.user.id)).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} usersfromgroup={mygroup.users} />) : null}
       <nav>
       <Link to='/bars'>  Search Bars  </Link>

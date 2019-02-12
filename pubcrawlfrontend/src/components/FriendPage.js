@@ -27,7 +27,7 @@ class FriendPage extends React.Component {
     return (
       <div>
       <nav>
-      <Link to='/groups'>  Create a Group  </Link>
+      <Link to='/groups'>  Group Page  </Link>
       <Link to='/profile'> Back to Profile </Link>
       </nav>
       <UserList />

@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import BarContainer from './BarContainer'
+import MyBarContainer from './MyBarContainer'
 import {addToPubCrawls} from '../actions/addpubcrawls'
 import {setCurrentPubCrawl} from '../actions/currentpubcrawl'
 
@@ -26,11 +27,11 @@ class PubCrawlPage extends React.Component {
   }
 
   render() {
-    console.log(this.props.group.name)
     return (
       <div>
       Let's create a pubcrawl with your group named, {this.props.group.name}!
       <BarContainer />
+      <MyBarContainer />
       </div>
     );
   }
