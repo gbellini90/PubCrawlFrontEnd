@@ -8,6 +8,7 @@ import {Input} from 'react-materialize'
 
 class Bars extends React.Component {
 
+
   state = {
     search:''
   }

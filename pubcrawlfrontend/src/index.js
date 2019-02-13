@@ -9,6 +9,7 @@ import {Provider} from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import {createLogger} from 'redux-logger'
+import 'leaflet/dist/leaflet.css'
 
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(createLogger({ collapsed: true }))),)
