@@ -6,3 +6,21 @@
   width: 20%;
   height:20%;
 }
+
+.map{
+  height:500px;
+}
+
+.homepage {
+  background-image: url('../../images/taps.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.login {
+  background-image: url('../../images/alcohol-beer-beverage-418225.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}

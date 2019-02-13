@@ -4,9 +4,11 @@ import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {setCurrentUser} from '../actions/user'
 import {setCurrentUserList} from '../actions/users'
+// import {setFriendships} from '../actions/friendships'
 
 
 const apiUsersAddress = 'http://localhost:3000/api/v1/users'
+// const apiFriendshipAddress = 'http://localhost:3000/api/v1/friendships'
 
 class Login extends React.Component {
 
@@ -14,6 +16,12 @@ class Login extends React.Component {
     fetch ('http://localhost:3000/api/v1/users')
     .then(r => r.json())
     .then(allUsers => this.props.setCurrentUserList(allUsers))
+
+    // fetch(apiFriendshipAddress)
+    // .then(r => r.json())
+    // .then(friendships => {
+    //   this.props.setFriendships(friendships)
+    // })
   }
 
   state = {
@@ -39,8 +47,7 @@ class Login extends React.Component {
 
   render() {
     const logInForm =
-      <div>
-        <div>Hi, this is the login form page</div>
+      <div className="login">
         <form onSubmit={this.handleSubmit}>
         <Row>
             <Input s={6} onChange={this.handleChange} placeholder="Username" name="username" value={this.state.username}><Icon>account_circle</Icon></Input>
@@ -64,6 +71,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setCurrentUser: (user) => dispatch(setCurrentUser(user)),
     setCurrentUserList: (users) => dispatch(setCurrentUserList(users)),
+    // setFriendships: (friendships) => dispatch(setFriendships(friendships)),
 }}
 
 

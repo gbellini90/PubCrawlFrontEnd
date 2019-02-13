@@ -4,8 +4,8 @@ import {setPendingFrienders} from '../actions/pendingFriender'
 import {setPendingFriendees} from '../actions/pendingFriendee'
 import PendingFriendeeCard from './PendingFriendeeCard'
 import PendingFrienderCard from './PendingFrienderCard'
-class PendingFriendList extends React.Component {
 
+class PendingFriendList extends React.Component {
 
 componentDidMount() {
   fetch(`http://localhost:3000/api/v1/users/${this.props.user.id}/pendingFriendees`)
@@ -23,6 +23,7 @@ componentDidMount() {
 
 
   render() {
+    debugger
     return (
       <div>
       <h2> Pending Friends </h2>
@@ -53,4 +54,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(PendingFriendList);
+export default connect(mapStateToProps, mapDispatchToProps)(PendingFriendList);

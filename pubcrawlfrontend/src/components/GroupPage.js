@@ -63,7 +63,8 @@ class Group extends React.Component {
       <h3> Your Created Group(s) </h3>
       {this.props.groups ? this.props.groups.filter(group => (group.creator_id === this.props.user.id)).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} usersfromgroup={mygroup.users} />) : null}
       <h3> Groups You're In </h3>
-      {this.props.groups.users ? this.props.groups.users.filter(user => user.id === this.props.user.id).map(group => <li>{group.name}</li>) : "None at this time"}
+    
+
       <nav>
       <Link to='/bars'>  Search Bars  </Link>
       <Link to='/profile'>  Back to Profile  </Link>
