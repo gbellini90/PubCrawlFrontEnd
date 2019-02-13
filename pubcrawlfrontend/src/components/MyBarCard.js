@@ -2,47 +2,37 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {removeBarFromPubcrawl} from '../actions/removebarfrompubcrawl'
 import {removeFromMyBars} from '../actions/removefrommybars'
-import {setPubcrawlBars} from '../actions/pubcrawlbars'
-import {foundBar} from '../actions/foundbar'
+
 
 
 class MyBarCard extends React.Component {
 
-  componentDidMount = () => {
-    fetch('http://localhost:3000/api/v1/pubcrawl_bars')
-    .then(r=>r.json())
-    .then(joinObjs => {
-      this.props.setPubcrawlBars(joinObjs)
-    })
-
-  }
-
-//FIX
-  removeFromCrawl = (bar, pubcrawl, coordinates, pubcrawlbars) => {
-    fetch('http://localhost:3000/ap1/v1/bars')
-    .then(r=>r.json())
-    .then(barss => {
-      let found = barss.find(barr => barr.name === bar.name)
-      this.props.foundBar(found)
-      console.log(pubcrawl);
-      console.log(found);
-      let foundObj = pubcrawlbars.find(pubcrawlbar => (pubcrawlbar.pubcrawl_id === pubcrawl.id && pubcrawlbar.bar_id === found.id))
-      console.log(foundObj)
-      // fetch(`http://localhost:3000/api/v1/pubcrawl_bars/${foundObj.id}`, {
-      //   method:"DELETE"
-      // })
-    })
-
+//BREAKS WHEN DELETING LAST BAR FROM CRAWL
+  removeFromCrawl = (bar, pubcrawl, coordinates) => {
     this.props.removeFromMyBars(bar)
     this.props.removeBarFromPubcrawl(bar, pubcrawl.id)
     this.props.getBarToRemove(coordinates, bar)
+    // console.log("BAR ID", this.props.bar.id);
+        fetch(`http://localhost:3000/api/v1/pubcrawls/${pubcrawl.id}`)
+        .then(r=>r.json())
+        .then(pubcrawll => {
+          let findBar = pubcrawll.bars.find(barr => barr.name === bar.name)
+          let barId = findBar.id
+          let pubcrawlJoin = pubcrawll.pubcrawl_bars.find(pcb => pcb.pubcrawl_id === pubcrawl.id && pcb.bar_id === barId)
+          // console.log("findPubcrawl join", pubcrawlJoin)
+          // console.log("found bar", findBar)
+          // console.log('barId', barId)
+          // console.log("pubcrawl join obj", pubcrawll)
+            fetch(`http://localhost:3000/api/v1/pubcrawl_bars/${pubcrawlJoin.id}`, {
+              method:"DELETE"
+            })
+      })
   }
 
 
 
 
   render() {
-    console.log("MY BAR CARD", this.props);
     return (
       <div>
         <ul>
@@ -51,7 +41,7 @@ class MyBarCard extends React.Component {
         <li>Price:{this.props.price}</li>
         <li>Rating:{this.props.rating}/5</li>
         <li>Address:{this.props.location.display_address.join(" ")}</li>
-        <button onClick={()=>this.removeFromCrawl(this.props, this.props.pubcrawl, this.props.coordinates, this.props.pubcrawlbars)}>Remove from Crawl</button>
+        <button onClick={()=>this.removeFromCrawl(this.props, this.props.pubcrawl, this.props.coordinates)}>Remove from Crawl</button>
         </ul>
 
       </div>
@@ -71,7 +61,7 @@ const mapStateToProps = (state) => {
     pubcrawl:state.bars.pubcrawl,
     mybars:state.bars.mybars,
     pubcrawlbars:state.bars.pubcrawlbars,
-    foundBar:state.bars.foundBar
+    foundBars:state.bars.foundBars
   }
 }
 
@@ -79,8 +69,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     removeBarFromPubcrawl: (bar, pubcrawl_id) => dispatch(removeBarFromPubcrawl(bar, pubcrawl_id)),
     removeFromMyBars: (bar) => dispatch(removeFromMyBars(bar)),
-    setPubcrawlBars:(pubcrawlbars) => dispatch(setPubcrawlBars(pubcrawlbars)),
-    foundBar:(bar) => dispatch(foundBar(bar))
   }
 }
 

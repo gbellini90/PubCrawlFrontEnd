@@ -1,6 +1,6 @@
-export const foundBar = (bar) =>{
+export const setFoundBars = (bars) =>{
   return {
     type:"FOUND_BAR",
-    payload: bar
+    payload: bars
   }
 }

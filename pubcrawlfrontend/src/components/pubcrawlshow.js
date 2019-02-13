@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from "react-router-dom";
-import {setCurrentGroup} from '../actions/currentgroup'
+// import {setCurrentGroup} from '../actions/currentgroup'
 import './css/pubcrawlshow.css';
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet'
 import L from 'leaflet'
@@ -71,19 +71,22 @@ const mapStateToProps = (state) => {
     user:state.user.user,
     users:state.user.users,
     bars:state.bars.bars,
+    bar:state.bars.bar,
+    group:state.groups.group,
+    groups:state.groups.groups,
     pubcrawls:state.bars.pubcrawls,
     pubcrawl:state.bars.pubcrawl,
-    groups:state.groups.groups,
-    group:state.groups.group,
-    // showBars:state.bars.showBars
+    mybars:state.bars.mybars,
+    pubcrawlbars:state.bars.pubcrawlbars,
+    foundBars:state.bars.foundBars
   }
 }
+//
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     setCurrentGroup : (group) => dispatch(setCurrentGroup(group)),
+//     // setBars: (bars) => dispatch(setBars(bars))
+//   }
+// }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setCurrentGroup : (group) => dispatch(setCurrentGroup(group)),
-    // setBars: (bars) => dispatch(setBars(bars))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PubCrawlShow);
+export default connect(mapStateToProps)(PubCrawlShow);

@@ -108,7 +108,7 @@ class PubCrawlPage extends React.Component {
           <Marker
            position={[coordinate.latitude, coordinate.longitude]} icon ={myIcon}>
             {this.state.barObj ? this.state.barObj.map(bar=>
-                <Popup>{bar.name} {bar.address}</Popup>
+                <Popup key={bar.id}>{bar.name} {bar.address}</Popup>
             ):null}
          </Marker>
        ):null}

@@ -6,7 +6,7 @@ const initialState = {
   pubcrawl:{},
   pubcrawlbars:[],
   showBars:[],
-  foundBar:{}
+  foundBars:[]
 }
 
  function reducer(state=initialState, action) {
@@ -14,7 +14,7 @@ const initialState = {
     case "SET_BARS":
       return {...state, bars:action.payload}
     case "FOUND_BAR":
-      return {...state, foundBar:action.payload}
+      return {...state, foundBars:action.payload}
     case "SET_PUBCRAWL_BARS":
       return {...state, showBars:action.payload}
     case "SET_PUBCRAWL_JOIN":

@@ -1,33 +1,24 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {removeBarFromPubcrawl} from '../actions/removebarfrompubcrawl'
-import {removeFromMyBars} from '../actions/removefrommybars'
-// import {myBars} from '../actions/mybars'
-import {addBarToPubcrawl} from '../actions/addbartopubcrawl'
+// import {removeBarFromPubcrawl} from '../actions/removebarfrompubcrawl'
+// // import {removeFromMyBars} from '../actions/removefrommybars'
+// // // import {myBars} from '../actions/mybars'
+// import {addBarToPubcrawl} from '../actions/addbartopubcrawl'
 
 
 class PubCard extends React.Component {
 
-  // componentDidMount = () => {
-  //   fetch(`http://localhost:3000/api/v1/pubcrawls/${pubcrawl.id}`)
-  //   .then(r=>r.json())
-  //   .then(pubcrawlObj => {
-  //     pubcrawlObj.
-  //   this.props.currentPubCrawlBar(pubcrawlbar))
-  //   })
-  //
-  // }
 
   //add in state that if edit is clicked, then conditionally render the search form, add that in from bar container, and add in the addtocrawl from the barcard
 
-  removeFromCrawl = (bar, pubcrawl) => {
-    let foundCrawl = pubcrawl.pubcrawl_bars.find(pubcrawlbar => pubcrawlbar.bar_id === bar.id && pubcrawlbar.pubcrawl_id === pubcrawl.id)
-    fetch(`http://localhost:3000/api/v1/pubcrawl_bars/${foundCrawl.id}`, {
-      method:"DELETE"
-    })
-    this.props.removeBarFromPubcrawl(bar, pubcrawl.id)
-    // this.props.removeFromMyBars(bar)
-  }
+  // removeFromCrawl = (bar, pubcrawl) => {
+  //   let foundCrawl = pubcrawl.pubcrawl_bars.find(pubcrawlbar => pubcrawlbar.bar_id === bar.id && pubcrawlbar.pubcrawl_id === pubcrawl.id)
+  //   fetch(`http://localhost:3000/api/v1/pubcrawl_bars/${foundCrawl.id}`, {
+  //     method:"DELETE"
+  //   })
+  //   this.props.removeBarFromPubcrawl(bar, pubcrawl.id)
+  //   // this.props.removeFromMyBars(bar)
+  // }
 
   // addToCrawl = (bar) => {
   //   fetch('http://localhost:3000/api/v1/pubcrawl_bars',{
@@ -85,12 +76,12 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    removeBarFromPubcrawl: (bar, pubcrawl_id) => dispatch(removeBarFromPubcrawl(bar, pubcrawl_id)),
-    // removeFromMyBars: (bar) => dispatch(removeFromMyBars(bar)),
-  }
-}
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     removeBarFromPubcrawl: (bar, pubcrawl_id) => dispatch(removeBarFromPubcrawl(bar, pubcrawl_id)),
+//     // removeFromMyBars: (bar) => dispatch(removeFromMyBars(bar)),
+//   }
+// }
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(PubCard);
+export default connect(mapStateToProps)(PubCard);

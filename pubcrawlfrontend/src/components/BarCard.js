@@ -44,12 +44,13 @@ class BarCard extends React.Component {
           // .then(pubcrawlbar => this.props.currentPubCrawlBar(pubcrawlbar))
       })
 
-      //add the bar object to this particular pubcrawl
-      this.props.addBarToPubcrawl(barObj, this.props.pubcrawl.id)
-
       // remove from the "bars" state list and add to "mybars"
       this.props.myBars(barObj)
       this.props.getBar(coordinates, barObj)
+
+      //add the bar object to this particular pubcrawl
+      this.props.addBarToPubcrawl(barObj, this.props.pubcrawl.id)
+
   }
 
   render() {
