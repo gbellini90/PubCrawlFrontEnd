@@ -45,7 +45,7 @@ class Bars extends React.Component {
       <Link to='/profile'>  Back to Profile </Link>
       </nav>
       <h1>Hi from Bar Pageeee</h1>
-      {this.props.bars ? this.props.bars.map(bar=> <BarCard key= {bar.id} {...bar} />) : null}
+      {this.props.bars ? this.props.bars.map(bar=> <BarCard key= {bar.id} {...bar} getBar={this.props.getBar}/>) : null}
       <form onSubmit={this.handleSubmit}>
         <Input onChange={this.handleChange} name="search" value={this.state.search} placeholder="Search for bars by NYC neighborhood name or zip code" type="text"/>
         <Input type="submit" />

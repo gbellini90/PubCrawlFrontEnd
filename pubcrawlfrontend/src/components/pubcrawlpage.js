@@ -11,20 +11,21 @@ import L from 'leaflet'
 const myIcon = L.icon({
     iconUrl: '../beermug.png',
     iconSize: [25, 30],
-    iconAnchor: [12.5,30],
-    popupAnchor: [0, -30],
   })
 
 
 class PubCrawlPage extends React.Component {
 
+
   state = {
     location:{
-      lat: 40.703830518 ,
-      long: -74.005666644
+      lat: 40.768163594  ,
+      long: -73.959329496
     },
     haveUsersLocation:false,
     zoom:2,
+    coordinates:[],
+    bar:[]
   }
 
   componentDidMount = () => {
@@ -36,7 +37,7 @@ class PubCrawlPage extends React.Component {
           long:position.coords.longitude
         },
         haveUsersLocation:true,
-        zoom:13
+        zoom:12
       })
       }, ()=> {
       fetch('https://ipapi.co/json')
@@ -48,7 +49,7 @@ class PubCrawlPage extends React.Component {
             long:location.longitude
           },
           haveUsersLocation:true,
-          zoom:13
+          zoom:12
         })
       })
       }
@@ -71,24 +72,48 @@ class PubCrawlPage extends React.Component {
       })
   }
 
+  getBar = (coordinates, bar) => {
+    this.setState({
+      coordinates: [...this.state.coordinates,coordinates],
+      bar: [...this.state.bar, bar]
+    })
+  }
+
+  getBarToRemove = (coordinates, bar) => {
+    let copyofBarState = this.state.bar.filter(barr => barr.id !== bar.id)
+    let copyCoordinateState = this.state.coordinates.filter(coordinate => coordinate.latitude !== coordinates.latitude && coordinate.longitude !== coordinates.longitude)
+    this.setState({
+      bar:copyofBarState,
+      coordinates: copyCoordinateState
+    })
+  }
+
+
   render() {
-    const position =[this.state.location.lat, this.state.location.long]
+    let position = this.state.coordinates.length > 0 ? [this.state.coordinates[0].latitude,this.state.coordinates[0].longitude] : [this.state.location.lat, this.state.location.long]
     return (
       <div>
       Let's create a pubcrawl with your group named, {this.props.group.name}!
-      <BarContainer />
-      <MyBarContainer />
+      <BarContainer getBar={this.getBar} />
+      <MyBarContainer getBarToRemove={this.getBarToRemove}/>
 
 
-      <Map className="map" center={position} zoom={this.state.zoom}>
+      <Map className="map" center={position} zoom={this.state.coordinates.length > 0 ? 14 : this.state.zoom}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
         />
-       {this.state.haveUsersLocation ?  <Marker
-          position={position} icon ={myIcon}>
-            <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
-          </Marker> : null }
+
+        {this.state.coordinates ? this.state.coordinates.map(coordinate =>
+          <Marker
+           position={[coordinate.latitude, coordinate.longitude]} icon ={myIcon}>
+            {this.state.barObj ? this.state.barObj.map(bar=>
+                <Popup>{bar.name} {bar.address}</Popup>
+            ):null}
+         </Marker>
+       ):null}
+
+
 
     </Map>
 

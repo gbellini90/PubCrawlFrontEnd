@@ -4,19 +4,21 @@ const initialState = {
   bar:{},
   pubcrawls:[],
   pubcrawl:{},
-  pubcrawlbar:{},
-  showBars:[]
+  pubcrawlbars:[],
+  showBars:[],
+  foundBar:{}
 }
-
 
  function reducer(state=initialState, action) {
   switch(action.type){
     case "SET_BARS":
       return {...state, bars:action.payload}
+    case "FOUND_BAR":
+      return {...state, foundBar:action.payload}
     case "SET_PUBCRAWL_BARS":
       return {...state, showBars:action.payload}
-    case "CURRENT_PUBCRAWL_BAR":
-      return {...state, pubcrawlbar:action.payload}
+    case "SET_PUBCRAWL_JOIN":
+      return {...state, pubcrawlbars:action.payload}
     case "ADD_TO_MY_BARS":
       return {
         ...state,

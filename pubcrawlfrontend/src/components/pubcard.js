@@ -21,10 +21,7 @@ class PubCard extends React.Component {
   //add in state that if edit is clicked, then conditionally render the search form, add that in from bar container, and add in the addtocrawl from the barcard
 
   removeFromCrawl = (bar, pubcrawl) => {
-    console.log(bar)
-    console.log(pubcrawl)
     let foundCrawl = pubcrawl.pubcrawl_bars.find(pubcrawlbar => pubcrawlbar.bar_id === bar.id && pubcrawlbar.pubcrawl_id === pubcrawl.id)
-    console.log(foundCrawl)
     fetch(`http://localhost:3000/api/v1/pubcrawl_bars/${foundCrawl.id}`, {
       method:"DELETE"
     })
@@ -58,7 +55,6 @@ class PubCard extends React.Component {
 
 
   render() {
-    console.log(this.props);
     return (
       <div>
       <ul>

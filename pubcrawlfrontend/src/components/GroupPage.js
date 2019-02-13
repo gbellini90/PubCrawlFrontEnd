@@ -51,7 +51,6 @@ class Group extends React.Component {
 
 
   render() {
-    console.log("From the GroupPage", this.props)
     return (
       <div>
       <h1> Group Page </h1>

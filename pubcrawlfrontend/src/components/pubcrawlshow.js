@@ -7,43 +7,25 @@ import {Map, TileLayer, Marker, Popup} from 'react-leaflet'
 import L from 'leaflet'
 // import {setBars} from '../actions/bars'
 // import {pubcrawlShowBars} from '../actions/pubcrawlShowBars'
+
 import PubCard from './pubcard'
 
 const myIcon = L.icon({
     iconUrl: '../beermug.png',
-    iconSize: [25, 30],
-    iconAnchor: [12.5, 30],
-    popupAnchor: [0, -30],
+    iconSize: [30, 35],
   })
 
 
 class PubCrawlShow extends React.Component {
 
-  // componentDidMount = () => {
-  //   this.setState({
-  //     lat: this.props.pubcrawl.group ? this.props.pubcrawl.bars[0].latitude : 40.703830518 ,
-  //     long: this.props.pubcrawl.group ? this.props.pubcrawl.bars[0].longitude : -74.005666644
-  //   })
-  // }
   state = {
     lat: 40.703830518 ,
     long: -74.005666644,
-    zoom:15,
+    zoom:14,
   }
-
-  // state = {
-  //   lat: this.props.pubcrawl.group ? this.props.pubcrawl.bars[0].latitude : 40.703830518 ,
-  //   long: this.props.pubcrawl.group ? this.props.pubcrawl.bars[0].longitude : -74.005666644,
-  //   zoom:15,
-  // }
 
   render() {
     let position = [this.state.lat, this.state.long]
-    console.log("from pubcrawl show, groups", this.props.groups)
-    console.log("from pubcrawl show, props", this.props)
-    console.log("from pubcrawl show group obj", this.props.pubcrawl.group)
-    console.log("from pubcrawl show, pubcrawl obj", this.props.pubcrawl)
-
     return (
       <div>
       <nav>
@@ -58,7 +40,7 @@ class PubCrawlShow extends React.Component {
         Bars: {this.props.pubcrawl.group ? this.props.pubcrawl.bars.map(bar => <PubCard key={bar.id} {...bar} />) : null} <br />
         Map:
 
-        <Map className="map" center={this.props.pubcrawl.group ? [this.props.pubcrawl.bars[0].latitude, this.props.pubcrawl.bars[0].longitude] : position} zoom={15}>
+        <Map className="map" center={this.props.pubcrawl.group ? [this.props.pubcrawl.bars[0].latitude, this.props.pubcrawl.bars[0].longitude] : position} zoom={this.state.zoom}>
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
@@ -70,6 +52,7 @@ class PubCrawlShow extends React.Component {
               icon ={myIcon}>
                 <Popup>
                   {bar.name}
+                  {bar.address}
                 </Popup>
               </Marker>
           )):null}

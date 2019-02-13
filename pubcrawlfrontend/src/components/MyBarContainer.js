@@ -9,7 +9,7 @@ class MyBarContainer extends React.Component {
   render() {
     return (
       <div>
-      {this.props.mybars ? this.props.mybars.map(bar => <MyBarCard key={bar.id} {...bar} />) : null}
+      {this.props.mybars ? this.props.mybars.map(bar => <MyBarCard key={bar.id} {...bar} getBarToRemove={this.props.getBarToRemove} />) : null}
       </div>
     );
   }
