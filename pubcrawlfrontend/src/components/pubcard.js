@@ -49,11 +49,11 @@ class PubCard extends React.Component {
     return (
       <div>
       <ul>
-        <li><h3>{this.props.name}</h3></li>
+        <li><h4>{this.props.name}</h4></li>
         <li><img className="restaurant-image" src={this.props.pic} alt={this.props.name}/></li>
-        <li>Price:{this.props.price}</li>
-        <li>Rating:{this.props.rating}/5</li>
-        <li>Address:{this.props.address}</li>
+        <li>Price: {this.props.price}</li>
+        <li>Rating: {this.props.rating}/5</li>
+        <li>Address: {this.props.address}</li>
         </ul>
 
       </div>

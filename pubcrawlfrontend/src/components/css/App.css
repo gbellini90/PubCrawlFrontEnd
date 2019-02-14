@@ -102,9 +102,30 @@ margin-bottom: 15px;
   overflow-y: scroll;
 }
 
+/* .title {
+  color:white;
+  margin-top: 200px;
+  font-family: 'Righteous', cursive;
+} */
 
 /* @media all {
   .aside-1 {order: 1;}
   .aside-2 {order: 2;}
   .map {order: 3; }
 } */
+
+.profile-page {
+  background-image: url("../../images/cafe-glass-beverage-drink-bottle-beer-773673-pxhere.com.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
+.profile-page-overlay {
+  background-color: rgba(255,255,255, .8);
+  height: 100vh;
+}
+
+.profile-page .card {
+  background-color: transparent;
+}

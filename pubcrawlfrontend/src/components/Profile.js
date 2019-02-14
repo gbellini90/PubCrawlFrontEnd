@@ -21,18 +21,21 @@ class Profile extends React.Component {
   render() {
   const profile =
     <div className="profile-page">
-    <nav>
-      <Link to='/friends'> View Your Friends! </Link>
-    </nav>
-        <div className="card horizontal medium">
-          <div className="card-image waves-effect waves-block waves-light">
-            <img className="card-image" src={this.props.user.pic ? this.props.user.pic : null} alt={this.props.user.name ? this.props.user.name : null}/>
+      <div className="profile-page-overlay">
+        <nav>
+          <Link to='/friends'> View Your Friends! </Link>
+        </nav>
+            <div className="card horizontal medium">
+              <div className="card-image waves-effect waves-block waves-light">
+                <img className="card-image" src={this.props.user.pic ? this.props.user.pic : null} alt={this.props.user.name ? this.props.user.name : null}/>
+              </div>
+              <div className="card-content">
+                  <span className="card-title grey-text text-darken-4">{this.props.user.name ? this.props.user.name : null}</span>
+                  <p>Age:{this.props.user.age ? this.props.user.age : null}</p> <br />
+                  <i>{this.props.user.bio ? this.props.user.bio : null}</i>
+              </div>
           </div>
-          <div className="card-content">
-              <span className="card-title grey-text text-darken-4">{this.props.user.name ? this.props.user.name : null}</span>
-              <p>Age:{this.props.user.age ? this.props.user.age : null}</p> <br />
-              <i>{this.props.user.bio ? this.props.user.bio : null}</i>
-          </div>
+          {/* <img src="../cafe-glass-beverage-drink-bottle-beer-773673-pxhere.com.jpg" alt="pic"/> */}
       </div>
     </div>
 

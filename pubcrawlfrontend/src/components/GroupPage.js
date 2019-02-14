@@ -63,28 +63,33 @@ meh = (groups) => {
     console.log((this.props.groups));
     return (
       <div className="group-page">
-      <nav>
-      <Link to='/profile'>  Back to Profile  </Link>
-      <Link to='/friends'> Back to Friend Page </Link>
-      </nav>
-        <h6> Create a New Group Below</h6>
-      <form onSubmit={this.createGroup}>
-        <input onChange={this.handleChange} name="groupName" value={this.state.groupName} type="text" placeholder="Enter Group Name here!"/>
-        <input type="submit" />
-      </form>
-      <h4> Your Groups </h4>
+          <nav>
+          <Link to='/profile'>  Back to Profile  </Link>
+          <Link to='/friends'> Back to Friend Page </Link>
+          </nav>
+          
+          <h6> Create a New Group Below</h6>
+          <form onSubmit={this.createGroup}>
+            <input onChange={this.handleChange} name="groupName" value={this.state.groupName} type="text" placeholder="Enter Group Name here!"/>
+            <input type="submit" />
+          </form>
 
-    <div className='container'>
-      <h5> Your Created Group(s) </h5>
-      <div className='cardcontainer'>
-      {Object.keys(this.props.groups).length > 0 ? this.props.groups.filter(group => (group.creator_id === this.props.user.id)).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} usersfromgroup={mygroup.users} />) : null}
-      </div>
+        <h4> Your Groups </h4>
 
-      <h5> Groups You're In </h5>
-      <div className='cardcontainer'>
-      {Object.keys(this.props.groups).length > 0 ? this.meh(this.props.groups).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} usersfromgroup={mygroup.users} />) : null}
-      </div>
-    </div>
+        <div className='container'>
+            <h5> Your Created Group(s) </h5>
+
+            <div className='cardcontainer'>
+            {Object.keys(this.props.groups).length > 0 ? this.props.groups.filter(group => (group.creator_id === this.props.user.id)).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} usersfromgroup={mygroup.users} />) : null}
+            </div>
+
+            <h5> Groups You're In </h5>
+            <div className='cardcontainer'>
+            {Object.keys(this.props.groups).length > 0 ? this.meh(this.props.groups).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} usersfromgroup={mygroup.users} />) : null}
+            </div>
+
+        </div>
+
       </div>
     );
   }

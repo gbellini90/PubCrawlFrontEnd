@@ -86,7 +86,7 @@ state ={
               delete_forever
             </i>
             <br />
-            Current users in group {this.props.name} {this.props.usersfromgroup.map(user => <li key={user.id}> {user.name} </li>)}
+            Current users in group {this.props.name} {this.props.usersfromgroup.map(user => <li key={user.id}> {user.name}</li> )}
             <br /><br />
 
             {this.props.pubcrawls.map(pubcrawl => (
@@ -95,7 +95,7 @@ state ={
 
               </div>
             ))}
-            {this.props.friends.map(friend => <span key={friend.id}>{friend.name} <button onClick={()=>this.addFriendToGroup(friend, this.props.id)}> {this.props.usersfromgroup.find(user => user.id === friend.id)  ? `Added to ${this.props.name}!` : "Add to Group?"} </button> </span>)} <br /><br />
+            {this.props.friends.map(friend => <span key={friend.id}>{friend.name} <button onClick={()=>this.addFriendToGroup(friend, this.props.id) }> {this.props.usersfromgroup.find(user => user.id === friend.id)  ? `Added to ${this.props.name}!` : "Add to Group?"} </button> <br/></span>)} <br /><br />
             <Button waves='light' onClick={()=>this.createNewPubCrawl(this.props.id)}>Create New Pub Crawl With {this.props.name}</Button>
 
           </li>

@@ -98,7 +98,7 @@ class PubCrawlPage extends React.Component {
     <Link to='/profile'>  Back to Profile </Link>
     <Link to='/groups'> Back to Group Page </Link>
     </nav>
-    <h1>  Let's create a pubcrawl with your group named, {this.props.group.name}! </h1>
+    <h4>  Let's create a pubcrawl with your group named, {this.props.group.name}! </h4>
 
     <div className= "bar-box">
       <div className="bar-containers">

@@ -59,7 +59,7 @@ class Bars extends React.Component {
       {this.props.bars.length > 0 ? <h2> All Bars </h2> : null}
       {this.props.bars ? this.props.bars.map(bar=> <BarCard key= {bar.id} {...bar} getBar={this.props.getBar}/>) : null}
       <form onSubmit={this.handleSubmit}>
-        <Input onChange={this.handleChange} name="search" value={this.state.search} placeholder="Search for bars by NYC neighborhood name or zip code" type="text"/>
+        <Input onChange={this.handleChange} name="search" value={this.state.search} placeholder="Search by location" type="text"/>
         <Input type="submit" />
       </form>
       </div>
