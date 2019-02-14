@@ -7,8 +7,8 @@ class AcceptedFriendList extends React.Component {
   render() {
     return (
       <div>
-      <h2>Your Friend List </h2>
-      {this.props.friends ? this.props.friends.map(friend => <AcceptedFriendCard key={friend.id} {...friend}/>) : null}
+      <h3>Your Friend List </h3>
+      {Object.keys(this.props.friends).length > 0 ? this.props.friends.map(friend => <AcceptedFriendCard key={friend.id} {...friend}/>) : null}
     </div>
     );
   }

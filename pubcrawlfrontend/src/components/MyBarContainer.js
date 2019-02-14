@@ -8,7 +8,8 @@ class MyBarContainer extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='my-bars-box'>
+      {this.props.mybars.length > 0 ? <h2> My Bars </h2> : null}
       {this.props.mybars ? this.props.mybars.map(bar => <MyBarCard key={bar.id} {...bar} getBarToRemove={this.props.getBarToRemove} />) : null}
       </div>
     );

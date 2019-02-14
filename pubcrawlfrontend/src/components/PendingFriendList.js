@@ -23,12 +23,11 @@ componentDidMount() {
 
 
   render() {
-    debugger
     return (
       <div>
-      <h2> Pending Friends </h2>
-      {this.props.pendingFriendees ? this.props.pendingFriendees.map(friend => <PendingFriendeeCard key={friend.id} {...friend}/>): null}
-      {this.props.pendingFrienders ? this.props.pendingFrienders.map(friend => <PendingFrienderCard key={friend.id} {...friend}/>) : null}
+      <h3> Pending Friends </h3>
+      {Object.keys(this.props.pendingFriendees).length > 0 ? this.props.pendingFriendees.map(friend => <PendingFriendeeCard key={friend.id} {...friend}/>): null}
+      {Object.keys(this.props.pendingFrienders) ? this.props.pendingFrienders.map(friend => <PendingFrienderCard key={friend.id} {...friend}/>) : null}
       </div>
     )
   }

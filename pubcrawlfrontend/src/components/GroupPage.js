@@ -49,27 +49,42 @@ class Group extends React.Component {
  })
 }
 
+meh = (groups) => {
+  const myGroups = groups.filter(group => {
+    const userIds = group.users.map(user => user.id)
+    return userIds.includes(this.props.user.id)
+  })
+  return myGroups
+}
+
+
 
   render() {
     console.log((this.props.groups));
     return (
-      <div>
-      <h1> Group Page </h1>
-        <h4> Create a New Group Below !</h4>
+      <div className="group-page">
+      <nav>
+      <Link to='/profile'>  Back to Profile  </Link>
+      <Link to='/friends'> Back to Friend Page </Link>
+      </nav>
+        <h6> Create a New Group Below</h6>
       <form onSubmit={this.createGroup}>
         <input onChange={this.handleChange} name="groupName" value={this.state.groupName} type="text" placeholder="Enter Group Name here!"/>
         <input type="submit" />
       </form>
-      <h3> Your Created Group(s) </h3>
-      {this.props.groups ? this.props.groups.filter(group => (group.creator_id === this.props.user.id)).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} usersfromgroup={mygroup.users} />) : null}
-      <h3> Groups You're In </h3>
-    
+      <h4> Your Groups </h4>
 
-      <nav>
-      <Link to='/bars'>  Search Bars  </Link>
-      <Link to='/profile'>  Back to Profile  </Link>
-      <Link to='/friends'> Back to Friend Page </Link>
-      </nav>
+    <div className='container'>
+      <h5> Your Created Group(s) </h5>
+      <div className='cardcontainer'>
+      {Object.keys(this.props.groups).length > 0 ? this.props.groups.filter(group => (group.creator_id === this.props.user.id)).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} usersfromgroup={mygroup.users} />) : null}
+      </div>
+
+      <h5> Groups You're In </h5>
+      <div className='cardcontainer'>
+      {Object.keys(this.props.groups).length > 0 ? this.meh(this.props.groups).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} usersfromgroup={mygroup.users} />) : null}
+      </div>
+    </div>
       </div>
     );
   }

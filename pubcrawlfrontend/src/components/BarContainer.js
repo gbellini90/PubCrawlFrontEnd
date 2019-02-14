@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {setBars} from '../actions/bars'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 import BarCard from './BarCard'
 import {Input} from 'react-materialize'
 // import {setPubcrawlBars} from '../actions/pubcrawlbars'
@@ -54,12 +54,9 @@ class Bars extends React.Component {
 
   render() {
     return (
-      <div>
-      <nav>
-      <Link to='/profile'>  Back to Profile </Link>
-      <Link to='/groups'> Back to Group Page </Link>
-      </nav>
-      <h1>Hi from Bar Pageeee</h1>
+      <div className='all-bars-box'>
+
+      {this.props.bars.length > 0 ? <h2> All Bars </h2> : null}
       {this.props.bars ? this.props.bars.map(bar=> <BarCard key= {bar.id} {...bar} getBar={this.props.getBar}/>) : null}
       <form onSubmit={this.handleSubmit}>
         <Input onChange={this.handleChange} name="search" value={this.state.search} placeholder="Search for bars by NYC neighborhood name or zip code" type="text"/>

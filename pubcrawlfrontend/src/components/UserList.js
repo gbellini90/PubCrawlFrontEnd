@@ -7,9 +7,9 @@ class UserList extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="all-users">
       <h3>All Users</h3>
-      {this.props.budless ? this.props.budless.map(budlessuser => <UserCard key= {budlessuser.id} {...budlessuser} />) : null}
+      {Object.keys(this.props.budless).length > 0 ? this.props.budless.map(budlessuser => <UserCard key= {budlessuser.id} {...budlessuser} />) : null}
       </div>
     );
   }

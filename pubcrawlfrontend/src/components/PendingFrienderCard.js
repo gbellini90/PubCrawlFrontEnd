@@ -30,7 +30,7 @@ class PendingFrienderCard extends React.Component {
       <div>
       <li> You have a friend request from: {this.props.name}
       <img src={this.props.pic} alt={this.props.name} />
-      {this.props.friendships.filter(friend => friend.friender_id === this.props.id && friend.friendee_id === this.props.user.id).map(friendship => <button onClick={()=>this.acceptFriendRequest(friendship.id)}> Accept Friend Request! </button>)}
+      {this.props.friendships.filter(friend => friend.friender_id === this.props.id && friend.friendee_id === this.props.user.id).map(friendship => <button className="btn" onClick={()=>this.acceptFriendRequest(friendship.id)}> Accept Friend Request! </button>)}
       </li>
 
       </div>

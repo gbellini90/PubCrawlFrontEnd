@@ -24,38 +24,19 @@ class FriendPage extends React.Component {
     .then(friends => {
       this.props.setFriends(friends)
     })
-
-    // fetch(apiFriendshipAddress)
-    // .then(r => r.json())
-    // .then(friendships => {
-    //   this.props.setFriendships(friendships)
-    // })
-
   }
 
   render() {
-    debugger
     return (
       <div>
       <nav>
-      <Link to='/groups'>  Group Page  </Link>
+      <Link to='/groups'>  Visit the Group Page  </Link>
       </nav>
-          <div>
-          Hi from Profile Page
-          <div className="card horizontal">
-                  <div className="card-image waves-effect waves-block waves-light">
-                    <img className="card-image" src={this.props.user.pic ? this.props.user.pic : null} alt={this.props.user.name ? this.props.user.name : null}/>
-                  </div>
 
-          <div className="card-content">
-            <span className="card-title grey-text text-darken-4">{this.props.user.name ? this.props.user.name : null} {this.props.user.id? this.props.user.id: null}<i className="material-icons right">{this.props.user.age ? this.props.user.age : null}</i></span>
-            <p>{this.props.user.bio ? this.props.user.bio : null}</p>
-          </div>
-          </div>
-          </div>
-      <UserList />
-      <FriendshipList />
-
+        <div className= "friend-box">
+          <UserList />
+          <FriendshipList />
+        </div>
       </div>
     );
   }

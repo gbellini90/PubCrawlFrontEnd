@@ -59,8 +59,7 @@ class Signup extends React.Component {
 
   render() {
     const signUpForm =
-        <div>
-        <div>Hi, this is the signup form page</div>
+        <div className="login">
         <form onSubmit={this.handleSubmit}>
           <Row>
               <Input s={6}  onChange={this.handleChange} name="name" value={this.state.name} placeholder="Name"/>

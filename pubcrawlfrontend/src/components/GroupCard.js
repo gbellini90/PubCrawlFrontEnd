@@ -7,7 +7,7 @@ import {setPubCrawls} from '../actions/pubcrawls'
 import {setCurrentPubCrawl} from '../actions/currentpubcrawl'
 import {Redirect} from "react-router-dom";
 
-
+import {Button} from 'react-materialize'
 
 
 
@@ -70,24 +70,34 @@ state ={
     })
   }
 
+  // <button onClick={()=> this.viewPubCrawl(pubcrawl)}>  View This Pubcrawl! </button>
+  // <button className="waves-effect waves-light btn-small" onClick={()=>this.createNewPubCrawl(this.props.id)}> Create New Pub Crawl With {this.props.name} </button>
+// <button onClick={()=>this.deleteGroup(this.props.id)}>
+// </button>
 
 
   render() {
     const groupCard =
-      <div>
+      <div className='groupcard'>
         <ul>
           <li>
-            <h3>Name of Group: {this.props.name} <button onClick={()=>this.deleteGroup(this.props.id)}>x</button><br /></h3>
+            <h4>Name of Group: </h4><h2>{this.props.name}</h2>
+            <i class="small material-icons" id='trash' onClick={()=>this.deleteGroup(this.props.id)}>
+              delete_forever
+            </i>
+            <br />
             Current users in group {this.props.name} {this.props.usersfromgroup.map(user => <li key={user.id}> {user.name} </li>)}
-            Group Id: {this.props.id} <br/>
-            Creator Id: {this.props.creator_id} <br/>
+            <br /><br />
+
             {this.props.pubcrawls.map(pubcrawl => (
-              <div key={pubcrawl.id}>  Group Id of this existing pub crawl{pubcrawl.group_id},Pubcrawl id of this existing pubcrawl {pubcrawl.id}
-                <button onClick={()=> this.viewPubCrawl(pubcrawl)}>  View This Pubcrawl! </button>
+              <div key={pubcrawl.id}>  Pubcrawl id: {pubcrawl.id}
+                <Button waves='light' onClick={()=> this.viewPubCrawl(pubcrawl)}>View This Pubcrawl!</Button>
+
               </div>
             ))}
-            {this.props.friends.map(friend => <span key={friend.id}>{friend.name} <button onClick={()=>this.addFriendToGroup(friend, this.props.id)}> {this.props.usersfromgroup.find(user => user.id === friend.id)  ? `Added to ${this.props.name}!` : "Add to Group?"} </button> </span>)} <br />
-            <button onClick={()=>this.createNewPubCrawl(this.props.id)}> Create New Pub Crawl With {this.props.name} </button>
+            {this.props.friends.map(friend => <span key={friend.id}>{friend.name} <button onClick={()=>this.addFriendToGroup(friend, this.props.id)}> {this.props.usersfromgroup.find(user => user.id === friend.id)  ? `Added to ${this.props.name}!` : "Add to Group?"} </button> </span>)} <br /><br />
+            <Button waves='light' onClick={()=>this.createNewPubCrawl(this.props.id)}>Create New Pub Crawl With {this.props.name}</Button>
+
           </li>
         </ul>
       </div>

@@ -25,7 +25,7 @@ class FriendshipList extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className ="friendlist-box">
         <AcceptedFriendList />
         <PendingFriendList />
       </div>

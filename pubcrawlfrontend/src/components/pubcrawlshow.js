@@ -31,16 +31,14 @@ class PubCrawlShow extends React.Component {
       <nav>
       <Link to='/groups'> Back to Group Page </Link>
       </nav>
-        Hi from Pubcrawl Show page <br />
-        Pubcrawl Id: {this.props.pubcrawl.id} <br />
-        Group Id: {this.props.pubcrawl.group_id} <br />
-        Group Name: {this.props.pubcrawl.group ? this.props.pubcrawl.group.name : null} <br />
-        Group's Creator: {this.props.pubcrawl.group ? this.props.users.filter(user => (user.id === this.props.pubcrawl.group.creator_id)).map(userObj => <span key={userObj.id}> {userObj.name} </span> ) : null}<br />
-        Group Members: {this.props.pubcrawl.group ? this.props.pubcrawl.group.users.map(user => <li key={user.id}>{user.name}</li>) :null } <br />
-        Bars: {this.props.pubcrawl.group ? this.props.pubcrawl.bars.map(bar => <PubCard key={bar.id} {...bar} />) : null} <br />
-        Map:
+        Pubcrawl Id: {this.props.pubcrawl.id} <br /> <br />
+        <h3>Group Name:</h3> {this.props.pubcrawl.group ? this.props.pubcrawl.group.name : null} <br />
+        <h3>Group's Creator:</h3>  {this.props.pubcrawl.group ? this.props.users.filter(user => (user.id === this.props.pubcrawl.group.creator_id)).map(userObj => <span key={userObj.id}> {userObj.name} </span> ) : null}<br /><br />
+        <h3>Group Members:</h3>  {this.props.pubcrawl.group ? this.props.pubcrawl.group.users.map(user => <li key={user.id}>{user.name}</li>) :null } <br />
+        <h3>Bars: </h3>  {this.props.pubcrawl.group ? this.props.pubcrawl.bars.map(bar => <PubCard key={bar.id} {...bar} />) : null} <br />
+        <h3>Map:</h3>
 
-        <Map className="map" center={this.props.pubcrawl.group ? [this.props.pubcrawl.bars[0].latitude, this.props.pubcrawl.bars[0].longitude] : position} zoom={this.state.zoom}>
+        <Map className="map" center={ Object.keys(this.props.pubcrawl).length > 0  && Object.keys(this.props.pubcrawl.bars).length > 0? [this.props.pubcrawl.bars[0].latitude, this.props.pubcrawl.bars[0].longitude] : position} zoom={this.state.zoom}>
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"

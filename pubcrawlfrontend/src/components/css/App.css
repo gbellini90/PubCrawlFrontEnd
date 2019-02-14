@@ -1,3 +1,7 @@
+* {
+  font-family: 'Ubuntu', sans-serif;
+}
+
 .App {
   text-align: center;
 }
@@ -24,3 +28,83 @@
   background-size: cover;
   height: 100vh;
 }
+
+.group-page {
+  background-image: url('../../images/cold-liquid-wine-glass-bar-beverage-1390230-pxhere.com.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.groupcard {
+  background-color: rgba(189, 195, 199, 0.3);
+  width: 500px;
+  padding: 1em;
+  margin: 1em;
+  position: relative;
+}
+
+.cardcontainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.friend-box {
+  display:flex;
+  margin:0 auto;
+}
+
+#trash {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+
+
+.friend-box img {
+  width:150px;
+  height:auto;
+  display:block;
+  margin:0 auto;
+}
+
+.friend-box > div {
+  width: 33%;
+}
+
+.friend-box .friendlist-box {
+  display:flex;
+  width: 66.666666%;
+}
+
+.all-users {
+margin-top: 5px;
+margin-bottom: 15px;
+}
+
+
+
+.pubcrawlpage {
+
+}
+
+
+
+.bar-box .bar-containers {
+  display: flex;
+
+}
+
+.all-bars-box, .my-bars-box {
+  height: 70vh;
+  overflow-y: scroll;
+}
+
+
+/* @media all {
+  .aside-1 {order: 1;}
+  .aside-2 {order: 2;}
+  .map {order: 3; }
+} */

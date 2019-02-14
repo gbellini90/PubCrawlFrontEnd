@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import BarContainer from './BarContainer'
 import MyBarContainer from './MyBarContainer'
+import {Link} from 'react-router-dom'
 import './css/pubcrawlpage.css';
 import {addToPubCrawls} from '../actions/addpubcrawls'
 import {setCurrentPubCrawl} from '../actions/currentpubcrawl'
@@ -92,31 +93,34 @@ class PubCrawlPage extends React.Component {
   render() {
     let position = this.state.coordinates.length > 0 ? [this.state.coordinates[0].latitude,this.state.coordinates[0].longitude] : [this.state.location.lat, this.state.location.long]
     return (
-      <div>
-      Let's create a pubcrawl with your group named, {this.props.group.name}!
-      <BarContainer getBar={this.getBar} />
-      <MyBarContainer getBarToRemove={this.getBarToRemove}/>
+    <div className='pubcrawlpage'>
+    <nav>
+    <Link to='/profile'>  Back to Profile </Link>
+    <Link to='/groups'> Back to Group Page </Link>
+    </nav>
+    <h1>  Let's create a pubcrawl with your group named, {this.props.group.name}! </h1>
+
+    <div className= "bar-box">
+      <div className="bar-containers">
+        <BarContainer getBar={this.getBar} />
+        <MyBarContainer getBarToRemove={this.getBarToRemove}/>
+      </div>
 
 
       <Map className="map" center={position} zoom={this.state.coordinates.length > 0 ? 14 : this.state.zoom}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-        />
+          attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"/>
 
         {this.state.coordinates ? this.state.coordinates.map(coordinate =>
-          <Marker
-           position={[coordinate.latitude, coordinate.longitude]} icon ={myIcon}>
+          <Marker position={[coordinate.latitude, coordinate.longitude]} icon ={myIcon}>
             {this.state.barObj ? this.state.barObj.map(bar=>
                 <Popup key={bar.id}>{bar.name} {bar.address}</Popup>
             ):null}
          </Marker>
        ):null}
-
-
-
-    </Map>
-
+       </Map>
+       </div>
 
 
       </div>

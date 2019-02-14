@@ -30,7 +30,7 @@ class UserCard extends React.Component {
     return (
       <div>
       <li>{this.props.name}</li>
-      <button onClick={()=> this.requestClick(this.props.id)}> Send a friend request! </button>
+      <button className="btn" onClick={()=> this.requestClick(this.props.id)}> Send a friend request! </button>
       </div>
     );
   }

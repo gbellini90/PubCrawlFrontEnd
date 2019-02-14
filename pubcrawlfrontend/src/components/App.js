@@ -13,9 +13,6 @@ import PubCrawlShow from './pubcrawlshow'
 
 
 
-
-
-
 class App extends React.Component {
 
   render() {
