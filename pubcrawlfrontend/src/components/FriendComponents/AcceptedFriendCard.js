@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import withAuth from '../withAuth'
+// import withAuth from '../withAuth'
 
 class AcceptedFriendCard extends React.Component {
 
@@ -27,5 +27,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-
-export default withAuth(connect(mapStateToProps)(AcceptedFriendCard))
+export default connect(mapStateToProps)(AcceptedFriendCard)

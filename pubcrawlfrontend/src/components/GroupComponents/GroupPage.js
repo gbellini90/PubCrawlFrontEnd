@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from "react-router-dom";
 import {addGroup} from '../../actions/addgroup'
 import {setGroups} from '../../actions/groups'
+import {logoutUser} from '../../actions/userActions'
 import GroupCard from './GroupCard'
 import Adapter from '../Adapter'
 
@@ -63,6 +64,7 @@ meh = (groups) => {
           <nav>
           <Link to='/profile'>  Back to Profile  </Link>
           <Link to='/friends'> Back to Friend Page </Link>
+          <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
           </nav>
 
           <h6> Create a New Group Below</h6>
@@ -111,7 +113,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setGroups: (groups) => dispatch(setGroups(groups)),
-    addGroup: (group) => dispatch(addGroup(group))
+    addGroup: (group) => dispatch(addGroup(group)),
+    logoutUser: () =>dispatch(logoutUser())
   }
 }
 

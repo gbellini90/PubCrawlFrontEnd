@@ -128,66 +128,6 @@ export const signUpUser = (username, password, name, bio, pic, age) => {
  	}
   }
 
-  //
-  // export const signUpUser = (username, password, name, bio, pic, age) => {
-  //   return  (dispatch) => {
-  //     dispatch({ type: 'AUTHENTICATING_USER' })
-  //     fetch('http://localhost:3000/api/v1/users', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         Accept: 'application/json'
-  //       },
-  //       body: JSON.stringify({
-  //         user:{
-  //           username: username,
-  //           password: password,
-  //           name:name,
-  //           bio: bio,
-  //           pic:pic,
-  //           age:age
-  //       }})
-  //     })
-  //       .then(response => {
-  //         if (response.ok) {
-  //           return response.json()
-  //         } else {
-  //           throw response
-  //         }
-  //       })
-  //       .then(JSONResponse => {
-  //         localStorage.setItem('jwt', JSONResponse.jwt)
-  //         // dispatch({ type: 'SET_CURRENT_USER', payload: JSONResponse.user })
-  //         dispatch(setCurrentUser(JSONResponse.user))
-  //       })
-  //       .catch(r => r.json().then(e => dispatch(failedLogin(e.message))))
-  //       // .then((jsonResponse) => {
-  //       //   localStorage.setItem('jwt', jsonResponse.jwt)
-  //       //   dispatch(setCurrentUser(jsonResponse.user))
-  //       // })
-  //   }
-  // }
-  //
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export const addUser = (newUser) => {
   return {

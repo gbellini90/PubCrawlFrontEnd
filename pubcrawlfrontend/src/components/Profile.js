@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {setFriends} from '../actions/userActions'
 import {setCurrentListofBudlessUsers} from '../actions/userActions'
-// import FriendPage from './FriendComponents/FriendPage'
+import {logoutUser} from '../actions/userActions'
 import UserList from './FriendComponents/UserList'
 import withAuth from './withAuth'
 import FriendshipList from './FriendComponents/FriendshipList'
@@ -31,7 +31,8 @@ class Profile extends React.Component {
 
       <div className="profile-page">
       <nav>
-      <Link to='/groups'>  Visit the Group Page  </Link>
+        <Link to='/groups'>  Visit the Group Page  </Link>
+        <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
       </nav>
         <div className="profile-page-overlay">
               <div className="card horizontal small">
@@ -70,8 +71,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setCurrentListofBudlessUsers: (budlessUsers) => dispatch(setCurrentListofBudlessUsers(budlessUsers)),
     setFriends: (friends) => dispatch(setFriends(friends)),
-  }
-}
+    logoutUser: () =>dispatch(logoutUser())
+      }
+    }
 
 
 export default withAuth(connect(mapStateToProps, mapDispatchToProps)(Profile));

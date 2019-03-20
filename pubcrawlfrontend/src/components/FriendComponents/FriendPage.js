@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import UserList from './UserList'
 import FriendshipList from './FriendshipList'
-// import withAuth from '../withAuth'
+import {logoutUser} from '../../actions/userActions'
 
 class FriendPage extends React.Component {
 
@@ -12,7 +12,8 @@ class FriendPage extends React.Component {
     return (
       <div>
       <nav>
-      <Link to='/groups'>  Visit the Group Page  </Link>
+        <Link to='/groups'>  Visit the Group Page  </Link>
+        <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
       </nav>
 
         <div className= "friend-box">
@@ -37,5 +38,11 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+      logoutUser: () =>dispatch(logoutUser())
+  }
+}
 
-export default connect(mapStateToProps)(FriendPage);
+
+export default connect(mapStateToProps, mapDispatchToProps)(FriendPage);

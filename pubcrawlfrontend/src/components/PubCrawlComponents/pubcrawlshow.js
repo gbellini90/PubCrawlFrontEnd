@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from "react-router-dom";
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet'
+import {logoutUser} from '../../actions/userActions'
 import L from 'leaflet'
 
 import PubCard from './pubcard'
@@ -25,7 +26,8 @@ class PubCrawlShow extends React.Component {
     return (
       <div>
       <nav>
-      <Link to='/groups'> Back to Group Page </Link>
+        <Link to='/groups'> Back to Group Page </Link>
+        <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
       </nav>
         <h5>Group Name:</h5>{this.props.pubcrawl.group ? this.props.pubcrawl.group.name : null} <br />
         <h5>Group's Creator:</h5> {this.props.pubcrawl.group ? this.props.users.filter(user => (user.id === this.props.pubcrawl.group.creator_id)).map(userObj => <span key={userObj.id}> {userObj.name} </span> ) : null}<br />
@@ -42,7 +44,7 @@ class PubCrawlShow extends React.Component {
               position={[bar.latitude, bar.longitude]}
               icon ={myIcon}>
                 <Popup>
-                  {bar.name}
+                  {bar.name} <br/>
                   {bar.address}
                 </Popup>
               </Marker>
@@ -73,5 +75,10 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+      logoutUser: () =>dispatch(logoutUser())
+  }
+}
 
-export default connect(mapStateToProps)(PubCrawlShow);
+export default connect(mapStateToProps, mapDispatchToProps)(PubCrawlShow);

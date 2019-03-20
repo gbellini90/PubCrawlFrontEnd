@@ -5,6 +5,7 @@ import MyBarContainer from '../BarComponents/MyBarContainer'
 import {Link} from 'react-router-dom'
 import {addToPubCrawls} from '../../actions/addpubcrawls'
 import {setCurrentPubCrawl} from '../../actions/currentpubcrawl'
+import {logoutUser} from '../../actions/userActions'
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet'
 import L from 'leaflet'
 
@@ -99,8 +100,9 @@ class PubCrawlPage extends React.Component {
     return (
     <div className='pubcrawlpage'>
     <nav>
-    <Link to='/profile'>  Back to Profile </Link>
-    <Link to='/groups'> Back to Group Page </Link>
+      <Link to='/profile'>  Back to Profile </Link>
+      <Link to='/groups'> Back to Group Page </Link>
+      <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
     </nav>
     <h4>  Let's create a pubcrawl with your group named, {this.props.group.name}! </h4>
 
@@ -148,11 +150,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addToPubCrawls: (pubcrawl) => dispatch(addToPubCrawls(pubcrawl)),
-    setCurrentPubCrawl:(pubcrawl) => dispatch(setCurrentPubCrawl(pubcrawl))
-
+    setCurrentPubCrawl:(pubcrawl) => dispatch(setCurrentPubCrawl(pubcrawl)),
+    logoutUser: () =>dispatch(logoutUser())
   }
 }
-
 
 
 

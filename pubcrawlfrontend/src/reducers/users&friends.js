@@ -39,7 +39,7 @@ const initialState = {
       authenticatingUser: false
     }
     case 'LOGOUT_USER':
-      return  initialState
+      return initialState
     case "SET_CURRENT_USERLIST":
       return {...state, users:action.payload}
     case "ADD_USER":
