@@ -7,7 +7,6 @@ import {removeFromMyBars} from '../../actions/removefrommybars'
 
 class MyBarCard extends React.Component {
 
-//BREAKS WHEN DELETING LAST BAR FROM CRAWL
   removeFromCrawl = (bar, pubcrawl, coordinates) => {
     this.props.removeFromMyBars(bar)
     this.props.removeBarFromPubcrawl(bar, pubcrawl.id)
@@ -19,10 +18,6 @@ class MyBarCard extends React.Component {
           let findBar = pubcrawll.bars.find(barr => barr.name === bar.name)
           let barId = findBar.id
           let pubcrawlJoin = pubcrawll.pubcrawl_bars.find(pcb => pcb.pubcrawl_id === pubcrawl.id && pcb.bar_id === barId)
-          // console.log("findPubcrawl join", pubcrawlJoin)
-          // console.log("found bar", findBar)
-          // console.log('barId', barId)
-          // console.log("pubcrawl join obj", pubcrawll)
             fetch(`http://localhost:3000/api/v1/pubcrawl_bars/${pubcrawlJoin.id}`, {
               method:"DELETE"
             })

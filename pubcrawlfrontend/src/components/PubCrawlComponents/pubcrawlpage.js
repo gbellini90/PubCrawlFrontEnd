@@ -10,7 +10,6 @@ import {Map, TileLayer, Marker, Popup} from 'react-leaflet'
 import L from 'leaflet'
 
 
-
 const myIcon = L.icon({
     iconUrl: '../beermug.png',
     iconSize: [25, 30],
@@ -92,10 +91,9 @@ class PubCrawlPage extends React.Component {
   }
 
 
-
-
   render() {
     console.log("My bars prop", this.props.mybars);
+    console.log("Bar", this.state.bar)
     let position = this.state.coordinates.length > 0 ? [this.state.coordinates[0].latitude,this.state.coordinates[0].longitude] : [this.state.location.lat, this.state.location.long]
     return (
     <div className='pubcrawlpage'>
@@ -105,8 +103,8 @@ class PubCrawlPage extends React.Component {
       <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
     </nav>
     <h4>  Let's create a pubcrawl with your group named, {this.props.group.name}! </h4>
-
     <div className= "bar-box">
+
       <div className="bar-containers">
         <BarContainer getBar={this.getBar} />
         <MyBarContainer getBarToRemove={this.getBarToRemove}/>

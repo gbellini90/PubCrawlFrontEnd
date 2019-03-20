@@ -5,6 +5,7 @@ import {addBarToPubcrawl} from '../../actions/addbartopubcrawl'
 import {myBars} from '../../actions/mybars'
 
 
+
 class BarCard extends React.Component {
 
 

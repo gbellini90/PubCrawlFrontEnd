@@ -24,11 +24,10 @@ class Homepage extends React.Component {
       console.log(this.props);
       return (
         <div className="homepage">
-
-
           <nav>
-            <Link to='/signup'>  Sign Up  </Link>
-            <Link to='/login'>  Log In  </Link>
+          <span className="homepagetitle">PubHub</span>
+            <Link className="homepagelink" to='/signup'>Sign Up  </Link>
+            <Link className="homepagelink" to='/login'>   Log In  </Link>
           </nav>
 
         </div>

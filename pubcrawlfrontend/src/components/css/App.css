@@ -61,8 +61,6 @@
   right: 0;
 }
 
-
-
 .friend-box img {
   width:150px;
   height:auto;
@@ -85,13 +83,6 @@ margin-bottom: 15px;
 }
 
 
-
-.pubcrawlpage {
-
-}
-
-
-
 .bar-box .bar-containers {
   display: flex;
 
@@ -102,17 +93,6 @@ margin-bottom: 15px;
   overflow-y: scroll;
 }
 
-/* .title {
-  color:white;
-  margin-top: 200px;
-  font-family: 'Righteous', cursive;
-} */
-
-/* @media all {
-  .aside-1 {order: 1;}
-  .aside-2 {order: 2;}
-  .map {order: 3; }
-} */
 
 .profile-page {
   background-image: url("../../images/cafe-glass-beverage-drink-bottle-beer-773673-pxhere.com.jpg");
@@ -128,4 +108,19 @@ margin-bottom: 15px;
 
 .profile-page .card {
   background-color: transparent;
+}
+
+.homepagelink {
+  padding-right: 9px;
+  font-size: 16px;
+  color: black;
+}
+
+.homepagetitle {
+  font-size: 25px;
+  float:left;
+  color: white;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
+  font-weight:bold;
+  font-family: 'Nunito', sans-serif;
 }

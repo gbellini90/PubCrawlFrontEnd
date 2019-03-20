@@ -6,6 +6,7 @@ import {setGroups} from '../../actions/groups'
 import {logoutUser} from '../../actions/userActions'
 import GroupCard from './GroupCard'
 import Adapter from '../Adapter'
+import {Navbar, NavItem} from 'react-materialize'
 
 
 const apiGroupsAddress = 'http://localhost:3000/api/v1/groups'
@@ -61,11 +62,12 @@ meh = (groups) => {
     console.log((this.props.groups));
     return (
       <div className="group-page">
-          <nav>
-          <Link to='/profile'>  Back to Profile  </Link>
-          <Link to='/friends'> Back to Friend Page </Link>
-          <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
-          </nav>
+    <nav>
+      <Navbar brand="PubHub" right>
+        <NavItem>  <Link to='/profile'>  Back to Profile  </Link></NavItem>
+        <NavItem><Link to='/' onClick={this.props.logoutUser}> Logout </Link></NavItem>
+      </Navbar>
+    </nav>
 
           <h6> Create a New Group Below</h6>
           <form onSubmit={this.createGroup}>

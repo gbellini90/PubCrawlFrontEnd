@@ -7,6 +7,7 @@ import UserList from './FriendComponents/UserList'
 import withAuth from './withAuth'
 import FriendshipList from './FriendComponents/FriendshipList'
 import {Link} from 'react-router-dom'
+import {Navbar, NavItem} from 'react-materialize'
 
 
 class Profile extends React.Component {
@@ -30,10 +31,11 @@ class Profile extends React.Component {
     const profile =
 
       <div className="profile-page">
-      <nav>
-        <Link to='/groups'>  Visit the Group Page  </Link>
-        <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
-      </nav>
+
+      <Navbar brand="PubHub">
+        <NavItem><Link to='/groups'>  Visit the Group Page  </Link></NavItem>
+        <NavItem><Link to='/' onClick={this.props.logoutUser}> Logout </Link></NavItem>
+      </Navbar>
         <div className="profile-page-overlay">
               <div className="card horizontal small">
                 <div className="card-image waves-effect waves-block waves-light">
