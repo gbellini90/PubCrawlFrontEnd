@@ -1,13 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import BarContainer from './BarContainer'
-import MyBarContainer from './MyBarContainer'
+import BarContainer from '../BarComponents/BarContainer'
+import MyBarContainer from '../BarComponents/MyBarContainer'
 import {Link} from 'react-router-dom'
-import './css/pubcrawlpage.css';
-import {addToPubCrawls} from '../actions/addpubcrawls'
-import {setCurrentPubCrawl} from '../actions/currentpubcrawl'
+import {addToPubCrawls} from '../../actions/addpubcrawls'
+import {setCurrentPubCrawl} from '../../actions/currentpubcrawl'
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet'
 import L from 'leaflet'
+
+
 
 const myIcon = L.icon({
     iconUrl: '../beermug.png',
@@ -90,7 +91,10 @@ class PubCrawlPage extends React.Component {
   }
 
 
+
+
   render() {
+    console.log("My bars prop", this.props.mybars);
     let position = this.state.coordinates.length > 0 ? [this.state.coordinates[0].latitude,this.state.coordinates[0].longitude] : [this.state.location.lat, this.state.location.long]
     return (
     <div className='pubcrawlpage'>
@@ -112,18 +116,19 @@ class PubCrawlPage extends React.Component {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"/>
 
-        {this.state.coordinates ? this.state.coordinates.map(coordinate =>
-          <Marker position={[coordinate.latitude, coordinate.longitude]} icon ={myIcon}>
-            {this.state.barObj ? this.state.barObj.map(bar=>
-                <Popup key={bar.id}>{bar.name} {bar.address}</Popup>
-            ):null}
-         </Marker>
-       ):null}
+        {this.state.coordinates ? this.props.mybars.map(bar => (
+          <Marker
+          key={bar.id}
+          position={[bar.coordinates.latitude, bar.coordinates.longitude]}
+          icon ={myIcon}>
+              <Popup key={bar.id}>
+                {bar.name} <br/>
+                {bar.location.address1}
+              </Popup>
+         </Marker>)) : null}
        </Map>
-       </div>
-
-
-      </div>
+   </div>
+    </div>
     );
   }
 
@@ -133,13 +138,10 @@ const mapStateToProps = (state) => {
   return {
       bars:state.bars.bars,
       user:state.user.user,
-      users:state.user.users,
-      friendships:state.user.friendships,
-      groups:state.groups.groups,
-      friends:state.user.friends,
       group:state.groups.group,
       pubcrawls:state.bars.pubcrawls,
-      pubcrawl:state.bars.pubcrawl
+      pubcrawl:state.bars.pubcrawl,
+      mybars:state.bars.mybars
   }
 }
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import AcceptedFriendCard from './AcceptedFriendCard'
+// import withAuth from '../withAuth'
 
 class AcceptedFriendList extends React.Component {
 

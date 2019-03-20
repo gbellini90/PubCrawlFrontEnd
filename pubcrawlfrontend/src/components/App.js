@@ -5,11 +5,11 @@ import Homepage from './Homepage'
 import Signup from './Signup'
 import Login from './Login'
 import Profile from './Profile'
-import BarContainer from './BarContainer'
-import GroupPage from './GroupPage'
-import FriendPage from './FriendPage'
-import PubCrawlPage from './pubcrawlpage'
-import PubCrawlShow from './pubcrawlshow'
+import BarContainer from './BarComponents/BarContainer'
+import GroupPage from './GroupComponents/GroupPage'
+import FriendPage from './FriendComponents/FriendPage'
+import PubCrawlPage from './PubCrawlComponents/pubcrawlpage'
+import PubCrawlShow from './PubCrawlComponents/pubcrawlshow'
 
 
 

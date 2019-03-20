@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import UserCard from './UserCard'
+import withAuth from '../withAuth'
 
 
 class UserList extends React.Component {
@@ -32,4 +33,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps)(UserList);
+export default withAuth(connect(mapStateToProps)(UserList));

@@ -2,32 +2,13 @@ import React from 'react'
 import {Input, Row, Icon} from 'react-materialize'
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {setCurrentUser} from '../actions/user'
-import {setCurrentUserList} from '../actions/users'
-// import {setFriendships} from '../actions/friendships'
-
-
-const apiUsersAddress = 'http://localhost:3000/api/v1/users'
-// const apiFriendshipAddress = 'http://localhost:3000/api/v1/friendships'
+import {loginUser} from '../actions/userActions'
 
 class Login extends React.Component {
 
-  componentDidMount = () => {
-    fetch ('http://localhost:3000/api/v1/users')
-    .then(r => r.json())
-    .then(allUsers => this.props.setCurrentUserList(allUsers))
-
-    // fetch(apiFriendshipAddress)
-    // .then(r => r.json())
-    // .then(friendships => {
-    //   this.props.setFriendships(friendships)
-    // })
-  }
-
   state = {
-    name:'',
     username: '',
-    loggedIn:false
+    password: '',
   }
 
   handleChange = (event) => {
@@ -38,10 +19,7 @@ class Login extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.setState({loggedIn:true})
-    fetch(apiUsersAddress)
-    .then(r => r.json())
-    .then(userList => this.props.setCurrentUser(userList.find(user => user.username === this.state.username && user.name === this.state.name)))
+      this.props.loginUser(this.state.username, this.state.password)
   }
 
 
@@ -49,29 +27,33 @@ class Login extends React.Component {
     const logInForm =
       <div className="login">
         <form onSubmit={this.handleSubmit}>
-        <Row>
-            <Input s={6} onChange={this.handleChange} placeholder="Username" name="username" value={this.state.username}><Icon>account_circle</Icon></Input>
-            <Input s={6} onChange={this.handleChange} placeholder="Name" name="name" value={this.state.name}><Icon>lock</Icon></Input>
-            <Input type="submit" />
-        </Row>
+          <Row>
+           { !this.props.failedLogin ? null : alert(this.props.error)}
+              <Input s={6} onChange={this.handleChange} type= "text" placeholder="Username" name="username" value={this.state.username}><Icon>account_circle</Icon></Input>
+              <Input s={6} onChange={this.handleChange} type="password" placeholder="Password" name="password" value={this.state.password}><Icon>lock</Icon></Input>
+              <Input type="submit" />
+          </Row>
         </form>
       </div>
-      return this.state.loggedIn ? <Redirect to='/profile'/> : logInForm
+  return this.props.loggedIn ? <Redirect to='/profile'/> : logInForm
   }
 
 }
 
 const mapStateToProps = (state) => {
   return {
-    user:state.user.user
+    user:state.user.user,
+    failedLogin:state.user.failedLogin,
+    error:state.user.error,
+    loggedIn:state.user.loggedIn,
+    authenticatingUser:state.user.authenticatingUser
+
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-    setCurrentUserList: (users) => dispatch(setCurrentUserList(users)),
-    // setFriendships: (friendships) => dispatch(setFriendships(friendships)),
+   loginUser: (username, password) => dispatch(loginUser(username, password))
 }}
 
 

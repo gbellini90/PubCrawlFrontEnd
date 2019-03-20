@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {removeBarFromPubcrawl} from '../actions/removebarfrompubcrawl'
-import {removeFromMyBars} from '../actions/removefrommybars'
+import {removeBarFromPubcrawl} from '../../actions/removebarfrompubcrawl'
+import {removeFromMyBars} from '../../actions/removefrommybars'
 
 
 

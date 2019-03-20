@@ -1,9 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {setPendingFrienders} from '../actions/pendingFriender'
-import {setPendingFriendees} from '../actions/pendingFriendee'
+import {setPendingFrienders} from '../../actions/userActions'
+import {setPendingFriendees} from '../../actions/userActions'
 import PendingFriendeeCard from './PendingFriendeeCard'
 import PendingFrienderCard from './PendingFrienderCard'
+// import withAuth from '../withAuth'
 
 class PendingFriendList extends React.Component {
 

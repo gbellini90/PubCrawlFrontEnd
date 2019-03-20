@@ -1,26 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {setBars} from '../actions/bars'
-// import {Link} from 'react-router-dom'
+import {setBars} from '../../actions/bars'
 import BarCard from './BarCard'
 import {Input} from 'react-materialize'
-// import {setPubcrawlBars} from '../actions/pubcrawlbars'
-// import {setFoundBars} from '../actions/foundbar'
+
 
 
 class Bars extends React.Component {
 
-  // componentDidUpdate = () => {
-  //   fetch('http://localhost:3000/api/v1/pubcrawl_bars')
-  //   .then(r=>r.json())
-  //   .then(joinObjs => {
-  //     this.props.setPubcrawlBars(joinObjs)
-  //   })
-  //   fetch('http://localhost:3000/api/v1/bars')
-  //   .then(r=>r.json())
-  //   .then(barss => {
-  //     this.props.setFoundBars(barss)
-  // })}
 
 
   state = {
@@ -82,8 +69,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setBars: (bars) => dispatch(setBars(bars)),
-    // setPubcrawlBars:(pubcrawlbars) => dispatch(setPubcrawlBars(pubcrawlbars)),
-    // setFoundBars:(bars) => dispatch(setFoundBars(bars))
   }
 }
 

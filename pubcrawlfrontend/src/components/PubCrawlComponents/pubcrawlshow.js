@@ -1,12 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from "react-router-dom";
-// import {setCurrentGroup} from '../actions/currentgroup'
-import './css/pubcrawlshow.css';
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet'
 import L from 'leaflet'
-// import {setBars} from '../actions/bars'
-// import {pubcrawlShowBars} from '../actions/pubcrawlShowBars'
 
 import PubCard from './pubcard'
 
@@ -76,12 +72,6 @@ const mapStateToProps = (state) => {
     foundBars:state.bars.foundBars
   }
 }
-//
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     setCurrentGroup : (group) => dispatch(setCurrentGroup(group)),
-//     // setBars: (bars) => dispatch(setBars(bars))
-//   }
-// }
+
 
 export default connect(mapStateToProps)(PubCrawlShow);

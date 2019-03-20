@@ -1,25 +1,22 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from "react-router-dom";
-import {addGroup} from '../actions/addgroup'
-import {setGroups} from '../actions/groups'
+import {addGroup} from '../../actions/addgroup'
+import {setGroups} from '../../actions/groups'
 import GroupCard from './GroupCard'
+import Adapter from '../Adapter'
 
 
 const apiGroupsAddress = 'http://localhost:3000/api/v1/groups'
 
 class Group extends React.Component {
 
-    // {this.props.groups ? this.props.groups.filter(group =>(group.creator_id !== this.props.user.id))}
-
   state = {
     groupName : ''
   }
 
   componentDidMount = () => {
-    fetch(apiGroupsAddress)
-    .then(r => r.json())
-    .then(groups => this.props.setGroups(groups))
+  Adapter.fetchGroups().then(groups => this.props.setGroups(groups))
   }
 
   createGroup = (event) => {
@@ -67,7 +64,7 @@ meh = (groups) => {
           <Link to='/profile'>  Back to Profile  </Link>
           <Link to='/friends'> Back to Friend Page </Link>
           </nav>
-          
+
           <h6> Create a New Group Below</h6>
           <form onSubmit={this.createGroup}>
             <input onChange={this.handleChange} name="groupName" value={this.state.groupName} type="text" placeholder="Enter Group Name here!"/>

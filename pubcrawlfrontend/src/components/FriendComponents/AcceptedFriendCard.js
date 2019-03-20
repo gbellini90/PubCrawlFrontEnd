@@ -1,22 +1,18 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import withAuth from '../withAuth'
 
-
-
-
-class PendingFriendeeCard extends React.Component {
-
+class AcceptedFriendCard extends React.Component {
 
   render() {
-    const pendingFriender =
+    return (
       <div>
-      <li>You sent a friend request to : {this.props.name}
-      <img src={this.props.pic} alt={this.props.name}/>
-      </li>
+        <li>{this.props.name} <br/>
+        <img src={this.props.pic} alt={this.props.name}/> </li><br/>
       </div>
-      return this.props ? pendingFriender : "No Friend Requests Sent By You Pending At This Time"
-
+    );
   }
+
 }
 
 const mapStateToProps = (state) => {
@@ -32,4 +28,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps)(PendingFriendeeCard);
+export default withAuth(connect(mapStateToProps)(AcceptedFriendCard))

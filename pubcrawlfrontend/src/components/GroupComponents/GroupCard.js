@@ -1,21 +1,19 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {removeGroup} from '../actions/removegroup'
-import {addUserToGroup} from '../actions/addusertogroup'
-import {setCurrentGroup} from '../actions/currentgroup'
-import {setPubCrawls} from '../actions/pubcrawls'
-import {setCurrentPubCrawl} from '../actions/currentpubcrawl'
+import {removeGroup} from '../../actions/removegroup'
+import {addUserToGroup} from '../../actions/addusertogroup'
+import {setCurrentGroup} from '../../actions/currentgroup'
+import {setPubCrawls} from '../../actions/pubcrawls'
+import {setCurrentPubCrawl} from '../../actions/currentpubcrawl'
 import {Redirect} from "react-router-dom";
-
+import Adapter from '../Adapter'
 import {Button} from 'react-materialize'
-
 
 
 class GroupCard extends React.Component {
 
 componentDidMount = () => {
-  fetch('http://localhost:3000/api/v1/pubcrawls')
-  .then(r=>r.json())
+  Adapter.fetchPubCrawls()
   .then(pubcrawls => this.props.setPubCrawls(pubcrawls))
 }
 
@@ -80,9 +78,9 @@ state ={
     const groupCard =
       <div className='groupcard'>
         <ul>
-          <li>
+          <span>
             <h4>Name of Group: </h4><h2>{this.props.name}</h2>
-            <i class="small material-icons" id='trash' onClick={()=>this.deleteGroup(this.props.id)}>
+            <i className="small material-icons" id='trash' onClick={()=>this.deleteGroup(this.props.id)}>
               delete_forever
             </i>
             <br />
@@ -98,7 +96,7 @@ state ={
             {this.props.friends.map(friend => <span key={friend.id}>{friend.name} <button onClick={()=>this.addFriendToGroup(friend, this.props.id) }> {this.props.usersfromgroup.find(user => user.id === friend.id)  ? `Added to ${this.props.name}!` : "Add to Group?"} </button> <br/></span>)} <br /><br />
             <Button waves='light' onClick={()=>this.createNewPubCrawl(this.props.id)}>Create New Pub Crawl With {this.props.name}</Button>
 
-          </li>
+          </span>
         </ul>
       </div>
       return this.state.newPubcrawlClicked? <Redirect to='/pubcrawl'/> : this.state.existingCrawlClicked ?  <Redirect to='mypubcrawl'/> : groupCard

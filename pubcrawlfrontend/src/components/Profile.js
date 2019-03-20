@@ -1,77 +1,77 @@
 import React from 'react'
-import {Link, Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {setFriendships} from '../actions/friendships'
-import FriendshipList from './FriendshipList'
-// import {Row, Col, CardPanel, Card, CardTitle} from 'react-materialize'
+import {setFriends} from '../actions/userActions'
+import {setCurrentListofBudlessUsers} from '../actions/userActions'
+// import FriendPage from './FriendComponents/FriendPage'
+import UserList from './FriendComponents/UserList'
+import withAuth from './withAuth'
+import FriendshipList from './FriendComponents/FriendshipList'
+import {Link} from 'react-router-dom'
 
-
-const apiFriendshipAddress = 'http://localhost:3000/api/v1/friendships'
 
 class Profile extends React.Component {
 
   componentDidMount = () => {
-    fetch(apiFriendshipAddress)
+  fetch(`http://localhost:3000/api/v1/users/${this.props.user.id}/budless`)
     .then(r => r.json())
-    .then(friendships => {
-      this.props.setFriendships(friendships)
+    .then(budlessUsers => {
+      this.props.setCurrentListofBudlessUsers(budlessUsers)
     })
-}
 
-  render() {
-  const profile =
-    <div className="profile-page">
-      <div className="profile-page-overlay">
-        <nav>
-          <Link to='/friends'> View Your Friends! </Link>
-        </nav>
-            <div className="card horizontal medium">
-              <div className="card-image waves-effect waves-block waves-light">
-                <img className="card-image" src={this.props.user.pic ? this.props.user.pic : null} alt={this.props.user.name ? this.props.user.name : null}/>
-              </div>
-              <div className="card-content">
-                  <span className="card-title grey-text text-darken-4">{this.props.user.name ? this.props.user.name : null}</span>
-                  <p>Age:{this.props.user.age ? this.props.user.age : null}</p> <br />
-                  <i>{this.props.user.bio ? this.props.user.bio : null}</i>
-              </div>
-          </div>
-          {/* <img src="../cafe-glass-beverage-drink-bottle-beer-773673-pxhere.com.jpg" alt="pic"/> */}
-      </div>
-    </div>
-
-
-
-      return this.props.user ? profile : null
-
+    fetch (`http://localhost:3000/api/v1/users/${this.props.user.id}/friends`)
+    .then (r => r.json())
+    .then(friends => {
+      this.props.setFriends(friends)
+    })
   }
 
+  render() {
+    console.log(this.props)
+    const profile =
+
+      <div className="profile-page">
+      <nav>
+      <Link to='/groups'>  Visit the Group Page  </Link>
+      </nav>
+        <div className="profile-page-overlay">
+              <div className="card horizontal small">
+                <div className="card-image waves-effect waves-block waves-light">
+                  <img className="card-image" src={this.props.user.pic ? this.props.user.pic : null} alt={this.props.user.name ? this.props.user.name : null}/>
+                </div>
+                <div className="card-content">
+                    <span className="card-title grey-text text-darken-4">{this.props.user.name ? this.props.user.name : null}</span>
+                    <p>Age:{this.props.user.age ? this.props.user.age : null}</p> <br />
+                    <i>{this.props.user.bio ? this.props.user.bio : null}</i>
+                </div>
+            </div>
+
+            <div className= "friend-box">
+              <UserList />
+              <FriendshipList />
+            </div>
+        </div>
+
+      </div>
+    return this.props.user ? profile : null
+
+  }
 }
 
 
 const mapStateToProps = (state) => {
   return {
-    bars:state.bars.bars,
     user:state.user.user,
-    users:state.user.users,
     friendships:state.user.friendships,
-    pendingFriendees:state.user.pendingFriendees,
-    pendingFrienders:state.user.pendingFrienders,
-    budless:state.user.budless,
-    friends:state.user.friends
+
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setFriendships: (friendships) => dispatch(setFriendships(friendships)),
-    // setCurrentListofBudlessUsers: (budlessUsers) => dispatch(setCurrentListofBudlessUsers(budlessUsers)),
-    // setFriends: (friends) => dispatch(setFriends(friends))
+    setCurrentListofBudlessUsers: (budlessUsers) => dispatch(setCurrentListofBudlessUsers(budlessUsers)),
+    setFriends: (friends) => dispatch(setFriends(friends)),
   }
 }
 
 
-
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default withAuth(connect(mapStateToProps, mapDispatchToProps)(Profile));

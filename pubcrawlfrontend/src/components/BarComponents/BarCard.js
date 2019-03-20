@@ -1,9 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {setCurrentBar} from '../actions/bar'
-import {addBarToPubcrawl} from '../actions/addbartopubcrawl'
-// import {currentPubCrawlBar} from '../actions/currentpubcrawlbar'
-import {myBars} from '../actions/mybars'
+import {setCurrentBar} from '../../actions/bar'
+import {addBarToPubcrawl} from '../../actions/addbartopubcrawl'
+import {myBars} from '../../actions/mybars'
 
 
 class BarCard extends React.Component {
@@ -40,8 +39,6 @@ class BarCard extends React.Component {
                 bar_id: barObject.id
               })
           })
-          // .then(r => r.json())
-          // .then(pubcrawlbar => this.props.currentPubCrawlBar(pubcrawlbar))
       })
 
       // remove from the "bars" state list and add to "mybars"
@@ -80,7 +77,7 @@ const mapStateToProps = (state) => {
       pubcrawl:state.bars.pubcrawl,
       bars:state.bars.bars,
       mybars:state.bars.mybars,
-      // pubcrawlbar:state.bars.pubcrawlbar
+
   }
 }
 
@@ -89,7 +86,6 @@ const mapDispatchToProps = (dispatch) => {
     setCurrentBar:(bar) => dispatch(setCurrentBar(bar)),
     addBarToPubcrawl: (bar, pubcrawl_id) => dispatch(addBarToPubcrawl(bar, pubcrawl_id)),
     myBars:(bar) => dispatch(myBars(bar)),
-    // currentPubCrawlBar:(pubcrawlbar)=>dispatch(currentPubCrawlBar(pubcrawlbar))
   }
 }
 

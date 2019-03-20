@@ -1,8 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addFriend} from '../actions/addfriend'
+import {addFriend} from '../../actions/userActions'
+// import withAuth from '../withAuth'
 
-
+// "../../images/cafe-glass-beverage-drink-bottle-beer-773673-pxhere.com.jpg"
 
 class PendingFrienderCard extends React.Component {
 

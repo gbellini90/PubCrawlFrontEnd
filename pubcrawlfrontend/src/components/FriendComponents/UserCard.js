@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addPendingFriend} from '../actions/addPendingFriend'
-import {addToFriendships} from '../actions/addToFriendships'
+import {addPendingFriend} from '../../actions/userActions'
+import {addToFriendships} from '../../actions/userActions'
+// import withAuth from '../withAuth'
 
 class UserCard extends React.Component {
 
