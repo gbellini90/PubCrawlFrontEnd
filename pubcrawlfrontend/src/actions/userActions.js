@@ -22,7 +22,7 @@ export const setPendingFriendees = (pendingFriendees) =>{
 export const loginUser = (username, password) => {
   return  (dispatch) => {
     dispatch({ type: 'AUTHENTICATING_USER' })
-    fetch('http://localhost:3000/api/v1/login', {
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ export const fetchCurrentUser = () => {
   // takes the token in localStorage and finds out who it belongs to
   return (dispatch) => {
     dispatch(authenticatingUser()) //tells the app we are fetching
-    fetch(`http://localhost:3000/api/v1/profile`, {
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/profile`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('jwt')}`
@@ -108,25 +108,86 @@ export const authenticatingUser = () => ({ type: 'AUTHENTICATING_USER' })
 //   return { type: 'AUTHENTICATING_USER' }
 // }
 
-export const signUpUser = (username, password) => {
+export const signUpUser = (username, password, name, bio, pic, age) => {
 	return (dispatch) => {
-	  const data = { user: {username, password} }
-	    fetch(`http://localhost:3000/api/v1/users`,{
+	  const data = { user: {username, password, name, bio, pic, age} }
+	    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/users`,{
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 					Accept: 'application/json'
 				},
-        body: JSON.stringify(console.log(data))
+        body: JSON.stringify(data)
       })
       .then(res => res.json())
 	    .then(res => {
 		    localStorage.setItem('jwt', res.jwt)
-		    .then((res) => dispatch(setCurrentUser(res.user)))
+		    dispatch({ type: "SET_CURRENT_USER", payload: res.user})
 	     })
 
  	}
   }
+
+  //
+  // export const signUpUser = (username, password, name, bio, pic, age) => {
+  //   return  (dispatch) => {
+  //     dispatch({ type: 'AUTHENTICATING_USER' })
+  //     fetch('http://localhost:3000/api/v1/users', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Accept: 'application/json'
+  //       },
+  //       body: JSON.stringify({
+  //         user:{
+  //           username: username,
+  //           password: password,
+  //           name:name,
+  //           bio: bio,
+  //           pic:pic,
+  //           age:age
+  //       }})
+  //     })
+  //       .then(response => {
+  //         if (response.ok) {
+  //           return response.json()
+  //         } else {
+  //           throw response
+  //         }
+  //       })
+  //       .then(JSONResponse => {
+  //         localStorage.setItem('jwt', JSONResponse.jwt)
+  //         // dispatch({ type: 'SET_CURRENT_USER', payload: JSONResponse.user })
+  //         dispatch(setCurrentUser(JSONResponse.user))
+  //       })
+  //       .catch(r => r.json().then(e => dispatch(failedLogin(e.message))))
+  //       // .then((jsonResponse) => {
+  //       //   localStorage.setItem('jwt', jsonResponse.jwt)
+  //       //   dispatch(setCurrentUser(jsonResponse.user))
+  //       // })
+  //   }
+  // }
+  //
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const addUser = (newUser) => {
   return {

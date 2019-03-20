@@ -2,12 +2,9 @@ import React from 'react'
 import {Redirect} from "react-router-dom";
 import {Input, Row} from 'react-materialize'
 import {connect} from 'react-redux'
-// import {setCurrentUser} from '../actions/userActions'
 import {signUpUser} from '../actions/userActions'
 import {addUser} from '../actions/userActions'
 
-
-const apiUsersAddress = 'http://localhost:3000/api/v1/users'
 
 class Signup extends React.Component {
 
@@ -21,40 +18,19 @@ class Signup extends React.Component {
    signedUp:false
  }
 
+ handleChange = (event) => {
+   this.setState({
+     [event.target.name]: event.target.value
+   })
+ }
+
  handleSubmit = (event) => {
      event.preventDefault()
      this.setState({ signedUp: true })
-     this.props.signUpUser(this.state.username, this.state.password)
-     //  const postConfig = {
-     // 	method:"POST",
-     // 	headers: {
-     //     "Content-type": "application/json"
-     //   },
-     //   body: JSON.stringify({
-     //     user: {
-     //       name: this.state.name,
-     //       username: this.state.username,
-     //       age: this.state.age,
-     //       pic:this.state.pic,
-     //       bio:this.state.bio
-     //     }
-     //   })
-     // }
-     //
-     // fetch(apiUsersAddress,postConfig)
-     //   .then(r=>r.json())
-     //   .then(userObj => {
-     //    this.props.addUser(userObj)
-     //    this.props.setCurrentUser(userObj)
-     //   })
-
+     this.props.signUpUser(this.state.username, this.state.password, this.state.name, this.state.bio, this.state.pic, this.state.age)
    }
 
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
+
 
 
   render() {
@@ -80,15 +56,18 @@ class Signup extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user:state.user.user,
-    users:state.user.users
+    users:state.user.users,
+    failedLogin:state.user.failedLogin,
+    error:state.user.error,
+    loggedIn:state.user.loggedIn,
+    authenticatingUser:state.user.authenticatingUser
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // setCurrentUser: (user) => dispatch(setCurrentUser(user)),
     addUser: (newUser) => dispatch(addUser(newUser)),
-    signUpUser: (username, password) => dispatch(signUpUser(username, password))
+    signUpUser: (username, password, name, bio, pic, age) => dispatch(signUpUser(username, password, name, bio, pic, age))
 
   }
 }
