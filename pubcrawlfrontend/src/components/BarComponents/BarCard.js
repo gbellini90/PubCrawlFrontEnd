@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {setCurrentBar} from '../../actions/bar'
-import {addBarToPubcrawl} from '../../actions/addbartopubcrawl'
-import {myBars} from '../../actions/mybars'
+import {setCurrentBar} from '../../actions/barActions'
+import {addBarToPubcrawl} from '../../actions/pubcrawlActions'
+import {myBars} from '../../actions/barActions'
 
 
 

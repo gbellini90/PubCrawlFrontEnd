@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {setBars} from '../../actions/bars'
+import {setBars} from '../../actions/barActions'
 import BarCard from './BarCard'
 import {Input} from 'react-materialize'
 
