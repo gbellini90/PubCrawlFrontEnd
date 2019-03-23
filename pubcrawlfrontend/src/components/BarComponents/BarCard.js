@@ -3,53 +3,20 @@ import {connect} from 'react-redux'
 import {setCurrentBar} from '../../actions/barActions'
 import {addBarToPubcrawl} from '../../actions/pubcrawlActions'
 import {myBars} from '../../actions/barActions'
-
+import Adapter from '../Adapter'
 
 
 class BarCard extends React.Component {
 
-
   addToCrawl = (barObj, coordinates) => {
-    fetch('http://localhost:3000/api/v1/bars', {
-      method:"POST",
-      headers: {
-              "Content-Type": "application/json",
-              "Accept":"application/json"},
-      body:
-        JSON.stringify({
-          name:barObj.name,
-          pic: barObj.image_url,
-          address:barObj.location.display_address.join(" "),
-          rating:barObj.rating,
-          price:barObj.price,
-          latitude:barObj.coordinates.latitude,
-          longitude:barObj.coordinates.longitude
-        })
-      })
-      .then(r=>r.json())
+    Adapter.fetchPostBar(barObj)
       .then(barObject => {
         this.props.setCurrentBar(barObject)
-          fetch('http://localhost:3000/api/v1/pubcrawl_bars',{
-            method:"POST",
-            headers: {
-                    "Content-Type": "application/json",
-                    "Accept":"application/json"},
-            body:
-              JSON.stringify({
-                pubcrawl_id: this.props.pubcrawl.id,
-                bar_id: barObject.id
-              })
-          })
-      })
-
-      // remove from the "bars" state list and add to "mybars"
-      this.props.myBars(barObj)
-      this.props.getBar(coordinates, barObj)
-
-      //add the bar object to this particular pubcrawl
-      this.props.addBarToPubcrawl(barObj, this.props.pubcrawl.id)
-
-  }
+          Adapter.fetchPostPubcrawlBar(barObject.id, this.props.pubcrawl.id)
+          this.props.myBars(barObj)
+          this.props.getBar(coordinates, barObj)
+          this.props.addBarToPubcrawl(barObj, this.props.pubcrawl.id)
+      })}
 
   render() {
     return (

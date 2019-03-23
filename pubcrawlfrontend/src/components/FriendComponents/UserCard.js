@@ -2,24 +2,14 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {addPendingFriend} from '../../actions/userActions'
 import {addToFriendships} from '../../actions/userActions'
+import Adapter from '../Adapter'
 // import withAuth from '../withAuth'
 
 class UserCard extends React.Component {
 
   requestClick = (id) => {
-    fetch('http://localhost:3000/api/v1/friendships', {
-      method:"POST",
-      headers: {
-              "Content-Type": "application/json",
-              "Accept":"application/json"},
-      body:
-        JSON.stringify({
-          friendee_id: id,
-          friender_id: this.props.user.id
-        })
-      }
-  ).then(r =>r.json())
-  .then(friendship => {
+    Adapter.fetchPostFriends(id, this.props.user.id)
+    .then(friendship => {
     let friendeeObj = this.props.users.find(user => user.id === id)
     this.props.addToFriendships(friendship)
     this.props.addPendingFriend(friendeeObj)

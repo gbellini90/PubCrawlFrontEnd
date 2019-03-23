@@ -39,7 +39,9 @@ const initialState = {
       authenticatingUser: false
     }
     case 'LOGOUT_USER':
+      localStorage.clear()
       return initialState
+
     case "SET_CURRENT_USERLIST":
       return {...state, users:action.payload}
     case "ADD_USER":

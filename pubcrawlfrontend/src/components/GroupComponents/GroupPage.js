@@ -6,10 +6,9 @@ import {setGroups} from '../../actions/groupActions'
 import {logoutUser} from '../../actions/userActions'
 import GroupCard from './GroupCard'
 import Adapter from '../Adapter'
-import {Navbar, NavItem} from 'react-materialize'
+import {Navbar} from 'react-materialize'
+import withAuth from '../withAuth'
 
-
-const apiGroupsAddress = 'http://localhost:3000/api/v1/groups'
 
 class Group extends React.Component {
 
@@ -18,43 +17,28 @@ class Group extends React.Component {
   }
 
   componentDidMount = () => {
-  Adapter.fetchGroups().then(groups => this.props.setGroups(groups))
+    Adapter.fetchGroups().then(groups => this.props.setGroups(groups))
   }
 
   createGroup = (event) => {
-      event.preventDefault()
-       const postConfig = {
-      	method:"POST",
-      	headers: {
-          "Content-type": "application/json"
-        },
-        body: JSON.stringify({
-            name: this.state.groupName,
-            creator_id: this.props.user.id
-          }
-        )
-      }
-
-      fetch(apiGroupsAddress,postConfig)
-        .then(r=>r.json())
-        .then(groupObj => {
-          this.props.addGroup(groupObj)
-        })
-      }
+    event.preventDefault()
+    Adapter.fetchCreateGroup(this.state.groupName, this.props.user.id).then(groupObj => {
+      this.props.addGroup(groupObj)
+    })
+  }
 
   handleChange = (event) => {
     this.setState({
-   [event.target.name]: event.target.value
- })
-}
+      [event.target.name]: event.target.value
+    })}
 
-meh = (groups) => {
-  const myGroups = groups.filter(group => {
-    const userIds = group.users.map(user => user.id)
-    return userIds.includes(this.props.user.id)
-  })
-  return myGroups
-}
+  memberOfGroups = (groups) => {
+    const myGroups = groups.filter(group => {
+      const userIds = group.users.map(user => user.id)
+      return userIds.includes(this.props.user.id)
+    })
+    return myGroups
+  }
 
 
 
@@ -62,14 +46,14 @@ meh = (groups) => {
     console.log((this.props.groups));
     return (
       <div className="group-page">
-    <nav>
-      <Navbar brand="PubHub" right>
-        <NavItem>  <Link to='/profile'>  Back to Profile  </Link></NavItem>
-        <NavItem><Link to='/' onClick={this.props.logoutUser}> Logout </Link></NavItem>
-      </Navbar>
-    </nav>
 
-          <h6> Create a New Group Below</h6>
+      <Navbar brand="PubHub" right>
+        <li><Link to='/profile'>  Back to Profile  </Link></li>
+        <li><Link to='/' onClick={this.props.logoutUser}> Logout </Link></li>
+      </Navbar>
+
+
+
           <form onSubmit={this.createGroup}>
             <input onChange={this.handleChange} name="groupName" value={this.state.groupName} type="text" placeholder="Enter Group Name here!"/>
             <input type="submit" />
@@ -86,7 +70,7 @@ meh = (groups) => {
 
             <h5> Groups You're In </h5>
             <div className='cardcontainer'>
-            {Object.keys(this.props.groups).length > 0 ? this.meh(this.props.groups).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} usersfromgroup={mygroup.users} />) : null}
+            {Object.keys(this.props.groups).length > 0 ? this.memberOfGroups(this.props.groups).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} usersfromgroup={mygroup.users} />) : null}
             </div>
 
         </div>
@@ -121,4 +105,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Group);
+export default withAuth(connect(mapStateToProps, mapDispatchToProps)(Group));

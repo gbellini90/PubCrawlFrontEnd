@@ -53,12 +53,23 @@
 .friend-box {
   display:flex;
   margin:0 auto;
+
+  /* background-image: url("../../images/cafe-glass-beverage-drink-bottle-beer-773673-pxhere.com.jpg");
+  background-size:contain; */
 }
 
 #trash {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.pending-friend-box {
+  padding:30px;
+}
+
+.accepted-friend-box {
+  padding:30px;
 }
 
 .friend-box img {
@@ -70,16 +81,23 @@
 
 .friend-box > div {
   width: 33%;
+  padding:20px;
+  /* background-color: rgba(255,255,255, .8);
+  height: 100vh; */
 }
 
 .friend-box .friendlist-box {
   display:flex;
   width: 66.666666%;
+  padding:20px;
+  /* background-color: rgba(255,255,255, .8);
+  height: 100vh; */
 }
 
 .all-users {
 margin-top: 5px;
 margin-bottom: 15px;
+padding:40px;
 }
 
 
@@ -94,7 +112,7 @@ margin-bottom: 15px;
 }
 
 
-.profile-page {
+/* .profile-page {
   background-image: url("../../images/cafe-glass-beverage-drink-bottle-beer-773673-pxhere.com.jpg");
   background-size: cover;
   background-position: center;
@@ -104,7 +122,8 @@ margin-bottom: 15px;
 .profile-page-overlay {
   background-color: rgba(255,255,255, .8);
   height: 100vh;
-}
+} */
+
 
 .profile-page .card {
   background-color: transparent;

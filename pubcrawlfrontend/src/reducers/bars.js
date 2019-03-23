@@ -49,7 +49,7 @@ const initialState = {
 
       // find the actual pubcrawl
       let foundPubcrawl = copyOfPubcrawls.find(pubcrawl => pubcrawl.id === action.payload.pubcrawl_id)
-
+      console.log("In reducer found pub crawl", foundPubcrawl);
       // copy the pubcrawl so we don't manipulate state
       let copyFoundPubcrawl = {...foundPubcrawl}
 

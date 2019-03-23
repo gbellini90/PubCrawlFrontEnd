@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-
+// import withAuth from '../withAuth'
 
 
 class PubCard extends React.Component {
@@ -32,7 +32,6 @@ const mapStateToProps = (state) => {
     groups:state.groups.groups,
     pubcrawls:state.bars.pubcrawls,
     pubcrawl:state.bars.pubcrawl,
-    // mybars:state.bars.mybars,
     pubcrawlbar:state.bars.pubcrawlbar,
   }
 }

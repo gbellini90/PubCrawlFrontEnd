@@ -8,7 +8,8 @@ import {setCurrentPubCrawl} from '../../actions/pubcrawlActions'
 import {logoutUser} from '../../actions/userActions'
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet'
 import L from 'leaflet'
-
+import Adapter from '../Adapter'
+import withAuth from '../withAuth'
 
 const myIcon = L.icon({
     iconUrl: '../beermug.png',
@@ -42,8 +43,7 @@ class PubCrawlPage extends React.Component {
         zoom:12
       })
       }, ()=> {
-      fetch('https://ipapi.co/json')
-      .then(r=>r.json())
+      Adapter.fetchIpapi
       .then(location => {
         this.setState({
           location: {
@@ -57,17 +57,7 @@ class PubCrawlPage extends React.Component {
       }
     )
 
-    fetch('http://localhost:3000/api/v1/pubcrawls', {
-      method:"POST",
-      headers: {
-              "Content-Type": "application/json",
-              "Accept":"application/json"},
-      body:
-        JSON.stringify({
-          group_id:this.props.group.id
-        })
-      })
-      .then(r=>r.json())
+    Adapter.fetchPostPubcrawls(this.props.group.id)
       .then(pubcrawl => {
         this.props.addToPubCrawls(pubcrawl)
         this.props.setCurrentPubCrawl(pubcrawl)
@@ -155,4 +145,4 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(PubCrawlPage);
+export default withAuth(connect(mapStateToProps, mapDispatchToProps)(PubCrawlPage));

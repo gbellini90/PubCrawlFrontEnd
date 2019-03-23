@@ -8,44 +8,30 @@ import {setCurrentPubCrawl} from '../../actions/pubcrawlActions'
 import {Redirect} from "react-router-dom";
 import Adapter from '../Adapter'
 import {Button} from 'react-materialize'
+// import withAuth from '../withAuth'
 
 
 class GroupCard extends React.Component {
 
-componentDidMount = () => {
-  Adapter.fetchPubCrawls()
-  .then(pubcrawls => this.props.setPubCrawls(pubcrawls))
-}
-
-state ={
-  newPubcrawlClicked:false,
-  existingCrawlClicked:false
-}
-
-  deleteGroup = (group_id) => {
-    fetch(`http://localhost:3000/api/v1/groups/${group_id}`, {
-      method:"DELETE"
-    })
-    let deleteGroup = this.props.groups.find(group => group.id === group_id)
-    this.props.removeGroup(deleteGroup)
+  state ={
+    newPubcrawlClicked:false,
+    existingCrawlClicked:false
   }
 
+  componentDidMount = () => {
+    Adapter.fetchPubCrawls()
+    .then(pubcrawls => this.props.setPubCrawls(pubcrawls))
+  }
 
+  deleteGroup = (group_id) => {
+    Adapter.fetchDeleteGroup(group_id)
+    let deletedGroup = this.props.groups.find(group => group.id === group_id)
+    this.props.removeGroup(deletedGroup)
+  }
 
   addFriendToGroup = (friend, group_id) => {
-    fetch('http://localhost:3000/api/v1/user_groups', {
-      method:"POST",
-      headers: {
-              "Content-Type": "application/json",
-              "Accept":"application/json"},
-      body:
-        JSON.stringify({
-          user_id:friend.id ,
-          group_id:group_id
-        })
-      })
-
-      this.props.addUserToGroup(friend,group_id)
+    Adapter.fetchAddFriendToGroup(friend.id, group_id)
+    this.props.addUserToGroup(friend, group_id)
   }
 
   createNewPubCrawl = (id) => {
@@ -55,23 +41,13 @@ state ={
   }
 
   viewPubCrawl = (pubcrawl) => {
-    console.log(pubcrawl)
     this.setState({existingCrawlClicked:!this.state.existingCrawlClicked})
-    fetch('http://localhost:3000/api/v1/pubcrawls')
-    .then(r=>r.json())
+    Adapter.fetchPubCrawls()
     .then(data => {
       let foundPubcrawl = data.find(data => data.id === pubcrawl.id)
-      // let foundGroup = data.find( data => data.group_id === pubcrawl.group_id)
       this.props.setCurrentPubCrawl(foundPubcrawl)
-      // this.props.setCurrentGroup(foundGroup)
-      //Need to possibly redirect to this pubcrawl's show page with edit features?
     })
   }
-
-  // <button onClick={()=> this.viewPubCrawl(pubcrawl)}>  View This Pubcrawl! </button>
-  // <button className="waves-effect waves-light btn-small" onClick={()=>this.createNewPubCrawl(this.props.id)}> Create New Pub Crawl With {this.props.name} </button>
-// <button onClick={()=>this.deleteGroup(this.props.id)}>
-// </button>
 
 
   render() {

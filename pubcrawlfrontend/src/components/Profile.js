@@ -6,38 +6,37 @@ import {logoutUser} from '../actions/userActions'
 import UserList from './FriendComponents/UserList'
 import withAuth from './withAuth'
 import FriendshipList from './FriendComponents/FriendshipList'
+import Adapter from './Adapter'
 import {Link} from 'react-router-dom'
-import {Navbar, NavItem} from 'react-materialize'
+import {Navbar} from 'react-materialize'
 
 
 class Profile extends React.Component {
 
   componentDidMount = () => {
-  fetch(`http://localhost:3000/api/v1/users/${this.props.user.id}/budless`)
-    .then(r => r.json())
-    .then(budlessUsers => {
-      this.props.setCurrentListofBudlessUsers(budlessUsers)
+    Adapter.fetchBudlessUsers(this.props.user.id)
+      .then(budlessUsers => {
+        this.props.setCurrentListofBudlessUsers(budlessUsers)
     })
 
-    fetch (`http://localhost:3000/api/v1/users/${this.props.user.id}/friends`)
-    .then (r => r.json())
-    .then(friends => {
-      this.props.setFriends(friends)
+    Adapter.fetchFriends(this.props.user.id)
+      .then(friends => {
+        this.props.setFriends(friends)
     })
   }
 
   render() {
-    console.log(this.props)
     const profile =
 
       <div className="profile-page">
 
-      <Navbar brand="PubHub">
-        <NavItem><Link to='/groups'>  Visit the Group Page  </Link></NavItem>
-        <NavItem><Link to='/' onClick={this.props.logoutUser}> Logout </Link></NavItem>
+      <Navbar brand="PubHub" right>
+        <li><Link to='/groups'>  Visit the Group Page  </Link></li>
+        <li><Link to='/' onClick={this.props.logoutUser}> Logout </Link></li>
       </Navbar>
+
         <div className="profile-page-overlay">
-              <div className="card horizontal small">
+              <div className="card horizontal">
                 <div className="card-image waves-effect waves-block waves-light">
                   <img className="card-image" src={this.props.user.pic ? this.props.user.pic : null} alt={this.props.user.name ? this.props.user.name : null}/>
                 </div>

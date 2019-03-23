@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import UserList from './UserList'
 import FriendshipList from './FriendshipList'
 import {logoutUser} from '../../actions/userActions'
+import withAuth from '../withAuth'
 
 class FriendPage extends React.Component {
 
@@ -11,10 +12,10 @@ class FriendPage extends React.Component {
   render() {
     return (
       <div>
-      <nav>
-        <Link to='/groups'>  Visit the Group Page  </Link>
-        <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
-      </nav>
+        <nav>
+          <Link to='/groups'>  Visit the Group Page  </Link>
+          <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
+        </nav>
 
         <div className= "friend-box">
           <UserList />
@@ -45,4 +46,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(FriendPage);
+export default withAuth(connect(mapStateToProps, mapDispatchToProps)(FriendPage));

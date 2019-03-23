@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import MyBarCard from './MyBarCard'
-
+// import withAuth from '../withAuth'
 
 
 class MyBarContainer extends React.Component {

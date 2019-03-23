@@ -2,8 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {removeBarFromPubcrawl} from '../../actions/pubcrawlActions'
 import {removeFromMyBars} from '../../actions/barActions'
-
-
+import Adapter from '../Adapter'
+// import withAuth from '../withAuth'
 
 class MyBarCard extends React.Component {
 
@@ -11,20 +11,14 @@ class MyBarCard extends React.Component {
     this.props.removeFromMyBars(bar)
     this.props.removeBarFromPubcrawl(bar, pubcrawl.id)
     this.props.getBarToRemove(coordinates, bar)
-    // console.log("BAR ID", this.props.bar.id);
-        fetch(`http://localhost:3000/api/v1/pubcrawls/${pubcrawl.id}`)
-        .then(r=>r.json())
+        Adapter.fetchPubcrawl(pubcrawl.id)
         .then(pubcrawll => {
           let findBar = pubcrawll.bars.find(barr => barr.name === bar.name)
           let barId = findBar.id
           let pubcrawlJoin = pubcrawll.pubcrawl_bars.find(pcb => pcb.pubcrawl_id === pubcrawl.id && pcb.bar_id === barId)
-            fetch(`http://localhost:3000/api/v1/pubcrawl_bars/${pubcrawlJoin.id}`, {
-              method:"DELETE"
-            })
+            Adapter.fetchDeletePubcrawlBar(pubcrawlJoin.id)
       })
   }
-
-
 
 
   render() {

@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {setBars} from '../../actions/barActions'
 import BarCard from './BarCard'
 import {Input} from 'react-materialize'
-
+import Adapter from '../Adapter'
 
 
 class Bars extends React.Component {
@@ -16,18 +16,8 @@ class Bars extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    fetch('http://localhost:3000/api/v1/search', {
-      method:"POST",
-      headers: {
-              "Content-Type": "application/json",
-              "Accept":"application/json"},
-      body:
-        JSON.stringify({
-          location: this.state.search
-        })
-      }
-  ).then(r =>r.json())
-  .then(data => this.props.setBars(data.businesses))
+    Adapter.fetchSearchBar(this.state.search)
+    .then(data => this.props.setBars(data.businesses))
   }
 
 

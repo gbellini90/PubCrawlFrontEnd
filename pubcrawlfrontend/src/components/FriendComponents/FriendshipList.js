@@ -1,7 +1,7 @@
 import React from 'react'
 import PendingFriendList from './PendingFriendList'
 import AcceptedFriendList from './AcceptedFriendList'
-// import withAuth from '../withAuth'
+import withAuth from '../withAuth'
 
 
 
@@ -20,4 +20,4 @@ class FriendshipList extends React.Component {
 
 }
 
-export default FriendshipList;
+export default withAuth(FriendshipList);

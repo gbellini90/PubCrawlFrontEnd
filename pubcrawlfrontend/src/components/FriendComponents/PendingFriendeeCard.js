@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-
+// import withAuth from '../withAuth'
 
 class PendingFriendeeCard extends React.Component {
 

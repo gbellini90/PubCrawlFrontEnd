@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet'
 import {logoutUser} from '../../actions/userActions'
 import L from 'leaflet'
-// import {Carousel} from 'react-materialize'
+// import withAuth from '../withAuth'
 
 
 import PubCard from './pubcard'
