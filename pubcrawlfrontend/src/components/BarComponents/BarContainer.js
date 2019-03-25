@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {setBars} from '../../actions/barActions'
 import BarCard from './BarCard'
-import {Input} from 'react-materialize'
+import TextField from '@material-ui/core/TextField';
 import Adapter from '../Adapter'
 
 
@@ -36,8 +36,8 @@ class Bars extends React.Component {
       {this.props.bars.length > 0 ? <h2> All Bars </h2> : null}
       {this.props.bars ? this.props.bars.map(bar=> <BarCard key= {bar.id} {...bar} getBar={this.props.getBar}/>) : null}
       <form onSubmit={this.handleSubmit}>
-        <Input onChange={this.handleChange} name="search" value={this.state.search} placeholder="Search by location" type="text"/>
-        <Input type="submit" />
+        <TextField onChange={this.handleChange} name="search" value={this.state.search} placeholder="Search by location" type="text"/>
+        <TextField type="submit" />
       </form>
       </div>
     );

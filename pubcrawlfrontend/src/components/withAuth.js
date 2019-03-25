@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
 import { fetchCurrentUser } from '../actions/userActions'
-import { Preloader } from 'react-materialize'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const withAuth = (WrappedComponent) => {
   class AuthorizedComponent extends React.Component {
@@ -20,7 +20,7 @@ const withAuth = (WrappedComponent) => {
         return <WrappedComponent />
       } else if (localStorage.getItem('jwt') && (this.props.authenticatingUser || !this.props.loggedIn)) {
         //we're currently fetching, show a loading spinner
-        return <Preloader active inline="centered" />
+        return <CircularProgress />
       } else {
         //user is not AUTHORIZED to see this component
         return <Redirect to="/" />

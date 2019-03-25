@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {addPendingFriend} from '../../actions/userActions'
 import {addToFriendships} from '../../actions/userActions'
 import Adapter from '../Adapter'
-// import withAuth from '../withAuth'
+import Card from '@material-ui/core/Card';
 
 class UserCard extends React.Component {
 
@@ -20,8 +20,10 @@ class UserCard extends React.Component {
   render() {
     return (
       <div>
-      <li>{this.props.name}</li>
+      <Card>
+      {this.props.name}
       <button className="btn" onClick={()=> this.requestClick(this.props.id)}> Send a friend request! </button>
+      </Card>
       </div>
     );
   }

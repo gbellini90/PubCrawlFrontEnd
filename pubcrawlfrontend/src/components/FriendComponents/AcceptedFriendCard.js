@@ -1,14 +1,16 @@
 import React from 'react'
 import {connect} from 'react-redux'
-// import withAuth from '../withAuth'
+import Card from '@material-ui/core/Card';
 
 class AcceptedFriendCard extends React.Component {
 
   render() {
     return (
       <div>
-        <li>{this.props.name} <br/>
-        <img src={this.props.pic} alt={this.props.name}/> </li><br/>
+      <Card>
+        {this.props.name} <br/> <br/>
+        <img src={this.props.pic} alt={this.props.name}/><br/>
+        </Card>
       </div>
     );
   }

@@ -10,6 +10,10 @@ import {Map, TileLayer, Marker, Popup} from 'react-leaflet'
 import L from 'leaflet'
 import Adapter from '../Adapter'
 import withAuth from '../withAuth'
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Toolbar from '@material-ui/core/Toolbar';
 
 const myIcon = L.icon({
     iconUrl: '../beermug.png',
@@ -87,11 +91,24 @@ class PubCrawlPage extends React.Component {
     let position = this.state.coordinates.length > 0 ? [this.state.coordinates[0].latitude,this.state.coordinates[0].longitude] : [this.state.location.lat, this.state.location.long]
     return (
     <div className='pubcrawlpage'>
-    <nav>
-      <Link to='/profile'>  Back to Profile </Link>
-      <Link to='/groups'> Back to Group Page </Link>
-      <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
-    </nav>
+    <AppBar position="static" color="secondary">
+      <Toolbar>
+        <Typography variant="headline" color="inherit">PubHub</Typography>
+          <Button variant="text" align="right">
+            <Link to='/profile'>  Back to Profile  </Link>
+            </Button>
+            <Button variant="text" align="right">
+            <Link to='/groups'> Back to Group Page </Link>
+              </Button>
+            <Button variant="text" align="right">
+              <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
+            </Button>
+        </Toolbar>
+    </AppBar>
+
+
+
+
     <h4>  Let's create a pubcrawl with your group named, {this.props.group.name}! </h4>
     <div className= "bar-box">
 

@@ -124,6 +124,9 @@ padding:40px;
   height: 100vh;
 } */
 
+.loginform {
+  padding:40px;
+}
 
 .profile-page .card {
   background-color: transparent;
@@ -132,7 +135,7 @@ padding:40px;
 .homepagelink {
   padding-right: 9px;
   font-size: 16px;
-  color: black;
+  color: white;
 }
 
 .homepagetitle {

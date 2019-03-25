@@ -4,7 +4,10 @@ import {Link} from "react-router-dom";
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet'
 import {logoutUser} from '../../actions/userActions'
 import L from 'leaflet'
-// import withAuth from '../withAuth'
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Toolbar from '@material-ui/core/Toolbar';
 
 
 import PubCard from './pubcard'
@@ -27,10 +30,22 @@ class PubCrawlShow extends React.Component {
     let position = [this.state.lat, this.state.long]
     return (
       <div>
-      <nav>
-        <Link to='/groups'> Back to Group Page </Link>
-        <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
-      </nav>
+      <AppBar position="static" color="secondary">
+        <Toolbar>
+          <Typography variant="headline" color="inherit">PubHub</Typography>
+            <Button variant="text" align="right">
+              <Link to='/profile'>  Back to Profile  </Link>
+              </Button>
+              <Button variant="text" align="right">
+              <Link to='/groups'> Back to Group Page </Link>
+                </Button>
+              <Button variant="text" align="right">
+                <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
+              </Button>
+          </Toolbar>
+      </AppBar>
+
+
         <h5>Group Name:</h5>{this.props.pubcrawl.group ? this.props.pubcrawl.group.name : null} <br />
         <h5>Group's Creator:</h5> {this.props.pubcrawl.group ? this.props.users.filter(user => (user.id === this.props.pubcrawl.group.creator_id)).map(userObj => <span key={userObj.id}> {userObj.name} </span> ) : null}<br />
         <h5>Group Members:</h5> {this.props.pubcrawl.group ? this.props.pubcrawl.group.users.map(user => <li key={user.id}>{user.name}</li>) :null } <br />

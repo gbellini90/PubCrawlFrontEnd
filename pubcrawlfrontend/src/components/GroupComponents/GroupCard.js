@@ -7,7 +7,7 @@ import {setPubCrawls} from '../../actions/pubcrawlActions'
 import {setCurrentPubCrawl} from '../../actions/pubcrawlActions'
 import {Redirect} from "react-router-dom";
 import Adapter from '../Adapter'
-import {Button} from 'react-materialize'
+import Button from '@material-ui/core/Button';
 // import withAuth from '../withAuth'
 
 

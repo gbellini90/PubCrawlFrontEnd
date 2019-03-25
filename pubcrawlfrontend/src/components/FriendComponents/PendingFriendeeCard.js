@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-// import withAuth from '../withAuth'
+import Card from '@material-ui/core/Card';
 
 class PendingFriendeeCard extends React.Component {
 
@@ -8,9 +8,10 @@ class PendingFriendeeCard extends React.Component {
   render() {
     const pendingFriender =
       <div>
-      <li>You sent a friend request to : {this.props.name}
+      <Card>
+      You sent a friend request to : <br/> {this.props.name}
       <img src={this.props.pic} alt={this.props.name}/>
-      </li>
+      </Card>
       </div>
       return this.props ? pendingFriender : "No Friend Requests Sent By You Pending At This Time"
 

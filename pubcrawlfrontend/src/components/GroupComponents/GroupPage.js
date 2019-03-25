@@ -6,7 +6,10 @@ import {setGroups} from '../../actions/groupActions'
 import {logoutUser} from '../../actions/userActions'
 import GroupCard from './GroupCard'
 import Adapter from '../Adapter'
-import {Navbar} from 'react-materialize'
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Toolbar from '@material-ui/core/Toolbar';
 import withAuth from '../withAuth'
 
 
@@ -47,10 +50,17 @@ class Group extends React.Component {
     return (
       <div className="group-page">
 
-      <Navbar brand="PubHub" right>
-        <li><Link to='/profile'>  Back to Profile  </Link></li>
-        <li><Link to='/' onClick={this.props.logoutUser}> Logout </Link></li>
-      </Navbar>
+      <AppBar position="static" color="secondary">
+        <Toolbar>
+          <Typography variant="headline" color="inherit">PubHub</Typography>
+            <Button variant="text" align="right">
+              <Link to='/profile'>  Back to Profile  </Link>
+              </Button>
+              <Button variant="text" align="right">
+                <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
+              </Button>
+          </Toolbar>
+      </AppBar>
 
 
 

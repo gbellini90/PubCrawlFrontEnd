@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom'
 import {setCurrentUserList} from '../actions/userActions'
 import {setFriendships} from '../actions/userActions'
 import Adapter from './Adapter'
-
+import Typography from '@material-ui/core/Typography';
+import Toolbar from '@material-ui/core/Toolbar';
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
 
 
 class Homepage extends React.Component {
@@ -24,12 +27,17 @@ class Homepage extends React.Component {
       console.log(this.props);
       return (
         <div className="homepage">
-          <nav>
-          <span className="homepagetitle">PubHub</span>
-            <Link className="homepagelink" to='/signup'>Sign Up  </Link>
-            <Link className="homepagelink" to='/login'>   Log In  </Link>
-          </nav>
-
+          <AppBar position="static" color="secondary">
+            <Toolbar>
+              <Typography variant="headline" color="inherit">PubHub</Typography>
+                <Button variant="text" align="right">
+                    <Link className="homepagelink" to='/signup'>Sign Up  </Link>
+                  </Button>
+                  <Button variant="text" align="right">
+                    <Link className="homepagelink" to='/login'>   Log In  </Link><
+                  /Button>
+              </Toolbar>
+          </AppBar>
         </div>
       );
     }
