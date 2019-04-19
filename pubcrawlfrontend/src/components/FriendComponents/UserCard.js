@@ -3,7 +3,13 @@ import {connect} from 'react-redux'
 import {addPendingFriend} from '../../actions/userActions'
 import {addToFriendships} from '../../actions/userActions'
 import Adapter from '../Adapter'
-import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+
 
 class UserCard extends React.Component {
 
@@ -20,10 +26,17 @@ class UserCard extends React.Component {
   render() {
     return (
       <div>
-      <Card>
-      {this.props.name}
-      <button className="btn" onClick={()=> this.requestClick(this.props.id)}> Send a friend request! </button>
-      </Card>
+      <List>
+        <ListItem alignItems="flex-start">
+            <ListItemAvatar>
+              <Avatar style={{width:100, height:100}} alt={this.props.name} src={this.props.pic} />
+            </ListItemAvatar>
+            <ListItemText
+              primary={this.props.name}
+              secondary= {<Button min={true} variant={'outlined'} color={"secondary"} onClick={()=> this.requestClick(this.props.id)}> Send a friend request! </Button>}>
+            </ListItemText> <br/>
+        </ListItem>
+      </List>
       </div>
     );
   }

@@ -15,6 +15,14 @@
   height:500px;
 }
 
+.picture{
+  width:15%;
+  height:15%;
+  border: red;
+  border-radius: 13em/3em;
+  border-style: double;
+}
+
 .homepage {
   background-image: url('../../images/taps.jpg');
   background-repeat: no-repeat;
@@ -111,18 +119,31 @@ padding:40px;
   overflow-y: scroll;
 }
 
+.profile {
+  font-size: 175%;
+  font-weight: light;
+}
 
-/* .profile-page {
+#profile-name{
+  font-size:250%;
+  color:black;
+  font-weight: bolder;
+}
+
+.profile-page {
   background-image: url("../../images/cafe-glass-beverage-drink-bottle-beer-773673-pxhere.com.jpg");
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  height: 450vh;
+  overflow: hidden;
+  scroll-behavior: smooth;
 }
 
 .profile-page-overlay {
-  background-color: rgba(255,255,255, .8);
-  height: 100vh;
-} */
+  background-color: rgba(255,255,255, .85);
+  height: 450vh;
+  overflow: hidden;
+}
 
 .loginform {
   padding:40px;

@@ -1,17 +1,28 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import Card from '@material-ui/core/Card';
+import Avatar from '@material-ui/core/Avatar';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 
 class PendingFriendeeCard extends React.Component {
+
 
 
   render() {
     const pendingFriender =
       <div>
-      <Card>
-      You sent a friend request to : <br/> {this.props.name}
-      <img src={this.props.pic} alt={this.props.name}/>
-      </Card>
+      <List>
+        <ListItem alignItems={'center'}>
+        <ListItemAvatar>
+          <Avatar style={{borderRadius:0, width:150, height:150}} src={this.props.pic} alt={this.props.name}/>
+        </ListItemAvatar>
+        <ListItemText
+          primary={`You sent a friend request to: ${this.props.name}`}>
+        </ListItemText>
+        </ListItem>
+      </List>
       </div>
       return this.props ? pendingFriender : "No Friend Requests Sent By You Pending At This Time"
 

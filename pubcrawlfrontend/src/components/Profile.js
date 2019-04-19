@@ -13,32 +13,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import Avatar from '@material-ui/core/Avatar';
-
-//Didn't workkkkkk
-//    <Card
-//    display="inline-block">
-//     <CardActionArea>
-//       <Avatar
-//         src={this.props.user.pic ? this.props.user.pic : null}
-//       />
-//       <CardContent>
-//         <Typography gutterBottom variant="h5" component="h2">
-//           {this.props.user.name ? this.props.user.name : null}
-//         </Typography>
-//         <Typography component="p">
-//           {this.props.user.bio ? this.props.user.bio : null}
-//         </Typography>
-//         <Typography component="p">
-//           Age:{this.props.user.age? this.props.user.age : null}
-//         </Typography>
-//       </CardContent>
-//     </CardActionArea>
-// </Card>
 
 
 class Profile extends React.Component {
@@ -74,15 +48,20 @@ class Profile extends React.Component {
 
 
         <div className="profile-page-overlay">
-              <div className="card horizontal">
-                <div className="card-image waves-effect waves-block waves-light">
-                  <img className="card-image" src={this.props.user.pic ? this.props.user.pic : null} alt={this.props.user.name ? this.props.user.name : null}/>
-                </div>
-                <div className="card-content">
-                    <span className="card-title grey-text text-darken-4">{this.props.user.name ? this.props.user.name : null}</span>
-                    <p>Age:{this.props.user.age ? this.props.user.age : null}</p> <br />
-                    <i>{this.props.user.bio ? this.props.user.bio : null}</i>
-                </div>
+        <div>
+          <h1 className='profile' id="profile-name">
+            {this.props.user.name}
+          </h1>
+
+            <img className='picture' src={this.props.user.pic ? this.props.user.pic : null} alt={this.props.user.name ? this.props.user.name : null}/>
+
+          <p className='profile'>
+            Age: {this.props.user.age ? this.props.user.age : null}
+          </p>
+          <p className='profile'>
+            {this.props.user.bio ? this.props.user.bio : null}
+          </p>
+
             </div>
             <Grid container spacing={32} alignItems="flex-end">
               <div className= "friend-box">

@@ -2,9 +2,12 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {addFriend} from '../../actions/userActions'
 import Adapter from '../Adapter'
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 
 
 class PendingFrienderCard extends React.Component {
@@ -21,12 +24,17 @@ class PendingFrienderCard extends React.Component {
   render() {
     const pendingFriendee =
       <div>
-      <Card>
-        <CardContent>You have a friend request from: <br/> {this.props.name}
-         <img src={this.props.pic} alt={this.props.name} />
-        {this.props.friendships.filter(friend => friend.friender_id === this.props.id && friend.friendee_id === this.props.user.id).map(friendship => <Button key={friendship.id} onClick={()=>this.acceptFriendRequest(friendship.id)}> Accept Friend Request! </Button>)}
-        </CardContent>
-      </Card>
+      <List>
+        <ListItem alignItems={'center'}>
+        <ListItemAvatar>
+          <Avatar style={{borderRadius:0, width:150, height:150}} src={this.props.pic} alt={this.props.name}/>
+        </ListItemAvatar>
+        <ListItemText
+          primary={`You have a friend request from: ${this.props.name}`}
+          secondary={this.props.friendships.filter(friend => friend.friender_id === this.props.id && friend.friendee_id === this.props.user.id).map(friendship => <Button size={"small"}  variant={"contained"} color={"secondary"} key={friendship.id} onClick={()=>this.acceptFriendRequest(friendship.id)}> Accept Friend Request! </Button>)}>
+          </ListItemText>
+        </ListItem>
+      </List>
       </div>
       return this.props ? pendingFriendee : "You don't have any requests at this time"
   }
