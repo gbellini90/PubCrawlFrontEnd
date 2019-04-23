@@ -46,3 +46,10 @@ export const removeBarFromPubcrawl = (bar, pubcrawl_id) =>{
     payload: {bar, pubcrawl_id}
   }
 }
+
+export const removePubCrawl = (pubcrawl) =>{
+  return {
+    type:"REMOVE_PUBCRAWL",
+    payload: pubcrawl
+  }
+}

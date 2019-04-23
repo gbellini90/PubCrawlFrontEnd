@@ -5,14 +5,14 @@ import {addUserToGroup} from '../../actions/groupActions'
 import {setCurrentGroup} from '../../actions/groupActions'
 import {setPubCrawls} from '../../actions/pubcrawlActions'
 import {setCurrentPubCrawl} from '../../actions/pubcrawlActions'
+import {removePubCrawl} from '../../actions/pubcrawlActions'
 import {Redirect} from "react-router-dom";
 import Adapter from '../Adapter'
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 // import withAuth from '../withAuth'
 
@@ -36,6 +36,12 @@ class GroupCard extends React.Component {
     this.props.removeGroup(deletedGroup)
   }
 
+  deletePubCrawl = (pubcrawl) => {
+    Adapter.fetchDeletePubCrawl(pubcrawl.id)
+    let deletedPubCrawl = this.props.pubcrawls.find(pc => pc.id === pubcrawl.id)
+    this.props.removePubCrawl(deletedPubCrawl)
+  }
+
   addFriendToGroup = (friend, group_id) => {
     Adapter.fetchAddFriendToGroup(friend.id, group_id)
     this.props.addUserToGroup(friend, group_id)
@@ -56,27 +62,35 @@ class GroupCard extends React.Component {
     })
   }
 
+  filterCrawls = () => {
+    return this.props.pubcrawls.filter(pubcrawl => pubcrawl.group_id === this.props.id)
+  }
+
   render() {
+    console.log(this.props);
     const groupCard =
       <div className='groupcard'>
-        <i className="small material-icons" id='trash' onClick={()=>this.deleteGroup(this.props.id)}>delete_forever</i>
+        <DeleteIcon className="small material-icons" id='trash' onClick={()=>this.deleteGroup(this.props.id)}>delete_forever</DeleteIcon>
+
           <List>
               <ListItem>
-                  <ListItemText
+                  <ListItemText align='left'
                       primary={`Name of Group: ${this.props.name}`}>
                   </ListItemText>
                 </ListItem>
                 <ListItem>
-                    <ListItemText
+                    <ListItemText align='left'
                     primary={`Current users in Group ${this.props.name}:`}
-                    secondary= {this.props.usersfromgroup.map(user => <li key={user.id}> {user.name}</li> )}>
+                    secondary= {this.props.usersfromgroup.map(user => <span key={user.id}> {user.name}<br/></span> )}>
                   </ListItemText>
                 </ListItem>
               <ListItem>
-                <ListItemText>
-                    {this.props.pubcrawls.map(pubcrawl => (
-                      <div key={pubcrawl.id}>  Pubcrawl id: {pubcrawl.id}
-                        <Button waves='light' onClick={()=> this.viewPubCrawl(pubcrawl)}>View This Pubcrawl!</Button>
+                <ListItemText align='left'>
+                    {this.filterCrawls().map(pubcrawl => (
+                      <div key={pubcrawl.id}> <br/> Pubcrawl id: {pubcrawl.id} <br/>
+                        <Button waves='light' onClick={()=> this.viewPubCrawl(pubcrawl)}>View This Pubcrawl!
+                        <i className="material-icons">people</i></Button><br/>
+                        <Button>Delete This Pubcrawl!<DeleteIcon onClick={()=>this.deletePubCrawl(pubcrawl)}></DeleteIcon></Button><br/>
                       </div>
                     ))}
                 </ListItemText>
@@ -89,7 +103,7 @@ class GroupCard extends React.Component {
 
                 </ListItemText>
               </ListItem>
-              <Button disableRipple='false' fullWidth='true' onClick={()=>this.createNewPubCrawl(this.props.id)}>Create New Pub Crawl With {this.props.name}</Button>
+              <Button fullWidth onClick={()=>this.createNewPubCrawl(this.props.id)}>Create New Pub Crawl With {this.props.name}</Button>
 
           </List>
       </div>
@@ -105,7 +119,9 @@ const mapStateToProps = (state) => {
       user:state.user.user,
       friends:state.user.friends,
       group:state.groups.group,
-      groups:state.groups.groups
+      groups:state.groups.groups,
+      pubcrawls:state.bars.pubcrawls
+
   }
 }
 
@@ -115,7 +131,8 @@ const mapDispatchToProps = (dispatch) => {
     addUserToGroup : (user, group_id)=> dispatch(addUserToGroup(user,group_id)),
     setCurrentGroup : (group) => dispatch(setCurrentGroup(group)),
     setPubCrawls:(pubcrawls) => dispatch(setPubCrawls(pubcrawls)),
-    setCurrentPubCrawl:(pubcrawl) => dispatch(setCurrentPubCrawl(pubcrawl))
+    setCurrentPubCrawl:(pubcrawl) => dispatch(setCurrentPubCrawl(pubcrawl)),
+    removePubCrawl:(pubcrawl) => dispatch(removePubCrawl(pubcrawl))
   }
 }
 

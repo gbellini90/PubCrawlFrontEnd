@@ -87,6 +87,19 @@ export default class Adapter {
       })
     }
 
+    //fetching/deleting in GroupCard component
+    //Deleting a pubcrawl
+    static fetchDeletePubCrawl(pubcrawl_id){
+      return fetch(`${URL}/pubcrawls/${pubcrawl_id}`, {
+        method:"DELETE",
+        headers: {
+          "Content-type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem('jwt')}`
+        },
+      })
+    }
+
+
     //fetching/posting in GroupCard component
     //Posting a new instance to the join table user_groups
     static fetchAddFriendToGroup(friend_id, group_id){

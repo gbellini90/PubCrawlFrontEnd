@@ -40,6 +40,11 @@ const initialState = {
         ...state,
         pubcrawls: [...state.pubcrawls, action.payload]
       }
+    case "REMOVE_PUBCRAWL":
+      return {
+        ...state,
+        pubcrawls:state.pubcrawls.filter(pubcrawl=> pubcrawl.id !== action.payload.id)
+      }
     case "ADD_BAR_TO_PUBCRAWL":
       // make a copy of state
       let copyOfPubcrawls =  [...state.pubcrawls]
@@ -72,7 +77,7 @@ const initialState = {
 
     case "REMOVE_BAR_FROM_PUBCRAWL":
 
-      // make a copy of state: works, gives back every pubcrawl object which consists of group_id, group obj, pubcrawl_bars, bars
+      // make a copy of state: works, gives back every pubcrawl object which consists of group_id, pubcrawlobj, pubcrawl_bars, bars
       let copyOfPubcrawlss =  [...state.pubcrawls]
 
       // find the index of the pubcrawl (we'll need to replace it later): gives back index of the pubcrawl within the list of pubcrawls

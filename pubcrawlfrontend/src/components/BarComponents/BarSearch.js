@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {setBars} from '../../actions/barActions'
-import BarCard from './BarCard'
 import TextField from '@material-ui/core/TextField';
 import Adapter from '../Adapter'
 
@@ -35,11 +34,9 @@ class BarSearch extends React.Component {
               value={this.state.search}
               placeholder="Search by location"
               type="text"
-              onChange={this.handleChange}
-              fullWidth='true'
+              fullWidth
               margin="normal"
               variant="filled"
-              value={this.state.groupName}
               InputLabelProps={{
                 shrink: true,
               }}

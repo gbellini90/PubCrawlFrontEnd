@@ -1,36 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {setBars} from '../../actions/barActions'
 import BarCard from './BarCard'
-import TextField from '@material-ui/core/TextField';
-import Adapter from '../Adapter'
+
 
 
 class Bars extends React.Component {
-
-//
-//
-//   state = {
-//     search:''
-//   }
-//
-//   handleSubmit = (event) => {
-//     event.preventDefault()
-//     Adapter.fetchSearchBar(this.state.search)
-//     .then(data => this.props.setBars(data.businesses))
-//   }
-//
-//
-//   handleChange = (event) => {
-//     this.setState({
-//       search: event.target.value
-//  })
-// }
-//
-
-
-
-
 
   render() {
     return (
