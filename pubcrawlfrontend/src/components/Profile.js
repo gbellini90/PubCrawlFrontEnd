@@ -35,7 +35,7 @@ class Profile extends React.Component {
       <div className="profile-page">
 
       <AppBar position="static" color="secondary">
-        <Toolbar>
+        <Toolbar variant="dense">
           <Typography variant="headline" color="inherit">PubHub</Typography>
             <Button variant="text" align="right">
                 <Link to='/groups'>  Visit the Group Page  </Link>

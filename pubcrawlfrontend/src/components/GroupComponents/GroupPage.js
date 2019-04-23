@@ -10,6 +10,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
+import TextField from '@material-ui/core/TextField';
 import withAuth from '../withAuth'
 
 
@@ -62,23 +63,32 @@ class Group extends React.Component {
           </Toolbar>
       </AppBar>
 
+  <form onSubmit={this.createGroup}>
+      <TextField
+          style={{ margin: 8 }}
+          name="groupName"
+          placeholder="Enter group name here!"
+          onChange={this.handleChange}
+          fullWidth
+          margin="normal"
+          variant="filled"
+          value={this.state.groupName}
+          type="text"
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+      </form>
 
-
-          <form onSubmit={this.createGroup}>
-            <input onChange={this.handleChange} name="groupName" value={this.state.groupName} type="text" placeholder="Enter Group Name here!"/>
-            <input type="submit" />
-          </form>
-
-        <h4> Your Groups </h4>
+        <h1> Your Groups </h1>
 
         <div className='container'>
-            <h5> Your Created Group(s) </h5>
-
+            <h3> Your Created Group(s) </h3>
             <div className='cardcontainer'>
             {Object.keys(this.props.groups).length > 0 ? this.props.groups.filter(group => (group.creator_id === this.props.user.id)).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} usersfromgroup={mygroup.users} />) : null}
             </div>
 
-            <h5> Groups You're In </h5>
+            {this.memberOfGroups(this.props.groups).length > 0 ? <h3> Groups You're In </h3> : null}
             <div className='cardcontainer'>
             {Object.keys(this.props.groups).length > 0 ? this.memberOfGroups(this.props.groups).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} usersfromgroup={mygroup.users} />) : null}
             </div>

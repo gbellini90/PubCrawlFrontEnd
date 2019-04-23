@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import BarContainer from '../BarComponents/BarContainer'
 import MyBarContainer from '../BarComponents/MyBarContainer'
+import BarSearch from '../BarComponents/BarSearch'
 import {Link} from 'react-router-dom'
 import {addToPubCrawls} from '../../actions/pubcrawlActions'
 import {setCurrentPubCrawl} from '../../actions/pubcrawlActions'
@@ -107,12 +108,12 @@ class PubCrawlPage extends React.Component {
     </AppBar>
 
 
-
-
     <h4>  Let's create a pubcrawl with your group named, {this.props.group.name}! </h4>
+    <BarSearch />
     <div className= "bar-box">
 
       <div className="bar-containers">
+
         <BarContainer getBar={this.getBar} />
         <MyBarContainer getBarToRemove={this.getBarToRemove}/>
       </div>

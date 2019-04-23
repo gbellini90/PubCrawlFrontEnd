@@ -8,37 +8,37 @@ import Adapter from '../Adapter'
 
 class Bars extends React.Component {
 
+//
+//
+//   state = {
+//     search:''
+//   }
+//
+//   handleSubmit = (event) => {
+//     event.preventDefault()
+//     Adapter.fetchSearchBar(this.state.search)
+//     .then(data => this.props.setBars(data.businesses))
+//   }
+//
+//
+//   handleChange = (event) => {
+//     this.setState({
+//       search: event.target.value
+//  })
+// }
+//
 
 
-  state = {
-    search:''
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault()
-    Adapter.fetchSearchBar(this.state.search)
-    .then(data => this.props.setBars(data.businesses))
-  }
-
-
-  handleChange = (event) => {
-    this.setState({
-      search: event.target.value
- })
-}
 
 
 
   render() {
     return (
-      <div className='all-bars-box'>
-
-      {this.props.bars.length > 0 ? <h2> All Bars </h2> : null}
-      {this.props.bars ? this.props.bars.map(bar=> <BarCard key= {bar.id} {...bar} getBar={this.props.getBar}/>) : null}
-      <form onSubmit={this.handleSubmit}>
-        <TextField onChange={this.handleChange} name="search" value={this.state.search} placeholder="Search by location" type="text"/>
-        <TextField type="submit" />
-      </form>
+      <div>
+        <div className='all-bars-box'>
+        {this.props.bars.length > 0 ? <h2> All Bars </h2> : null}
+        {this.props.bars ? this.props.bars.map(bar=> <BarCard key= {bar.id} {...bar} getBar={this.props.getBar}/>) : null}
+        </div>
       </div>
     );
   }
@@ -56,14 +56,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setBars: (bars) => dispatch(setBars(bars)),
-  }
-}
 
-
-
-
-
-export default connect(mapStateToProps,mapDispatchToProps)(Bars);
+export default connect(mapStateToProps)(Bars);
