@@ -4,6 +4,12 @@ import {setCurrentBar} from '../../actions/barActions'
 import {addBarToPubcrawl} from '../../actions/pubcrawlActions'
 import {myBars} from '../../actions/barActions'
 import Adapter from '../Adapter'
+import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
 
 
 class BarCard extends React.Component {
@@ -21,14 +27,22 @@ class BarCard extends React.Component {
   render() {
     return (
       <div>
-        <ul>
-        <li><h3>{this.props.name}</h3></li>
-        <li><img className="restaurant-image" src={this.props.image_url} alt={this.props.name}/></li>
-        <li>Price:{this.props.price}</li>
-        <li>Rating:{this.props.rating}/5</li>
-        <li>Address:{this.props.location.display_address.join(" ")}</li>
-        <button onClick={()=>this.addToCrawl(this.props, this.props.coordinates)}>Add to Crawl</button>
-        </ul>
+        <List>
+        <ListItem alignItems="flex-start">
+          <ListItemText
+            primary = {<h3>{this.props.name}</h3>}
+            secondary = {`Address:${this.props.location.display_address.join(" ")}`}>
+          </ListItemText>
+          <ListItemAvatar>
+            <Avatar  style={{width:200, height:200, borderRadius:40}} src={this.props.image_url} alt={this.props.name}/>
+          </ListItemAvatar>
+          <ListItemText
+            primary={`Rating: ${this.props.rating}/5`}
+            secondary={`Price: ${this.props.price ? this.props.price : 'N/A'}`}>
+          </ListItemText>
+          </ListItem>
+            <Button variant='contained' color='secondary' fullWidth onClick={()=>this.addToCrawl(this.props, this.props.coordinates)}>Add to Crawl</Button>
+        </List>
 
       </div>
     );

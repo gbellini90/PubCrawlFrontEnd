@@ -80,15 +80,15 @@ class Group extends React.Component {
         />
       </form>
 
-        <h1> Your Groups </h1>
+        <h1 style={{textDecorationLine:'underline'}}> Your Groups </h1>
 
         <div className='container'>
-            <h3> Your Created Group(s) </h3>
+            {this.props.groups.length > 0 ?  <h1> Your Created Group(s): </h1> : null}
             <div className='cardcontainer'>
             {Object.keys(this.props.groups).length > 0 ? this.props.groups.filter(group => (group.creator_id === this.props.user.id)).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} usersfromgroup={mygroup.users} />) : null}
             </div>
 
-            {this.memberOfGroups(this.props.groups).length > 0 ? <h3> Groups You're In </h3> : null}
+            {this.memberOfGroups(this.props.groups).length > 0 ? <h1> Group(s) You're In: </h1> : null}
             <div className='cardcontainer'>
             {Object.keys(this.props.groups).length > 0 ? this.memberOfGroups(this.props.groups).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} usersfromgroup={mygroup.users} />) : null}
             </div>

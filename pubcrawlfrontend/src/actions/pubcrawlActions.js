@@ -53,3 +53,12 @@ export const removePubCrawl = (pubcrawl) =>{
     payload: pubcrawl
   }
 }
+
+// export const clearCrawl = (pubcrawl) =>{
+//   return {
+//     type:"CLEAR_CRAWL",
+//     payload: pubcrawl
+//   }
+// }
+
+export const clearCrawl = () => ({ type: "CLEAR_CRAWL" })

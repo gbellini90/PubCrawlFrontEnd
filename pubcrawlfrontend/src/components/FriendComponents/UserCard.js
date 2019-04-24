@@ -33,7 +33,7 @@ class UserCard extends React.Component {
             </ListItemAvatar>
             <ListItemText
               primary={this.props.name}
-              secondary= {<Button min={true} variant={'outlined'} color={"secondary"} onClick={()=> this.requestClick(this.props.id)}> Send a friend request! </Button>}>
+              secondary= {<Button variant={'outlined'} color={"secondary"} onClick={()=> this.requestClick(this.props.id)}> Send a friend request! </Button>}>
             </ListItemText> <br/>
         </ListItem>
       </List>

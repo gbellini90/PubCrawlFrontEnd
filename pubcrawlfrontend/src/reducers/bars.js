@@ -45,6 +45,15 @@ const initialState = {
         ...state,
         pubcrawls:state.pubcrawls.filter(pubcrawl=> pubcrawl.id !== action.payload.id)
       }
+    case "CLEAR_CRAWL":
+      let empty = ''
+      return {
+        ...state,
+        pubcrawl:empty,
+        bar:empty,
+        mybars:[],
+        bars:[]
+      }
     case "ADD_BAR_TO_PUBCRAWL":
       // make a copy of state
       let copyOfPubcrawls =  [...state.pubcrawls]

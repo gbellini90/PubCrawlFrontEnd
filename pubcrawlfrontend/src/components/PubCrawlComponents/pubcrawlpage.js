@@ -15,6 +15,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
 
 const myIcon = L.icon({
     iconUrl: '../beermug.png',
@@ -113,28 +115,32 @@ class PubCrawlPage extends React.Component {
     <div className= "bar-box">
 
       <div className="bar-containers">
+      <GridList spacing={10} style={{display:'flex', flexWrap:'wrap', justifyContent:'space-around'}}>
+        <GridListTile col={2} rows={4}><BarContainer getBar={this.getBar} /></GridListTile>
+        <GridListTile col={2} rows={4}><MyBarContainer getBarToRemove={this.getBarToRemove}/></GridListTile>
+        </GridList>
 
-        <BarContainer getBar={this.getBar} />
-        <MyBarContainer getBarToRemove={this.getBarToRemove}/>
+        <Map className="map" center={position} zoom={this.state.coordinates.length > 0 ? 14 : this.state.zoom}>
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"/>
+
+          {this.state.coordinates ? this.props.mybars.map(bar => (
+            <Marker
+            key={bar.id}
+            position={[bar.coordinates.latitude, bar.coordinates.longitude]}
+            icon ={myIcon}>
+                <Popup key={bar.id}>
+                  {bar.name} <br/>
+                  {bar.location.address1}
+                </Popup>
+           </Marker>)) : null}
+         </Map>
+        
       </div>
 
 
-      <Map className="map" center={position} zoom={this.state.coordinates.length > 0 ? 14 : this.state.zoom}>
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"/>
 
-        {this.state.coordinates ? this.props.mybars.map(bar => (
-          <Marker
-          key={bar.id}
-          position={[bar.coordinates.latitude, bar.coordinates.longitude]}
-          icon ={myIcon}>
-              <Popup key={bar.id}>
-                {bar.name} <br/>
-                {bar.location.address1}
-              </Popup>
-         </Marker>)) : null}
-       </Map>
    </div>
     </div>
     );

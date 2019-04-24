@@ -6,6 +6,7 @@ import {setCurrentGroup} from '../../actions/groupActions'
 import {setPubCrawls} from '../../actions/pubcrawlActions'
 import {setCurrentPubCrawl} from '../../actions/pubcrawlActions'
 import {removePubCrawl} from '../../actions/pubcrawlActions'
+import {clearCrawl} from '../../actions/pubcrawlActions'
 import {Redirect} from "react-router-dom";
 import Adapter from '../Adapter'
 import Button from '@material-ui/core/Button';
@@ -15,7 +16,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 // import withAuth from '../withAuth'
-
 
 
 class GroupCard extends React.Component {
@@ -51,6 +51,7 @@ class GroupCard extends React.Component {
     this.setState({newPubcrawlClicked:!this.state.newPubcrawlClicked})
     let groupObj = this.props.groups.find(group => group.id === this.props.id)
     this.props.setCurrentGroup(groupObj)
+    this.props.clearCrawl()
   }
 
   viewPubCrawl = (pubcrawl) => {
@@ -74,36 +75,37 @@ class GroupCard extends React.Component {
 
           <List>
               <ListItem>
-                  <ListItemText align='left'
-                      primary={`Name of Group: ${this.props.name}`}>
+                  <ListItemText align='center'
+                     primary=<h2> {`Name of Group: ${this.props.name}`}</h2>>
                   </ListItemText>
                 </ListItem>
                 <ListItem>
-                    <ListItemText align='left'
-                    primary={`Current users in Group ${this.props.name}:`}
-                    secondary= {this.props.usersfromgroup.map(user => <span key={user.id}> {user.name}<br/></span> )}>
+                    <ListItemText align='flex-start'
+                      primary={this.props.usersfromgroup.length > 0 ? <h3 style={{textDecorationLine:'underline'}}>Current users in Group {this.props.name}:</h3> : null}
+                      secondary={this.props.usersfromgroup.map(user => <h3 style={{textDecorationLine:null}} key={user.id}> {user.name}</h3> )}>
+                  </ListItemText>
+                </ListItem>
+                <ListItem>
+                  <ListItemText
+                  primary=  <h3 style={{textDecorationLine:'underline'}}> Your Friends </h3>
+                    secondary=  {this.props.friends.map(friend => <h3 key={friend.id}>{friend.name}:
+                        <span key={friend.id}>{this.props.usersfromgroup.find(user => user.id === friend.id)  ? ` Officially a member of ${this.props.name}` :  <Button size="small" onClick={()=>this.addFriendToGroup(friend, this.props.id) } variant='outlined'> Add to Group?</Button> }</span></h3> )}>
+
                   </ListItemText>
                 </ListItem>
               <ListItem>
                 <ListItemText align='left'>
+                  {this.filterCrawls().length > 0 ? <h4 style={{textDecorationLine:'underline'}}> Your Pubcrawls with this Group: </h4> : null}
                     {this.filterCrawls().map(pubcrawl => (
-                      <div key={pubcrawl.id}> <br/> Pubcrawl id: {pubcrawl.id} <br/>
-                        <Button waves='light' onClick={()=> this.viewPubCrawl(pubcrawl)}>View This Pubcrawl!
-                        <i className="material-icons">people</i></Button><br/>
-                        <Button>Delete This Pubcrawl!<DeleteIcon onClick={()=>this.deletePubCrawl(pubcrawl)}></DeleteIcon></Button><br/>
+                      <div key={pubcrawl.id}> Pubcrawl id: {pubcrawl.id} <br/>
+                        <Button onClick={()=> this.viewPubCrawl(pubcrawl)}>View This Pubcrawl!<i className="material-icons">people</i></Button><br/>
+                        <Button onClick={()=>this.deletePubCrawl(pubcrawl)}>Delete This Pubcrawl!<DeleteIcon onClick={()=>this.deletePubCrawl(pubcrawl)}></DeleteIcon></Button><br/>
                       </div>
                     ))}
                 </ListItemText>
               </ListItem>
-              <ListItem>
-                <ListItemText>
 
-                    {this.props.friends.map(friend => <span key={friend.id}>{friend.name}
-                      <button key={friend.id} onClick={()=>this.addFriendToGroup(friend, this.props.id) }>{this.props.usersfromgroup.find(user => user.id === friend.id)  ? `Added to ${this.props.name}!` : "Add to Group?" }  </button> <br/></span>)}
-
-                </ListItemText>
-              </ListItem>
-              <Button fullWidth onClick={()=>this.createNewPubCrawl(this.props.id)}>Create New Pub Crawl With {this.props.name}</Button>
+            <Button variant='contained' color='secondary' fullWidth onClick={()=>this.createNewPubCrawl(this.props.id)}>Create New Pub Crawl With {this.props.name}</Button>
 
           </List>
       </div>
@@ -132,7 +134,8 @@ const mapDispatchToProps = (dispatch) => {
     setCurrentGroup : (group) => dispatch(setCurrentGroup(group)),
     setPubCrawls:(pubcrawls) => dispatch(setPubCrawls(pubcrawls)),
     setCurrentPubCrawl:(pubcrawl) => dispatch(setCurrentPubCrawl(pubcrawl)),
-    removePubCrawl:(pubcrawl) => dispatch(removePubCrawl(pubcrawl))
+    removePubCrawl:(pubcrawl) => dispatch(removePubCrawl(pubcrawl)),
+    clearCrawl:()=> dispatch(clearCrawl())
   }
 }
 
