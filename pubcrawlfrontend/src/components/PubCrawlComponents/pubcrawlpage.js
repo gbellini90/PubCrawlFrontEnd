@@ -92,7 +92,8 @@ class PubCrawlPage extends React.Component {
     console.log("My bars prop", this.props.mybars);
     console.log("Bar", this.state.bar)
     let position = this.state.coordinates.length > 0 ? [this.state.coordinates[0].latitude,this.state.coordinates[0].longitude] : [this.state.location.lat, this.state.location.long]
-    return (
+
+      const barss =
     <div className='pubcrawlpage'>
     <AppBar position="static" color="secondary">
       <Toolbar>
@@ -136,14 +137,34 @@ class PubCrawlPage extends React.Component {
                 </Popup>
            </Marker>)) : null}
          </Map>
-        
       </div>
-
-
-
    </div>
     </div>
-    );
+
+    const noBars =
+
+    <div className='pubcrawlpage'>
+      <AppBar position="static" color="secondary">
+        <Toolbar>
+          <Typography variant="headline" color="inherit">PubHub</Typography>
+            <Button variant="text" align="right">
+              <Link to='/profile'>  Back to Profile  </Link>
+              </Button>
+              <Button variant="text" align="right">
+              <Link to='/groups'> Back to Group Page </Link>
+                </Button>
+              <Button variant="text" align="right">
+                <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
+              </Button>
+          </Toolbar>
+      </AppBar>
+
+
+      <h4>  Let's create a pubcrawl with your group named, {this.props.group.name}! </h4>
+      <BarSearch />
+      <img src='https://cdnimg.webstaurantstore.com/images/products/large/132200/956034.jpg'></img>
+      </div>
+    return this.props.bars.length > 0 ? barss : noBars
   }
 
 }

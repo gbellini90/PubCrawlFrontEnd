@@ -29,23 +29,22 @@ class MyBarCard extends React.Component {
   render() {
     return (
       <div>
-      <List>
-      <ListItem alignItems="flex-start">
-        <ListItemText
-          primary = {<h3>{this.props.name}</h3>}
-          secondary = {`Address:${this.props.location.display_address.join(" ")}`}>
-        </ListItemText>
-        <ListItemAvatar>
-          <Avatar  style={{width:200, height:200, borderRadius:40}} src={this.props.image_url} alt={this.props.name}/>
-        </ListItemAvatar>
-        <ListItemText
-          primary={`Rating: ${this.props.rating}/5`}
-          secondary={`Price: ${this.props.price ? this.props.price : 'N/A'}`}>
-        </ListItemText>
-        </ListItem>
-          <Button variant='outlined' color='secondary' fullWidth onClick={()=>this.removeFromCrawl(this.props, this.props.pubcrawl, this.props.coordinates)}>Remove from Crawl</Button>
-      </List>
-
+        <List>
+        <ListItem alignItems="flex-start">
+          <ListItemText
+            primary = {<h3>{this.props.name}</h3>}
+            secondary = {`Address:${this.props.location.display_address.join(" ")}`}>
+          </ListItemText>
+          <ListItemAvatar>
+            <Avatar  style={{width:200, height:200, borderRadius:40}} src={this.props.image_url} alt={this.props.name}/>
+          </ListItemAvatar>
+          <ListItemText
+            primary={`Rating: ${this.props.rating}/5`}
+            secondary={`Price: ${this.props.price ? this.props.price : 'N/A'}`}>
+          </ListItemText>
+          </ListItem>
+            <Button variant='outlined' color='secondary' fullWidth onClick={()=>this.removeFromCrawl(this.props, this.props.pubcrawl, this.props.coordinates)}>Remove from Crawl</Button>
+        </List>
       </div>
     );
   }
