@@ -17,6 +17,19 @@ const initialState = {
         ...state,
         groups:state.groups.filter(group => group.id !== action.payload.id)
       }
+    case "REMOVE_USER_FROM_GROUP":
+     let copyOfGroupss = [...state.groups]
+     let indexx = copyOfGroupss.findIndex(group => group.id === action.payload.group_id)
+     let foundGroupp = copyOfGroupss.find(group => group.id === action.payload.group_id)
+     let copyFoundGroupp = {...foundGroupp}
+     let copyUserss = [...foundGroupp.users]
+     let updatedUserArray = copyUserss.filter(user => user.id !== action.payload.user_id)
+     copyFoundGroupp.users = updatedUserArray
+     copyOfGroupss[indexx] = copyFoundGroupp
+      return {
+        ...state,
+        groups: copyOfGroupss
+      }
     case "SET_USER_GROUPS":
       return {...state, usergroups:action.payload}
     case "ADD_USER_TO_GROUP":

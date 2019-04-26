@@ -34,7 +34,7 @@ componentDidMount() {
       <div className="pending-friend-box">
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography variant={"display1"} align={"center"} noWrap>Pending Friends</Typography>
+          <Typography variant={"subheading"} align={"center"} noWrap>Pending Friends</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography paragraph={true} align={"center"}>

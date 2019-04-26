@@ -8,7 +8,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
-
+import Avatar from '@material-ui/core/Avatar';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 
 import PubCard from './pubcard'
 
@@ -23,7 +27,11 @@ class PubCrawlShow extends React.Component {
   state = {
     lat: 40.703830518 ,
     long: -74.005666644,
-    zoom:14,
+    zoom:14.4,
+  }
+
+  componentDidMount() {
+    window.scrollTo(0, 0)
   }
 
   render() {
@@ -46,10 +54,10 @@ class PubCrawlShow extends React.Component {
       </AppBar>
 
 
-        <h5>Group Name:</h5>{this.props.pubcrawl.group ? this.props.pubcrawl.group.name : null} <br />
-        <h5>Group's Creator:</h5> {this.props.pubcrawl.group ? this.props.users.filter(user => (user.id === this.props.pubcrawl.group.creator_id)).map(userObj => <span key={userObj.id}> {userObj.name} </span> ) : null}<br />
-        <h5>Group Members:</h5> {this.props.pubcrawl.group ? this.props.pubcrawl.group.users.map(user => <li key={user.id}>{user.name}</li>) :null } <br />
-         {this.props.pubcrawl.group ? this.props.pubcrawl.bars.map(bar => <PubCard key={bar.id} {...bar} />) : null} <br />
+        <h2>Group Name:</h2>{this.props.pubcrawl.group ? this.props.pubcrawl.group.name : null}<br/>
+        <br/><h2>Group's Creator:</h2> {this.props.pubcrawl.group ? this.props.users.filter(user => (user.id === this.props.pubcrawl.group.creator_id)).map(userObj => <span key={userObj.id}> {userObj.name} </span> ) : null}<br />
+        <h2>Group Members:</h2> {this.props.pubcrawl.group ? this.props.pubcrawl.group.users.map(user => <li id='showuser' key={user.id}> {user.name.split(' ').length > 2 ? user.name.split(' ')[1] : user.name.split(' ')[0]}<br/><br/> <img style={{borderRadius:30, width:75, height:75}}src={user.pic} alt={user.name}/></li>) :null }<br/>
+        <br/><h2> Your Pubcrawl Bars: </h2>{this.props.pubcrawl.group ? this.props.pubcrawl.bars.map(bar => <PubCard key={bar.id} {...bar} />) : null}
         <Map className="map" center={ Object.keys(this.props.pubcrawl).length > 0  && Object.keys(this.props.pubcrawl.bars).length > 0? [this.props.pubcrawl.bars[0].latitude, this.props.pubcrawl.bars[0].longitude] : position} zoom={this.state.zoom}>
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -58,6 +66,8 @@ class PubCrawlShow extends React.Component {
           {this.props.pubcrawl.group ? this.props.pubcrawl.bars.map(bar =>  (
               <Marker
               key={bar.id}
+              zoomControl={true}
+              animate={true}
               position={[bar.latitude, bar.longitude]}
               icon ={myIcon}>
                 <Popup>
@@ -66,6 +76,7 @@ class PubCrawlShow extends React.Component {
                 </Popup>
               </Marker>
           )):null}
+
         </Map>
 
 

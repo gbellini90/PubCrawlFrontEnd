@@ -18,7 +18,7 @@ class UserList extends React.Component {
       <br/>
             <ExpansionPanel>
               <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography variant={"display1"} align={"center"} noWrap>All Users</Typography>
+                <Typography variant={"subheading"} align={"center"} noWrap>All Users</Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 <Typography>

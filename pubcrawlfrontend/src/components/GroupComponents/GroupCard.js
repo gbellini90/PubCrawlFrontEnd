@@ -3,10 +3,13 @@ import {connect} from 'react-redux'
 import {removeGroup} from '../../actions/groupActions'
 import {addUserToGroup} from '../../actions/groupActions'
 import {setCurrentGroup} from '../../actions/groupActions'
+import {deleteUserFromGroup} from '../../actions/groupActions'
 import {setPubCrawls} from '../../actions/pubcrawlActions'
 import {setCurrentPubCrawl} from '../../actions/pubcrawlActions'
 import {removePubCrawl} from '../../actions/pubcrawlActions'
 import {clearCrawl} from '../../actions/pubcrawlActions'
+import {myBars} from '../../actions/barActions'
+import {setBars} from '../../actions/barActions'
 import {Redirect} from "react-router-dom";
 import Adapter from '../Adapter'
 import Button from '@material-ui/core/Button';
@@ -23,6 +26,7 @@ class GroupCard extends React.Component {
   state ={
     newPubcrawlClicked:false,
     existingCrawlClicked:false,
+    editPubcrawlClicked: false
   }
 
   componentDidMount = () => {
@@ -67,8 +71,14 @@ class GroupCard extends React.Component {
     return this.props.pubcrawls.filter(pubcrawl => pubcrawl.group_id === this.props.id)
   }
 
+  deleteUserFromUserGroup = (user_groups, group) => {
+    let foundUG = user_groups.find(ug => ug.group_id === group.id)
+    console.log(foundUG);
+    Adapter.fetchDeleteFriendFromGroup(foundUG.id)
+    this.props.deleteUserFromGroup(foundUG)
+  }
+
   render() {
-    console.log(this.props);
     const groupCard =
       <div className='groupcard'>
         <DeleteIcon className="small material-icons" id='trash' onClick={()=>this.deleteGroup(this.props.id)}>delete_forever</DeleteIcon>
@@ -82,15 +92,14 @@ class GroupCard extends React.Component {
                 <ListItem>
                     <ListItemText align='flex-start'
                       primary={this.props.usersfromgroup.length > 0 ? <h3 style={{textDecorationLine:'underline'}}>Current users in Group {this.props.name}:</h3> : null}
-                      secondary={this.props.usersfromgroup.map(user => <h3 style={{textDecorationLine:null}} key={user.id}> {user.name}</h3> )}>
+                      secondary={this.props.usersfromgroup.map(user => <h3 style={{textDecorationLine:null}} key={user.id}> {user.name} <i onClick={()=>this.deleteUserFromUserGroup(user.user_groups, this.props)}className="material-icons">cancel</i></h3> )}>
                   </ListItemText>
                 </ListItem>
                 <ListItem>
                   <ListItemText
                   primary=  <h3 style={{textDecorationLine:'underline'}}> Your Friends </h3>
                     secondary=  {this.props.friends.map(friend => <h3 key={friend.id}>{friend.name}:
-                        <span key={friend.id}>{this.props.usersfromgroup.find(user => user.id === friend.id)  ? ` Officially a member of ${this.props.name}` :  <Button size="small" onClick={()=>this.addFriendToGroup(friend, this.props.id) } variant='outlined'> Add to Group?</Button> }</span></h3> )}>
-
+                        <span key={friend.id}>{this.props.usersfromgroup.find(user => user.id === friend.id)  ? ` Officially a member of ${this.props.name}` :  <i className="material-icons" onClick={()=>this.addFriendToGroup(friend, this.props.id) }>person_add</i>}</span></h3> )}>
                   </ListItemText>
                 </ListItem>
               <ListItem>
@@ -100,7 +109,8 @@ class GroupCard extends React.Component {
                       <div key={pubcrawl.id}> Pubcrawl id: {pubcrawl.id} <br/>
                         <Button onClick={()=> this.viewPubCrawl(pubcrawl)}>View This Pubcrawl!<i className="material-icons">people</i></Button><br/>
                         <Button onClick={()=>this.deletePubCrawl(pubcrawl)}>Delete This Pubcrawl!<DeleteIcon onClick={()=>this.deletePubCrawl(pubcrawl)}></DeleteIcon></Button><br/>
-                      </div>
+
+                        </div>
                     ))}
                 </ListItemText>
               </ListItem>
@@ -109,7 +119,7 @@ class GroupCard extends React.Component {
 
           </List>
       </div>
-      return this.state.newPubcrawlClicked? <Redirect to='/pubcrawl'/> : this.state.existingCrawlClicked ?  <Redirect to='mypubcrawl'/> : groupCard
+      return this.state.newPubcrawlClicked || this.state.editPubcrawlClicked ? <Redirect to='/pubcrawl'/> : this.state.existingCrawlClicked ?  <Redirect to='mypubcrawl'/> : groupCard
 
   }
 
@@ -135,7 +145,10 @@ const mapDispatchToProps = (dispatch) => {
     setPubCrawls:(pubcrawls) => dispatch(setPubCrawls(pubcrawls)),
     setCurrentPubCrawl:(pubcrawl) => dispatch(setCurrentPubCrawl(pubcrawl)),
     removePubCrawl:(pubcrawl) => dispatch(removePubCrawl(pubcrawl)),
-    clearCrawl:()=> dispatch(clearCrawl())
+    clearCrawl:()=> dispatch(clearCrawl()),
+    setBars: (bars) => dispatch(setBars(bars)),
+    myBars:(bar) => dispatch(myBars(bar)),
+    deleteUserFromGroup:(user_group) => dispatch(deleteUserFromGroup(user_group))
   }
 }
 

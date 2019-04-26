@@ -16,10 +16,10 @@ class AcceptedFriendCard extends React.Component {
       <List>
         <ListItem alignItems={'center'}>
           <ListItemAvatar>
-            <Avatar style={{width:200, height:200}} src={this.props.pic} alt={this.props.name}/>
+            <Avatar style={{borderRadius:0, width:125, height:125}} src={this.props.pic} alt={this.props.name}/>
           </ListItemAvatar>
           <ListItemText inset>
-             <Typography variant={"title"} noWrap>
+             <Typography variant={"subheading"} noWrap>
                  {this.props.name}
              </Typography>
            </ListItemText>

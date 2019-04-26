@@ -30,49 +30,41 @@ class Profile extends React.Component {
   }
 
   render() {
-    const profile =
+  const profile =
 
-      <div className="profile-page">
+  <div className="profile-page">
 
-      <AppBar position="static" color="secondary">
-        <Toolbar variant="dense">
-          <Typography variant="headline" color="inherit">PubHub</Typography>
-            <Button variant="text" align="right">
-                <Link to='/groups'>  Visit the Group Page  </Link>
-              </Button>
+        <AppBar position="static" color="secondary">
+          <Toolbar variant="dense">
+            <Typography variant="headline" color="inherit">PubHub</Typography>
               <Button variant="text" align="right">
-                <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
-              </Button>
-          </Toolbar>
-      </AppBar>
+                  <Link to='/groups'>  Visit the Group Page  </Link>
+                </Button>
+                <Button variant="text" align="right">
+                  <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
+                </Button>
+            </Toolbar>
+        </AppBar>
 
 
-        <div className="profile-page-overlay">
+      <div className="profile-page-overlay">
+      
         <div>
-          <h1 className='profile' id="profile-name">
-            {this.props.user.name}
-          </h1>
-
-            <img className='picture' src={this.props.user.pic ? this.props.user.pic : null} alt={this.props.user.name ? this.props.user.name : null}/>
-
-          <p className='profile'>
-            Age: {this.props.user.age ? this.props.user.age : null}
-          </p>
-          <p className='profile'>
-            {this.props.user.bio ? this.props.user.bio : null}
-          </p>
-
-            </div>
-            <Grid container spacing={32} alignItems="flex-end">
-              <div className= "friend-box">
-                <UserList /> <FriendshipList />
-              </div>
-            </Grid>
+          <h1 className='profile' id="profile-name">{this.props.user.name}</h1>
+          <img className='picture' src={this.props.user.pic ? this.props.user.pic : null} alt={this.props.user.name ? this.props.user.name : null}/>
+          <p className='profile'> Age: {this.props.user.age ? this.props.user.age : null} </p>
+          <p className='profile'>{this.props.user.bio ? this.props.user.bio : null}</p>
         </div>
 
-      </div>
-    return this.props.user ? profile : null
+        <Grid container spacing={18} alignItems="flex-end">
+          <div className= "friend-box"><UserList /> <FriendshipList />
+          </div>
+        </Grid>
 
+      </div>
+
+  </div>
+    return this.props.user ? profile : null
   }
 }
 

@@ -16,7 +16,7 @@ class PendingFriendeeCard extends React.Component {
       <List>
         <ListItem alignItems={'center'}>
         <ListItemAvatar>
-          <Avatar style={{borderRadius:0, width:150, height:150}} src={this.props.pic} alt={this.props.name}/>
+          <Avatar style={{width:100, height:100}} src={this.props.pic} alt={this.props.name}/>
         </ListItemAvatar>
         <ListItemText
           primary={`You sent a friend request to: ${this.props.name}`}>

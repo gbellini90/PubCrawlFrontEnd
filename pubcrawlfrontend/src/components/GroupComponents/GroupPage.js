@@ -29,6 +29,7 @@ class Group extends React.Component {
     Adapter.fetchCreateGroup(this.state.groupName, this.props.user.id).then(groupObj => {
       this.props.addGroup(groupObj)
     })
+    this.setState({groupName:''})
   }
 
   handleChange = (event) => {
@@ -47,7 +48,7 @@ class Group extends React.Component {
 
 
   render() {
-    console.log((this.props.groups));
+    
     return (
       <div className="group-page">
 

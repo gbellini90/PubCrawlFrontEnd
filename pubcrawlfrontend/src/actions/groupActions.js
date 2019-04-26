@@ -33,3 +33,10 @@ export const removeGroup = (group) =>{
     payload: group
   }
 }
+
+export const deleteUserFromGroup = (user_group) =>{
+  return{
+    type:"REMOVE_USER_FROM_GROUP",
+    payload:user_group
+  }
+}

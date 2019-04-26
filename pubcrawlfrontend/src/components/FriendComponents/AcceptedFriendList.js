@@ -16,7 +16,7 @@ class AcceptedFriendList extends React.Component {
       <div className="accepted-friend-box">
       <ExpansionPanel defaultExpanded={true}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography variant={"display1"} align={"center"} noWrap>Your Friend List</Typography>
+          <Typography variant={"subheading"} align={"center"} noWrap>Your Friend List</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography align={"center"}>

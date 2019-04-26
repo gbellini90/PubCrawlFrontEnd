@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom'
 import {addToPubCrawls} from '../../actions/pubcrawlActions'
 import {setCurrentPubCrawl} from '../../actions/pubcrawlActions'
 import {logoutUser} from '../../actions/userActions'
-import {Map, TileLayer, Marker, Popup} from 'react-leaflet'
+import {Map, TileLayer, Marker, Popup, Polyline} from 'react-leaflet'
 import L from 'leaflet'
 import Adapter from '../Adapter'
 import withAuth from '../withAuth'
@@ -17,6 +17,9 @@ import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+import Beerzz from '../../images/Beerzz.jpg'
+import Image from 'material-ui-image'
+
 
 const myIcon = L.icon({
     iconUrl: '../beermug.png',
@@ -33,13 +36,13 @@ class PubCrawlPage extends React.Component {
       long: -73.959329496
     },
     haveUsersLocation:false,
-    zoom:2,
+    zoom:4,
     coordinates:[],
     bar:[]
   }
 
   componentDidMount = () => {
-
+    window.scrollTo(0, 0)
     navigator.geolocation.getCurrentPosition((position) => {
       this.setState({
         location: {
@@ -91,6 +94,7 @@ class PubCrawlPage extends React.Component {
   render() {
     console.log("My bars prop", this.props.mybars);
     console.log("Bar", this.state.bar)
+    console.log("Current pubcrawl in pubcrawl page", this.props.pubcrawl);
     let position = this.state.coordinates.length > 0 ? [this.state.coordinates[0].latitude,this.state.coordinates[0].longitude] : [this.state.location.lat, this.state.location.long]
 
       const barss =
@@ -129,6 +133,8 @@ class PubCrawlPage extends React.Component {
           {this.state.coordinates ? this.props.mybars.map(bar => (
             <Marker
             key={bar.id}
+            zoomControl={true}
+            animate={true}
             position={[bar.coordinates.latitude, bar.coordinates.longitude]}
             icon ={myIcon}>
                 <Popup key={bar.id}>
@@ -136,6 +142,7 @@ class PubCrawlPage extends React.Component {
                   {bar.location.address1}
                 </Popup>
            </Marker>)) : null}
+
          </Map>
       </div>
    </div>
@@ -161,10 +168,11 @@ class PubCrawlPage extends React.Component {
 
 
       <h4>  Let's create a pubcrawl with your group named, {this.props.group.name}! </h4>
-      <BarSearch />
-      <img src='https://cdnimg.webstaurantstore.com/images/products/large/132200/956034.jpg'></img>
+      <BarSearch /><Image className='search' src={Beerzz} ></Image>
+
       </div>
-    return this.props.bars.length > 0 ? barss : noBars
+
+    return this.props.bars.length > 0 || this.props.mybars.length > 0 ? barss : noBars
   }
 
 }
@@ -184,7 +192,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addToPubCrawls: (pubcrawl) => dispatch(addToPubCrawls(pubcrawl)),
     setCurrentPubCrawl:(pubcrawl) => dispatch(setCurrentPubCrawl(pubcrawl)),
-    logoutUser: () =>dispatch(logoutUser())
+    logoutUser: () =>dispatch(logoutUser()),
   }
 }
 

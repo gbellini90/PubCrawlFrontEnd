@@ -27,14 +27,12 @@ class PendingFrienderCard extends React.Component {
         <List>
           <ListItem alignItems={'center'}>
             <ListItemAvatar>
-              <Avatar style={{borderRadius:0, width:150, height:150}} src={this.props.pic} alt={this.props.name}/>
+              <Avatar style={{width:100, height:100}} src={this.props.pic} alt={this.props.name}/>
             </ListItemAvatar>
-          </ListItem>
-          <ListItem alignItems={'center'}>
             <ListItemText
               primary={`You have a friend request from: ${this.props.name}`}
               secondary={this.props.friendships.filter(friend => friend.friender_id === this.props.id && friend.friendee_id === this.props.user.id).map(friendship => <Button size={"small"}  variant={"contained"} color={"secondary"} key={friendship.id} onClick={()=>this.acceptFriendRequest(friendship.id)}> Accept Friend Request! </Button>)}>
-              </ListItemText>
+            </ListItemText>
           </ListItem>
         </List>
       </div>

@@ -27,14 +27,14 @@ class UserCard extends React.Component {
     return (
       <div>
       <List>
-        <ListItem alignItems="flex-start">
+        <ListItem alignItems={"center"}>
             <ListItemAvatar>
               <Avatar style={{width:100, height:100}} alt={this.props.name} src={this.props.pic} />
             </ListItemAvatar>
             <ListItemText
               primary={this.props.name}
-              secondary= {<Button variant={'outlined'} color={"secondary"} onClick={()=> this.requestClick(this.props.id)}> Send a friend request! </Button>}>
-            </ListItemText> <br/>
+              secondary={<Button variant={'outlined'} color={"secondary"} onClick={()=> this.requestClick(this.props.id)}> Send a friend request! </Button>}>
+            </ListItemText>
         </ListItem>
       </List>
       </div>

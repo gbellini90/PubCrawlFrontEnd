@@ -14,6 +14,7 @@ class BarSearch extends React.Component {
     event.preventDefault()
     Adapter.fetchSearchBar(this.state.search)
     .then(data => this.props.setBars(data.businesses))
+    this.setState({search:''})
   }
 
 
@@ -32,7 +33,7 @@ class BarSearch extends React.Component {
               name="search"
               onChange={this.handleChange}
               value={this.state.search}
-              placeholder="Search by location"
+              placeholder="Search by neighborhood name or zipcode"
               type="text"
               fullWidth
               margin="normal"
