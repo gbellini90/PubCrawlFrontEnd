@@ -28,7 +28,7 @@ class Homepage extends React.Component {
         <div className="homepage">
           <AppBar position="static" color="secondary">
             <Toolbar>
-              <Typography variant="headline" color="inherit">PubHub</Typography>
+              <Typography variant="headline" color="inherit">PubCrawlin'</Typography>
                 <Button variant="text" align="right">
                     <Link className="homepagelink" to='/signup'>Sign Up  </Link>
                   </Button>

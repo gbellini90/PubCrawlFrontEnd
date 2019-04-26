@@ -101,7 +101,7 @@ class PubCrawlPage extends React.Component {
     <div className='pubcrawlpage'>
     <AppBar position="static" color="secondary">
       <Toolbar>
-        <Typography variant="headline" color="inherit">PubHub</Typography>
+        <Typography variant="headline" color="inherit">PubCrawlin'</Typography>
           <Button variant="text" align="right">
             <Link to='/profile'>  Back to Profile  </Link>
             </Button>
@@ -153,7 +153,7 @@ class PubCrawlPage extends React.Component {
     <div className='pubcrawlpage'>
       <AppBar position="static" color="secondary">
         <Toolbar>
-          <Typography variant="headline" color="inherit">PubHub</Typography>
+          <Typography variant="headline" color="inherit">PubCrawlin'</Typography>
             <Button variant="text" align="right">
               <Link to='/profile'>  Back to Profile  </Link>
               </Button>

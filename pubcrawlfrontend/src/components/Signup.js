@@ -43,7 +43,7 @@ class Signup extends React.Component {
         <div className="login">
         <AppBar position="static" color="secondary">
           <Toolbar>
-            <Typography variant="headline" color="inherit">PubHub</Typography>
+            <Typography variant="headline" color="inherit">PubCrawlin'</Typography>
             </Toolbar>
         </AppBar>
         <form onSubmit={this.handleSubmit}>

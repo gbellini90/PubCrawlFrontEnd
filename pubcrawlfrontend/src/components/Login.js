@@ -35,7 +35,7 @@ class Login extends React.Component {
       <div className="login">
       <AppBar position="static" color="secondary">
         <Toolbar>
-          <Typography variant="headline" color="inherit">PubHub</Typography>
+          <Typography variant="headline" color="inherit">PubCrawlin'</Typography>
           </Toolbar>
       </AppBar>
         <form className="loginform" onSubmit={this.handleSubmit}>

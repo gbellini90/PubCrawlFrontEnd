@@ -36,7 +36,7 @@ class Profile extends React.Component {
 
         <AppBar position="static" color="secondary">
           <Toolbar variant="dense">
-            <Typography variant="headline" color="inherit">PubHub</Typography>
+            <Typography variant="headline" color="inherit">PubCrawlin'</Typography>
               <Button variant="text" align="right">
                   <Link to='/groups'>  Visit the Group Page  </Link>
                 </Button>
@@ -48,7 +48,7 @@ class Profile extends React.Component {
 
 
       <div className="profile-page-overlay">
-      
+
         <div>
           <h1 className='profile' id="profile-name">{this.props.user.name}</h1>
           <img className='picture' src={this.props.user.pic ? this.props.user.pic : null} alt={this.props.user.name ? this.props.user.name : null}/>
