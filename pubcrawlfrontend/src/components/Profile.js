@@ -38,10 +38,10 @@ class Profile extends React.Component {
           <Toolbar variant="dense">
             <Typography variant="headline" color="inherit">PubCrawlin'</Typography>
               <Button variant="text" align="right">
-                  <Link to='/groups'>  Visit the Group Page  </Link>
+                  <Link className="homepagelink" to='/groups'>  Visit the Group Page  </Link>
                 </Button>
                 <Button variant="text" align="right">
-                  <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
+                  <Link className="homepagelink" to='/' onClick={this.props.logoutUser}> Logout </Link>
                 </Button>
             </Toolbar>
         </AppBar>

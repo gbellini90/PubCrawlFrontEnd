@@ -156,7 +156,7 @@ padding:10px;
 .profile-page-overlay {
   background-color: rgba(255,255,255, .85);
   height: 450vh;
-  overflow: hidden;
+  overflow-y: scroll;
 }
 
 .loginform {

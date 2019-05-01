@@ -8,11 +8,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
-import Avatar from '@material-ui/core/Avatar';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+
 
 import PubCard from './pubcard'
 
@@ -42,13 +38,13 @@ class PubCrawlShow extends React.Component {
         <Toolbar>
           <Typography variant="headline" color="inherit">PubCrawlin'</Typography>
             <Button variant="text" align="right">
-              <Link to='/profile'>  Back to Profile  </Link>
+              <Link className="homepagelink" to='/profile'>  Back to Profile  </Link>
               </Button>
               <Button variant="text" align="right">
-              <Link to='/groups'> Back to Group Page </Link>
+              <Link className="homepagelink" to='/groups'> Back to Group Page </Link>
                 </Button>
               <Button variant="text" align="right">
-                <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
+                <Link className="homepagelink" to='/' onClick={this.props.logoutUser}> Logout </Link>
               </Button>
           </Toolbar>
       </AppBar>

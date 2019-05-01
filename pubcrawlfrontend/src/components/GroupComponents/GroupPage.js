@@ -45,10 +45,14 @@ class Group extends React.Component {
     return myGroups
   }
 
+  creatorOfGroup = (groups) => {
+    return groups.filter(group => group.creator_id === this.props.user.id)
+  }
+
 
 
   render() {
-
+console.log(this.props.groups);
     return (
       <div className="group-page">
 
@@ -56,10 +60,10 @@ class Group extends React.Component {
         <Toolbar>
           <Typography variant="headline" color="inherit">PubCrawlin'</Typography>
             <Button variant="text" align="right">
-              <Link to='/profile'>  Back to Profile  </Link>
+              <Link className="homepagelink" to='/profile'>  Back to Profile  </Link>
               </Button>
               <Button variant="text" align="right">
-                <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
+                <Link className="homepagelink" to='/' onClick={this.props.logoutUser}> Logout </Link>
               </Button>
           </Toolbar>
       </AppBar>
@@ -84,7 +88,7 @@ class Group extends React.Component {
         <h1 style={{textDecorationLine:'underline'}}> Your Groups </h1>
 
         <div className='container'>
-            {this.props.groups.length > 0 ?  <h1> Your Created Group(s): </h1> : null}
+            {this.creatorOfGroup(this.props.groups).length > 0 ? <h1> Your Created Group(s): </h1> : null}
             <div className='cardcontainer'>
             {Object.keys(this.props.groups).length > 0 ? this.props.groups.filter(group => (group.creator_id === this.props.user.id)).map(mygroup => <GroupCard key={mygroup.id} {...mygroup} usersfromgroup={mygroup.users} />) : null}
             </div>

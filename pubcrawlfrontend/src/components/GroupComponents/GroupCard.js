@@ -79,9 +79,11 @@ class GroupCard extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     const groupCard =
       <div className='groupcard'>
-        <DeleteIcon className="small material-icons" id='trash' onClick={()=>this.deleteGroup(this.props.id)}>delete_forever</DeleteIcon>
+      {this.props.creator_id === this.props.user.id ? <DeleteIcon className="small material-icons" id='trash' onClick={()=>this.deleteGroup(this.props.id)}>delete_forever</DeleteIcon> : null}
+
 
           <List>
               <ListItem>
@@ -92,14 +94,14 @@ class GroupCard extends React.Component {
                 <ListItem>
                     <ListItemText align='flex-start'
                       primary={this.props.usersfromgroup.length > 0 ? <h3 style={{textDecorationLine:'underline'}}>Current users in Group {this.props.name}:</h3> : null}
-                      secondary={this.props.usersfromgroup.map(user => <h3 style={{textDecorationLine:null}} key={user.id}> {user.name} <i onClick={()=>this.deleteUserFromUserGroup(user.user_groups, this.props)}className="material-icons">cancel</i></h3> )}>
+                      secondary={this.props.usersfromgroup.map(user => <h3 style={{textDecorationLine:null}} key={user.id}> {user.name}{this.props.creator_id === this.props.user.id ? <i onClick={()=>this.deleteUserFromUserGroup(user.user_groups, this.props)}className="material-icons">cancel</i> : null} </h3> )}>
                   </ListItemText>
                 </ListItem>
                 <ListItem>
                   <ListItemText
                   primary=  <h3 style={{textDecorationLine:'underline'}}> Your Friends </h3>
-                    secondary=  {this.props.friends.map(friend => <h3 key={friend.id}>{friend.name}:
-                        <span key={friend.id}>{this.props.usersfromgroup.find(user => user.id === friend.id)  ? ` Officially a member of ${this.props.name}` :  <i className="material-icons" onClick={()=>this.addFriendToGroup(friend, this.props.id) }>person_add</i>}</span></h3> )}>
+                  secondary={this.props.friends.filter(friend => friend.id !== this.props.creator_id).map(f => <h3 key={f.id}> {f.name}:
+                        <span key={f.id}>{this.props.usersfromgroup.find(user => user.id === f.id)  ? ` Officially a member of ${this.props.name}` :  <i className="material-icons" onClick={()=>this.addFriendToGroup(f, this.props.id) }>person_add</i>}</span></h3> )}>
                   </ListItemText>
                 </ListItem>
               <ListItem>
@@ -108,7 +110,7 @@ class GroupCard extends React.Component {
                     {this.filterCrawls().map(pubcrawl => (
                       <div key={pubcrawl.id}> Pubcrawl id: {pubcrawl.id} <br/>
                         <Button onClick={()=> this.viewPubCrawl(pubcrawl)}>View This Pubcrawl!<i className="material-icons">people</i></Button><br/>
-                        <Button onClick={()=>this.deletePubCrawl(pubcrawl)}>Delete This Pubcrawl!<DeleteIcon onClick={()=>this.deletePubCrawl(pubcrawl)}></DeleteIcon></Button><br/>
+                        {this.props.creator_id === this.props.user.id ? <Button onClick={()=>this.deletePubCrawl(pubcrawl)}>Delete This Pubcrawl!<DeleteIcon onClick={()=>this.deletePubCrawl(pubcrawl)}></DeleteIcon></Button> : null}
 
                         </div>
                     ))}

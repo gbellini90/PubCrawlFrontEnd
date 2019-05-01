@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom'
 import {addToPubCrawls} from '../../actions/pubcrawlActions'
 import {setCurrentPubCrawl} from '../../actions/pubcrawlActions'
 import {logoutUser} from '../../actions/userActions'
-import {Map, TileLayer, Marker, Popup, Polyline} from 'react-leaflet'
+import {Map, TileLayer, Marker, Popup} from 'react-leaflet'
 import L from 'leaflet'
 import Adapter from '../Adapter'
 import withAuth from '../withAuth'
@@ -103,13 +103,13 @@ class PubCrawlPage extends React.Component {
       <Toolbar>
         <Typography variant="headline" color="inherit">PubCrawlin'</Typography>
           <Button variant="text" align="right">
-            <Link to='/profile'>  Back to Profile  </Link>
+            <Link className="homepagelink" to='/profile'>  Back to Profile  </Link>
             </Button>
             <Button variant="text" align="right">
-            <Link to='/groups'> Back to Group Page </Link>
+            <Link className="homepagelink" to='/groups'> Back to Group Page </Link>
               </Button>
             <Button variant="text" align="right">
-              <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
+              <Link className="homepagelink" to='/' onClick={this.props.logoutUser}> Logout </Link>
             </Button>
         </Toolbar>
     </AppBar>
@@ -125,7 +125,7 @@ class PubCrawlPage extends React.Component {
         <GridListTile col={2} rows={4}><MyBarContainer getBarToRemove={this.getBarToRemove}/></GridListTile>
         </GridList>
 
-        <Map className="map" center={position} zoom={this.state.coordinates.length > 0 ? 14 : this.state.zoom}>
+        <Map className="map" center={position} zoom={this.state.coordinates.length > 0 ? 14.5 : this.state.zoom}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"/>
@@ -155,13 +155,13 @@ class PubCrawlPage extends React.Component {
         <Toolbar>
           <Typography variant="headline" color="inherit">PubCrawlin'</Typography>
             <Button variant="text" align="right">
-              <Link to='/profile'>  Back to Profile  </Link>
+              <Link className="homepagelink" to='/profile'>  Back to Profile  </Link>
               </Button>
               <Button variant="text" align="right">
-              <Link to='/groups'> Back to Group Page </Link>
+              <Link className="homepagelink" to='/groups'> Back to Group Page </Link>
                 </Button>
               <Button variant="text" align="right">
-                <Link to='/' onClick={this.props.logoutUser}> Logout </Link>
+                <Link className="homepagelink" to='/' onClick={this.props.logoutUser}> Logout </Link>
               </Button>
           </Toolbar>
       </AppBar>
