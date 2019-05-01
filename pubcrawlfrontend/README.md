@@ -36,7 +36,7 @@ and type “yes” or “y” when asked if you’d like to run this server on a
 
 ## Demo Video
 
-[PubCrawlin'](https://youtu.be/8YwsaviZZe0)
+[PubCrawlin'](https://youtu.be/rxKEzIz-uek)
 
 ## Author
 
