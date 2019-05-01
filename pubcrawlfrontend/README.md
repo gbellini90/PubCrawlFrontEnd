@@ -1,68 +1,53 @@
+# PubCrawlin' Frontend README
+
+## Project Overview
+
+Pubcrawlin' is an app to create pubcrawls with a user's group of friends. Users can log in or sign up to view all of their friends, groups and pubcrawls. When a user visits their profile page, they can view their established friendships, their pending friendships and all the users of the sight. They can also accept friend requests and make friend requests. From there, a user can navigate to their group page where they can view groups that they have created(if any) and groups they are already a member of(if any). A user can create a group from their list of friends. With that group, a user can then create a pubcrawl. On the pubcrawl page, a user can search a neighborhood by zip code or neighborhood name and begin adding bars to their pubcrawl.They can view the bars they've added on the map below to make sure that their pubcrawl makes logistic sense. After a pucbrawl is created a user can view that pubcrawl's details back on the group page. 
+
+## Technologies Used
+
+React, Redux, Thunk, Ruby on Rails (Rails API backend), Yelp API, Leaflet, HTML, CSS, JSON, Material UI & GoogleFonts, ActiveModel Serializers, Faker, ‘dotenv-rails’ and other Ruby gems
+
+## Getting Started
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Prerequisites
+To use, clone down this repo and open with your preferred text editor. Before anything else, if you haven’t already, make sure to set up the project backend as well (link below), which will ensure you have the working usable version of Ruby/Rails installed on your machine. This project uses React and requires node package manager, so once you have it open in your local environment, from the root of the project run the following:
 
-In the project directory, you can run:
+`npm install`
 
-### `npm start`
+terminal command to install dependencies.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Installing
+Once npm is finished installing and you’re back to a working terminal, jump over to the backend project root and run:
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+`rails s`
 
-### `npm test`
+to start the server. (From the previous backend set up, should indicate successful connection to server, but to double check, navigate to http://localhost:3000 and make sure you have a “Yay! You’re on Rails!” welcome page). Back in the terminal, run:
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`npm start`
 
-### `npm run build`
+and type “yes” or “y” when asked if you’d like to run this server on another port, at which point PubCrawlin' will launch in your browser. You can sign in, sign up as a new user (and sign back in later with same info), view your profile and friends, view and create groups and and view and create pubcrawls. Cheers! 🍻
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Backend Link
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+[PubCrawlin'-backend](https://github.com/gbellini90/PubCrawlBackEnd)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Demo Video
 
-### `npm run eject`
+[PubCrawlin'](https://youtu.be/8YwsaviZZe0)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Author
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Gabrielle  Bellini**
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+≫ gbellini90@gmail.com<br/>
+↳ *LinkedIn*: https://www.linkedin.com/in/gabrielle-bellini/<br/>
+↳ *GitHub*: https://github.com/gbellini90<br/>
+↳ *Blog*: https://medium.com/@gbellini90
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## License
 
-## Learn More
+This project is licensed under the MIT License - see the [LICENSE.md](/LICENSE) file for details.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
